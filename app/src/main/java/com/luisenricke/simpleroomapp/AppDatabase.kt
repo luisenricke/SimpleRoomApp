@@ -1,6 +1,7 @@
 package com.luisenricke.simpleroomapp
 
 import android.content.Context
+import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -21,6 +22,17 @@ abstract class AppDatabase : RoomDatabase() {
             }
         }
 
+        fun openDB(context: Context): ContactDAO{
+            return AppDatabase.getInstance(context).contactDAO()
+        }
+/*TODO: CHECK
+        fun closeDB() {
+            if (INSTANCE?.isOpen == true) {
+                INSTANCE?.close()
+            }
+            INSTANCE = null
+        }
+*/
         // Create and pre-populate the database. See this article for more details:
         // https://medium.com/google-developers/7-pro-tips-for-room-fbadea4bfbd1#4785
         private fun buildDatabase(context: Context): AppDatabase {
@@ -29,11 +41,17 @@ abstract class AppDatabase : RoomDatabase() {
                     override fun onCreate(db: SupportSQLiteDatabase) {
                         super.onCreate(db)
                         ioThread {
+                            Log.d("Database","Created")
                             getInstance(context).contactDAO().insertContact(INIT_DATA)
                         }
                     }
+
+                    override fun onOpen(db: SupportSQLiteDatabase) {
+                        super.onOpen(db)
+                        Log.d("Database","Opened")
+                    }
                 })
-                .allowMainThreadQueries()
+                .allowMainThreadQueries() // Uncomment if threads available in MainThread
                 .build()
         }
 
