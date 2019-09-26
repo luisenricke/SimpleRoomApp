@@ -1,9 +1,11 @@
 package com.luisenricke.simpleroomapp
 
-import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.luisenricke.simpleroomapp.data.AppDatabase
+import com.luisenricke.simpleroomapp.data.contact.Contact
+import com.luisenricke.simpleroomapp.data.contact.ContactDAO
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,31 +20,31 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //Witjin Intance - First run
-    /*
-        var appDatabase = Room.databaseBuilder(this, AppDatabase::class.java, "CONTACS_DB")
-            .allowMainThreadQueries().addCallback(object : RoomDatabase.Callback(){
-                override fun onCreate(db: SupportSQLiteDatabase) {
-                    super.onCreate(db)
-                    Insert rows
-                            Log.d("Database","Created")
-                }
+        //Writing or get instance
+        /*
+            var appDatabase = Room.databaseBuilder(this, AppDatabase::class.java, "CONTACS_DB")
+                .allowMainThreadQueries().addCallback(object : RoomDatabase.Callback(){
+                    override fun onCreate(db: SupportSQLiteDatabase) {
+                        super.onCreate(db)
+                        Insert rows
+                                Log.d("Database","Created")
+                    }
 
-                override fun onOpen(db: SupportSQLiteDatabase) {
-                    super.onOpen(db)
-                    Log.d("Database", "opened")
-                }
-            }).build()
-    */
-        AppDatabase.openDB(this)
-        CreateContactAsyncTask().execute(Contact(3, "Check", "Check"))
-        GetAllContactsAsyncTask().execute()
+                    override fun onOpen(db: SupportSQLiteDatabase) {
+                        super.onOpen(db)
+                        Log.d("Database", "opened")
+                    }
+                }).build()
+        */
+        manageDB = AppDatabase.openDB(this)
+
+        Log.d("Funciono", manageDB.get().toString())
 
         Log.e("Funciono", contacts.toList().toString())
     }
 
 
-
+/*
     // TODO: Check later
     private fun insertContact(email: String, name: String) {
         var id =
@@ -76,7 +78,10 @@ class MainActivity : AppCompatActivity() {
         contacts.addAll(AppDatabase.getInstance(this).contactDAO().getAllContacts())
     }
 
+ */
+
     /* PARAMS, PROGRESS, RESULT*/
+    /*
     private class GetAllContactsAsyncTask : AsyncTask<Unit, Unit, Unit>() {
         override fun doInBackground(vararg params: Unit?): Unit {
             contacts.addAll(manageDB.getAllContacts())
@@ -135,4 +140,5 @@ class MainActivity : AppCompatActivity() {
             //contactAdapter.notifySetDataChanged()
         }
     }
+     */
 }

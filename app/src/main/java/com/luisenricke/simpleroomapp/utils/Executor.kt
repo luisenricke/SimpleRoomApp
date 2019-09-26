@@ -1,4 +1,4 @@
-package com.luisenricke.simpleroomapp
+package com.luisenricke.simpleroomapp.utils
 
 import java.util.concurrent.Executors
 

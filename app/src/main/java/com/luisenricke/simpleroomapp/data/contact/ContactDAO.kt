@@ -1,8 +1,10 @@
-package com.luisenricke.simpleroomapp
+package com.luisenricke.simpleroomapp.data.contact
 
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Transaction
+import com.luisenricke.simpleroomapp.data.BaseDAO
+import com.luisenricke.simpleroomapp.data.Database
 
 @Dao
 abstract class ContactDAO : BaseDAO<Contact>,

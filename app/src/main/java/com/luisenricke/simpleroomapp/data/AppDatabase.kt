@@ -1,11 +1,13 @@
-package com.luisenricke.simpleroomapp
+package com.luisenricke.simpleroomapp.data
 
 import android.content.Context
-import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.luisenricke.simpleroomapp.data.contact.Contact
+import com.luisenricke.simpleroomapp.data.contact.ContactDAO
+import com.luisenricke.simpleroomapp.utils.ioThread
 
 @Database(entities = [Contact::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
@@ -18,7 +20,10 @@ abstract class AppDatabase : RoomDatabase() {
 
         fun getInstance(context: Context): AppDatabase {
             return INSTANCE ?: synchronized(this) {
-                INSTANCE ?: buildDatabase(context).also { INSTANCE = it }
+                INSTANCE
+                    ?: buildDatabase(
+                        context
+                    ).also { INSTANCE = it }
             }
         }
 
@@ -39,7 +44,10 @@ abstract class AppDatabase : RoomDatabase() {
                     override fun onCreate(db: SupportSQLiteDatabase) { //When is created do....
                         super.onCreate(db)
                         ioThread {
-                            getInstance(context).contactDAO().insert(INIT_DATA)
+                            getInstance(
+                                context
+                            ).contactDAO()
+                                .insert(INIT_DATA)
                         }
                     }
 

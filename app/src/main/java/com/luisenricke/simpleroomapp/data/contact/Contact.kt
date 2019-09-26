@@ -1,11 +1,9 @@
-package com.luisenricke.simpleroomapp
+package com.luisenricke.simpleroomapp.data.contact
 
-import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.*
-import java.util.*
+import com.luisenricke.simpleroomapp.data.Database
 
 @Entity(tableName = Database.Contact.TABLE)
 data class Contact(
