@@ -3,15 +3,15 @@ package com.luisenricke.simpleroomapp.data.contact
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.luisenricke.simpleroomapp.data.Database
+import com.luisenricke.simpleroomapp.data.DatabaseScheme
 
-@Entity(tableName = Database.Contact.TABLE)
+@Entity(tableName = DatabaseScheme.Contact.TABLE)
 data class Contact(
-    @ColumnInfo(name = Database.Contact.EMAIL)
+    @ColumnInfo(name = DatabaseScheme.Contact.EMAIL)
     var email: String,
-    @ColumnInfo(name = Database.Contact.NAME)
+    @ColumnInfo(name = DatabaseScheme.Contact.NAME)
     var name: String,
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = Database.Contact.ID)
+    @ColumnInfo(name = DatabaseScheme.Contact.ID)
     val id: Long = 0
 )

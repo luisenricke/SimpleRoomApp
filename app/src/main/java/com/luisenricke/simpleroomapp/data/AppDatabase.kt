@@ -39,19 +39,17 @@ abstract class AppDatabase : RoomDatabase() {
         }
 
         private fun buildDatabase(context: Context): AppDatabase {
-            return Room.databaseBuilder(context, AppDatabase::class.java, "CONTACS_DB.db")
+            return Room.databaseBuilder(context, AppDatabase::class.java, DatabaseScheme.NAME)
                 .addCallback(object : Callback() {
                     override fun onCreate(db: SupportSQLiteDatabase) { //When is created do....
                         super.onCreate(db)
                         ioThread {
-                            getInstance(
-                                context
-                            ).contactDAO()
+                            getInstance(context).contactDAO()
                                 .insert(INIT_DATA)
                         }
                     }
 
-                    override fun onOpen(db: SupportSQLiteDatabase) { //When id open do...
+                    override fun onOpen(db: SupportSQLiteDatabase) { //When is open do...
                         super.onOpen(db)
 
                     }

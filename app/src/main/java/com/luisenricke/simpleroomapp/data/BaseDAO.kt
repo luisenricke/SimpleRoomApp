@@ -74,8 +74,11 @@ interface BaseDAO<X> {
     }
 
     /*
-    interface MustBeImplemented<Y>{
-        fun reset(rows: List<Y>) // @Transaction with drop() and insert(rows: List<Y>)
-    }
-     */
+        // Some great implementations
+        @Transaction
+        open fun reset(rows: List<Y>){
+            drop()
+            insert(rows: List<Y>)
+        }
+    */
 }
