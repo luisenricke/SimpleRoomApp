@@ -7,7 +7,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 
-@Database(entities = [Contact::class], version = 1)
+@Database(entities = [Contact::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun contactDAO(): ContactDAO
@@ -22,39 +22,36 @@ abstract class AppDatabase : RoomDatabase() {
             }
         }
 
-        fun openDB(context: Context): ContactDAO{
-            return AppDatabase.getInstance(context).contactDAO()
+        fun openDB(context: Context): ContactDAO {
+            return getInstance(context).contactDAO()
         }
-/*TODO: CHECK
+
         fun closeDB() {
             if (INSTANCE?.isOpen == true) {
                 INSTANCE?.close()
             }
             INSTANCE = null
         }
-*/
-        // Create and pre-populate the database. See this article for more details:
-        // https://medium.com/google-developers/7-pro-tips-for-room-fbadea4bfbd1#4785
+
         private fun buildDatabase(context: Context): AppDatabase {
             return Room.databaseBuilder(context, AppDatabase::class.java, "CONTACS_DB.db")
                 .addCallback(object : Callback() {
-                    override fun onCreate(db: SupportSQLiteDatabase) {
+                    override fun onCreate(db: SupportSQLiteDatabase) { //When is created do....
                         super.onCreate(db)
                         ioThread {
-                            Log.d("Database","Created")
-                            getInstance(context).contactDAO().insertContact(INIT_DATA)
+                            getInstance(context).contactDAO().insert(INIT_DATA)
                         }
                     }
 
-                    override fun onOpen(db: SupportSQLiteDatabase) {
+                    override fun onOpen(db: SupportSQLiteDatabase) { //When id open do...
                         super.onOpen(db)
-                        Log.d("Database","Opened")
+
                     }
                 })
                 .allowMainThreadQueries() // Uncomment if threads available in MainThread
                 .build()
         }
 
-        val INIT_DATA = Contact(0, "class@class.com", "class")
+        val INIT_DATA = Contact("root@root.com", "root")
     }
 }
