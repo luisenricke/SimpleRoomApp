@@ -1,6 +1,6 @@
 package com.luisenricke.simpleroomapp.data
 
-class DatabaseScheme {
+interface DatabaseScheme {
     companion object {
         const val NAME = "Contacts_DB"
     }
