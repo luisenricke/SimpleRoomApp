@@ -20,10 +20,8 @@ abstract class AppDatabase : RoomDatabase() {
 
         fun getInstance(context: Context): AppDatabase {
             return INSTANCE ?: synchronized(this) {
-                INSTANCE
-                    ?: buildDatabase(
-                        context
-                    ).also { INSTANCE = it }
+                INSTANCE ?: buildDatabase(context)
+                    .also { INSTANCE = it }
             }
         }
 
@@ -44,8 +42,7 @@ abstract class AppDatabase : RoomDatabase() {
                     override fun onCreate(db: SupportSQLiteDatabase) { //When is created do....
                         super.onCreate(db)
                         ioThread {
-                            getInstance(context).contactDAO()
-                                .insert(INIT_DATA)
+                            getInstance(context).contactDAO().insert(INIT_DATA)
                         }
                     }
 

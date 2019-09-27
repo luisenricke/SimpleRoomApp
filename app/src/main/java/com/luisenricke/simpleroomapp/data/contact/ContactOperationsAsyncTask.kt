@@ -1,17 +1,15 @@
 package com.luisenricke.simpleroomapp.data.contact
 
-import android.content.Context
 import android.os.AsyncTask
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.luisenricke.simpleroomapp.data.AppDatabase
 
 class ContactOperationsAsyncTask : AppCompatActivity() {
 
     /**
      *  Setting AsyncTask class : <PARAMS, PROGRESS, RESULT>
      */
-    class GetContacts(val dao: ContactDAO) : AsyncTask<Unit, Unit, List<Contact>>() {
+    class GetContacts(private val dao: ContactDAO) : AsyncTask<Unit, Unit, List<Contact>>() {
         override fun doInBackground(vararg params: Unit?): List<Contact> {
             return dao.get()
         }
@@ -23,7 +21,7 @@ class ContactOperationsAsyncTask : AppCompatActivity() {
         }
     }
 
-    class CreateContact(val dao: ContactDAO) : AsyncTask<Contact, Unit, Long>() {
+    class CreateContact(private val dao: ContactDAO) : AsyncTask<Contact, Unit, Long>() {
         override fun doInBackground(vararg params: Contact?): Long {
             return dao.insert(params[0]!!)
         }
@@ -35,7 +33,7 @@ class ContactOperationsAsyncTask : AppCompatActivity() {
         }
     }
 
-    class UpdateContact(val dao: ContactDAO) : AsyncTask<Contact, Unit, Boolean>() {
+    class UpdateContact(private val dao: ContactDAO) : AsyncTask<Contact, Unit, Boolean>() {
         override fun doInBackground(vararg params: Contact?): Boolean? {
             dao.update(params[0]!!)
 
@@ -49,7 +47,7 @@ class ContactOperationsAsyncTask : AppCompatActivity() {
         }
     }
 
-    class DeleteContact(val dao: ContactDAO) : AsyncTask<Contact, Unit, Boolean>() {
+    class DeleteContact(private val dao: ContactDAO) : AsyncTask<Contact, Unit, Boolean>() {
         override fun doInBackground(vararg params: Contact?): Boolean? {
             val countAfter = dao.count()
             dao.delete(params[0]!!)
