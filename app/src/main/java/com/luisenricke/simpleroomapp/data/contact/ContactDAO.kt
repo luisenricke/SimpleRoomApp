@@ -31,4 +31,8 @@ abstract class ContactDAO : BaseDAO<Contact>,
         drop()
         inserts(rows)
     }
+
+    //Specific queries for the table
+    @Query("SELECT ${DatabaseScheme.Contact.NAME} FROM ${DatabaseScheme.Contact.TABLE}")
+    abstract fun getCustomColumns(): List<ContactMinimal>
 }

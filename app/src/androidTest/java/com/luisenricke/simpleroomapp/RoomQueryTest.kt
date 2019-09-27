@@ -50,6 +50,20 @@ class RoomQueryTest {
 
     @Test
     @Throws(Exception::class)
+    fun getListOfRowsCompact() {
+        val rowOne = Contact("test@test.com,", "test", 1)
+        val rowTwo = Contact("test@test.com,", "test2", 2)
+        val rowThree =
+            Contact("test@test.com,", "test3", 3)
+        val list = listOf(rowOne, rowTwo, rowThree)
+        dao.inserts(list)
+        val checkList = dao.getCustomColumns()
+
+        Assert.assertEquals(list[0].name, checkList[0].name)
+    }
+
+    @Test
+    @Throws(Exception::class)
     fun insertSimpleRowDifferentId() {
         val row = Contact("test@test.com,", "test", 10)
         val idGenerated = dao.insert(row)
