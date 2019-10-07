@@ -46,61 +46,52 @@ ext {
     butterknifeVersion = '7.0.0'
 
     androidxDependencies = [
-            appCompat       : buildDependency(androidxPackage, 'appcompat', 'appcompat', appCompatVersion),
-            coreKtx         : buildDependency(androidxPackage, 'core', 'core-ktx', coreKtxVersion),
-            annotation      : buildDependency(androidxPackage, 'annotation', 'annotation', annotationVersion),
-            legacySupportv4 : buildDependency(androidxPackage, 'legacy', 'legacy-support-v4', legacySupportv4Version),
-            recyclerview    : buildDependency(androidxPackage, 'recyclerview', 'recyclerview', recycleviewVersion),
-            cardview        : buildDependency(androidxPackage, 'cardview', 'cardview', cardviewVersion),
-            constraintlayout: buildDependency(androidxPackage, 'constraintlayout', 'constraintlayout', constraintLayoutVersion),
-            lifecycle       : buildDependency(androidxPackage, 'lifecycle', 'lifecycle-extensions', lifecycleVersion)
+            appCompat       : "${androidxPackage}.appcompat:appcompat:${appCompatVersion}",
+            coreKtx         : "${androidxPackage}.core:core-ktx:${coreKtxVersion}",
+            annotation      : "${androidxPackage}.annotation:annotation:${annotationVersion}",
+            legacySupportv4 : "${androidxPackage}.legacy:legacy-support-v4:${legacySupportv4Version}",
+            recyclerview    : "${androidxPackage}.recyclerview:recyclerview:${recycleviewVersion}",
+            cardview        : "${androidxPackage}.cardview.cardview:${cardviewVersion}",
+            constraintlayout: "${androidxPackage}.constraintlayout:constraintlayout:${constraintLayoutVersion}",
+            lifecycle       : "${androidxPackage}.lifecycle:lifecycle-extensions:${lifecycleVersion}"
     ]
 
     googleDependencies = [
-            material: buildDependency(googlePackage, 'android.material', 'material', materialVersion),
-            gson    : buildDependency(googlePackage, 'code.gson', 'gson', gsonVersion)
+            material: "${googlePackage}.android.material;material:${materialVersion}",
+            gson    : "${googlePackage}.code.gson:gson:${gsonVersion}",
     ]
 
     roomDependencies = [
-            runtime : buildDependency(androidxPackage, 'room', 'room-runtime', roomVersion),
-            compiler : buildDependency(androidxPackage, 'room', 'room-compiler', roomVersion),
-            rxjava : buildDependency(androidxPackage, 'room', 'room-rxjava2', roomVersion),
-            testing : buildDependency(androidxPackage, 'room', 'room-testing', roomVersion)
+            runtime : "${androidxPackage}.room:room-runtime:${roomVersion}",
+            compiler: "${androidxPackage}.room:room-compiler:${roomVersion}",
+            rxjava  : "${androidxPackage}.room:room-rxjava2:${roomVersion}",
+            testing : "${androidxPackage}.room:room-testing:${roomVersion}",
     ]
 
     retrofitDependencies = [
-            retrofit          : buildDependency(squareupPackage, 'retrofit2', 'retrofit', retrofitVersion),
-            gson              : buildDependency(squareupPackage, 'retrofit2', 'converter-gson', retrofitVersion),
-            rxjava            : buildDependency(squareupPackage, 'retrofit2', 'adapter-rxjava2', retrofitVersion),
-            loggingInterceptor: buildDependency(squareupPackage, 'okhttp3', 'logging-interceptor', okhttpVersion)
+            retrofit          : "${squareupPackage}.retrofit2:retrofit:${squareupPackage}",
+            gson              : "${squareupPackage}.retrofit2:converter-gson:${squareupPackage}",
+            rxjava            : "${squareupPackage}.retrofit2:adapter-rxjava2:${squareupPackage}",
+            loggingInterceptor: "${squareupPackage}.okhttp3:logging-interceptor${okhttpVersion}",
     ]
 
     rxDependencies = [
-            rxJava   : buildDependency(reactivePackage, 'rxjava', rxjavaVersion),
-            rxAndroid: buildDependency(reactivePackage, 'rxandroid', rxandroidVersion)
+            rxJava   : "${reactivePackage}:rxjava:${rxjavaVersion}",
+            rxAndroid: "${reactivePackage}:rxandroid:${rxandroidVersion}",
     ]
 
     testingDependencies = [
-            junit   : buildDependency(junitPackage, 'junit', junitVersion),
-            mockito : buildDependency(mockitoPackage, 'mockito-core', mockitoVersion),
-            runner  : buildDependency(oldSupportPackage, 'test', 'runner', testRunnerVersion),
-            espresso: buildDependency(androidxPackage, 'test.espresso', 'espresso-core', espressoVersion),
+            junit   : "${junitPackage}:junit:${junitVersion}",
+            mockito : "${mockitoPackage}:mockito-core:${mockitoVersion}",
+            runner  : "${oldSupportPackage}.test:runner:${testRunnerVersion}",
+            espresso: "${androidxPackage}.test.espresso:espresso-core:${espressoVersion}",
     ]
 
     jakeWhartonDependencies = [
-            timber     : buildDependency(jakeWhartonPackage, 'timber', 'timber', timberVersion),
-            butterknife: buildDependency(jakeWhartonPackage, 'butterknife', 'butterknife', butterknifeVersion)
+            timber     : "${jakeWhartonPackage}.timber:timber:${timberVersion}",
+            butterknife: "${jakeWhartonPackage}.butterknife:butterknife:${butterknifeVersion}",
     ]
 
-    glide = buildDependency(bumptechPackage, 'glide', 'glide', glideVersion)
-    picasso = buildDependency(squareupPackage, 'picasso', 'picasso', picassoVersion)
+    glide = "${bumptechPackage}.glide:glide:${glideVersion}"
+    picasso = "${squareupPackage}.picasso:picasso:${picassoVersion}"
 }
-
-String buildDependency(String pack, String dependency, String version) {
-    return "${pack}:${dependency}:${version}"
-}
-
-String buildDependency(String superPack, String subPack, String dependency, String version) {
-    return "${superPack}.${subPack}:${dependency}:${version}"
-}
-
