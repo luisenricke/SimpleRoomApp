@@ -13,4 +13,13 @@ interface DatabaseScheme {
             const val NAME = "name"
         }
     }
+
+    interface Image{
+        companion object{
+            const val TABLE = "Image"
+            const val ID = "id"
+            const val NAME = "name"
+            const val SRC = "source"
+        }
+    }
 }

@@ -13,7 +13,7 @@ import com.luisenricke.simpleroomapp.data.contact.ContactOperationsAsyncTask
 
 class MainActivity : AppCompatActivity() {
     private lateinit var list: List<Contact>
-    private lateinit var manageDB: ContactDAO
+    private lateinit var manageDB: AppDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,14 +47,14 @@ class MainActivity : AppCompatActivity() {
      *  Test functions from ContactOperationsAsyncTask::class
      */
     private fun testAsyncTask() {
-        ContactOperationsAsyncTask.CreateContact(manageDB)
+        ContactOperationsAsyncTask.CreateContact(manageDB.contactDAO())
             .execute(Contact("activity@activity.com", "activity"))
-        list = ContactOperationsAsyncTask.GetContacts(manageDB)
+        list = ContactOperationsAsyncTask.GetContacts(manageDB.contactDAO())
             .execute().get()
         Log.println(Log.DEBUG, "OperationsAsyncTask", list.toList().toString())
-        ContactOperationsAsyncTask.UpdateContact(manageDB)
+        ContactOperationsAsyncTask.UpdateContact(manageDB.contactDAO())
             .execute(Contact("activity@activity.com", "activity", 2))
-        ContactOperationsAsyncTask.DeleteContact(manageDB)
+        ContactOperationsAsyncTask.DeleteContact(manageDB.contactDAO())
             .execute(Contact("activity@activity.com", "activity", 2))
     }
 }
