@@ -1,5 +1,6 @@
 package com.luisenricke.simpleroomapp
 
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +11,9 @@ import com.luisenricke.simpleroomapp.data.AppDatabase
 import com.luisenricke.simpleroomapp.data.contact.Contact
 import com.luisenricke.simpleroomapp.data.contact.ContactDAO
 import com.luisenricke.simpleroomapp.data.contact.ContactOperationsAsyncTask
+import com.luisenricke.simpleroomapp.data.image.Image
+import com.luisenricke.simpleroomapp.utils.ImageHelper
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var list: List<Contact>
@@ -20,6 +24,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         manageDB = AppDatabase.openDB(this)
+
+        if (manageDB.imageDAO().count() <= 0) {
+            val bitmap = BitmapFactory.decodeResource(resources, R.mipmap.img_test)
+            val byteArray = ImageHelper.BitmaptoByteArray(bitmap)
+            val row = Image("Tes", byteArray, 1)
+            manageDB.imageDAO().insert(row)
+        }
+
+        img_db.setImageBitmap(manageDB.imageDAO().filterId(1)
+            .src?.let { ImageHelper.ByteArraytoBitmap(it) })
+
     }
 
     /**
