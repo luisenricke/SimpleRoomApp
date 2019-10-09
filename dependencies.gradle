@@ -1,5 +1,5 @@
 ext {
-    //Packages
+    //Package
     oldSupportPackage = 'com.android.support'
     googlePackage = 'com.google'
     androidxPackage = 'androidx'
@@ -51,13 +51,13 @@ ext {
             annotation      : "${androidxPackage}.annotation:annotation:${annotationVersion}",
             legacySupportv4 : "${androidxPackage}.legacy:legacy-support-v4:${legacySupportv4Version}",
             recyclerview    : "${androidxPackage}.recyclerview:recyclerview:${recycleviewVersion}",
-            cardview        : "${androidxPackage}.cardview.cardview:${cardviewVersion}",
+            cardview        : "${androidxPackage}.cardview:cardview:${cardviewVersion}",
             constraintlayout: "${androidxPackage}.constraintlayout:constraintlayout:${constraintLayoutVersion}",
             lifecycle       : "${androidxPackage}.lifecycle:lifecycle-extensions:${lifecycleVersion}"
     ]
 
     googleDependencies = [
-            material: "${googlePackage}.android.material;material:${materialVersion}",
+            material: "${googlePackage}.android.material:material:${materialVersion}",
             gson    : "${googlePackage}.code.gson:gson:${gsonVersion}",
     ]
 
@@ -69,10 +69,10 @@ ext {
     ]
 
     retrofitDependencies = [
-            retrofit          : "${squareupPackage}.retrofit2:retrofit:${squareupPackage}",
-            gson              : "${squareupPackage}.retrofit2:converter-gson:${squareupPackage}",
-            rxjava            : "${squareupPackage}.retrofit2:adapter-rxjava2:${squareupPackage}",
-            loggingInterceptor: "${squareupPackage}.okhttp3:logging-interceptor${okhttpVersion}",
+            retrofit          : "${squareupPackage}.retrofit2:retrofit:${retrofitVersion}",
+            gson              : "${squareupPackage}.retrofit2:converter-gson:${retrofitVersion}",
+            rxjava            : "${squareupPackage}.retrofit2:adapter-rxjava2:${retrofitVersion}",
+            loggingInterceptor: "${squareupPackage}.okhttp3:logging-interceptor:${okhttpVersion}",
     ]
 
     rxDependencies = [
