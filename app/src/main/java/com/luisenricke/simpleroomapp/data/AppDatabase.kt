@@ -5,17 +5,20 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.luisenricke.simpleroomapp.data.cache.Cache
+import com.luisenricke.simpleroomapp.data.cache.CacheDAO
 import com.luisenricke.simpleroomapp.data.contact.Contact
 import com.luisenricke.simpleroomapp.data.contact.ContactDAO
 import com.luisenricke.simpleroomapp.data.image.Image
 import com.luisenricke.simpleroomapp.data.image.ImageDAO
 import com.luisenricke.simpleroomapp.utils.ioThread
 
-@Database(entities = [Contact::class, Image::class], version = 1, exportSchema = false)
+@Database(entities = [Contact::class, Image::class, Cache::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun contactDAO(): ContactDAO
     abstract fun imageDAO(): ImageDAO
+    abstract fun cacheDAO(): CacheDAO
 
     companion object {
         @Volatile

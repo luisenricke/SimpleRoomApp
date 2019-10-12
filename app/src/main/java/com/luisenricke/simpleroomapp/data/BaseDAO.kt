@@ -32,6 +32,11 @@ interface BaseDAO<X> {
     @Delete
     fun delete(row: X)
 
+    /**
+     * Drop all rows existing in the table.
+     */
+    fun drop()
+
     interface ComplementaryOperations<Y> {
         /**
          * Count rows from the table.
@@ -44,11 +49,6 @@ interface BaseDAO<X> {
          * @return list of objects requested.
          */
         fun get(): List<Y>
-
-        /**
-         * Drop all rows existing in the table.
-         */
-        fun drop()
     }
 
     interface AdditionalOperationWithID<Z> {
