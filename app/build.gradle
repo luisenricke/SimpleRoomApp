@@ -43,4 +43,7 @@ dependencies {
 
     implementation rxDependencies.rxJava
     implementation rxDependencies.rxAndroid
+
+    implementation jakeWhartonDependencies.timber
+    implementation okhttp
 }

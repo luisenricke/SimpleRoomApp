@@ -94,4 +94,5 @@ ext {
 
     glide = "${bumptechPackage}.glide:glide:${glideVersion}"
     picasso = "${squareupPackage}.picasso:picasso:${picassoVersion}"
+    okhttp = "${squareupPackage}.okhttp3:okhttp:${okhttpVersion}"
 }
