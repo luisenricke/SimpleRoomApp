@@ -31,11 +31,11 @@ abstract class AppDatabase : RoomDatabase() {
             }
         }
 
-        fun openDB(context: Context): AppDatabase {
+        fun open(context: Context): AppDatabase {
             return getInstance(context)
         }
 
-        fun closeDB() {
+        fun close() {
             if (INSTANCE?.isOpen == true) {
                 INSTANCE?.close()
             }
