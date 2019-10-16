@@ -4,20 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     tools:context=".MainActivity">
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/bar"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_gravity="top"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:visibility="gone"
+        android:indeterminate="true"
+        />
 
     <ImageView
         android:id="@+id/img_res"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.5"
+        android:layout_weight="0.4"
         android:src="@mipmap/img_test" />
 
     <ImageView
         android:id="@+id/img_db"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.5" />
+        android:layout_weight="0.4" />
 
 </LinearLayout>
