@@ -1,6 +1,5 @@
 package com.luisenricke.simpleroomapp
 
-import android.graphics.Bitmap
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.luisenricke.simpleroomapp.data.AppDatabase
@@ -18,7 +17,6 @@ class MainActivity : AppCompatActivity() {
         val TAG: String = MainActivity::class.java.name
     }
 
-    private lateinit var list: List<Contact>
     private lateinit var db: AppDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,12 +25,7 @@ class MainActivity : AppCompatActivity() {
 
         db = AppDatabase.getInstance(this)
 
-        val urlimage =
-            "https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2FjrTMMG0zJyI%2Fmaxresdefault.jpg"
-        val urlimage2 =
-            "https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fwallup.net%2Fwp-content%2Fuploads%2F2016%2F05%2F14%2F45171-Samurai_Champloo-Mugen.jpg"
-
-        OkHttpHelper.downloadImage(urlimage, db.cacheDAO())
+        OkHttpHelper.downloadImage(Constraints.IMAGE_URL_EVANGELION, db.cacheDAO())
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnComplete {
@@ -42,7 +35,5 @@ class MainActivity : AppCompatActivity() {
                 Timber.i("After -> Rows: ${db.cacheDAO().count()}")
             }.doOnError { Timber.e(it) }
             .subscribe()
-        //val image: Bitmap? = OkHttpHelper.downloadImage(urlimage, db.cacheDAO())
-        //Timber.i("Image: ${image?.byteCount} :: ${image?.width}x${image?.height}")
     }
 }
