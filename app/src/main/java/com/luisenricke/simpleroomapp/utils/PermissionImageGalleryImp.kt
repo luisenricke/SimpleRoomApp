@@ -14,7 +14,7 @@ class PermissionImageGalleryImp(
         Manifest.permission.READ_EXTERNAL_STORAGE,
         Manifest.permission.CAMERA,
         Manifest.permission.READ_PHONE_STATE,
-        Manifest.permission.READ_CONTACTS
+        Manifest.permission.BLUETOOTH
     ),
     override var token: Int = Constraints.PERMISSION_IMAGE_GALLERY,
     override var requestCode: Int = Constraints.REQUEST_IMAGE_GALLERY
