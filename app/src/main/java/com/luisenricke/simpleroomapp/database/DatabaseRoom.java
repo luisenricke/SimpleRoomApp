@@ -8,15 +8,19 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.luisenricke.simpleroomapp.database.dao.User;
-import com.luisenricke.simpleroomapp.database.dao.UserDAO;
+import com.luisenricke.simpleroomapp.database.pet.Pet;
+import com.luisenricke.simpleroomapp.database.pet.PetDAO;
+import com.luisenricke.simpleroomapp.database.user.User;
+import com.luisenricke.simpleroomapp.database.user.UserDAO;
 
-@Database(entities = {User.class}, version = 1, exportSchema = false)
+@Database(entities = {User.class, Pet.class}, version = 1, exportSchema = false)
 public abstract class DatabaseRoom extends RoomDatabase {
 
     private static volatile DatabaseRoom INSTANCE;
 
     public abstract UserDAO userDAO();
+
+    public abstract PetDAO petDAO();
 
     public static DatabaseRoom getInstance(Context context) {
         if (INSTANCE == null) {

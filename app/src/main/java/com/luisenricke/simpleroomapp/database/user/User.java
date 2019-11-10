@@ -1,5 +1,8 @@
-package com.luisenricke.simpleroomapp.database.dao;
+package com.luisenricke.simpleroomapp.database.user;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
@@ -9,8 +12,11 @@ import com.luisenricke.simpleroomapp.database.Schema;
 @Entity(tableName = Schema.User.TABLE)
 public class User {
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = Schema.User.ID)
     private int id;
+    @ColumnInfo(name = Schema.User.EMAIL)
     private String correo;
+    @ColumnInfo(name = Schema.User.PASSWORD)
     private String password;
 
     @Ignore
@@ -51,5 +57,12 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if (obj == null || obj.getClass() != User.class) return false;
+        User cast = (User) obj;
+        return cast.id == getId() && cast.correo.equals(getCorreo()) && cast.password.equals(getPassword());
     }
 }

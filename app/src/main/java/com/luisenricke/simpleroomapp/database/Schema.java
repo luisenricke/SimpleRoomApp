@@ -3,12 +3,18 @@ package com.luisenricke.simpleroomapp.database;
 public interface Schema {
     String NAME = "SimpleDatabase.db";
 
-    interface Query{
-        String SELECT_COUNT = "SELECT COUNT(*) FROM ";
-        String SELECT_ALL = "SELECT * FROM ";
-    }
     interface User{
         String TABLE = "User";
+        String ID = "id";
+        String EMAIL = "correo";
+        String PASSWORD = "password";
     }
 
+    interface Pet{
+        String TABLE = "Pet";
+        String ID = "id";
+        String NOMBRE = "nombre";
+        String NACIMIENTO = "nacimiento";
+        String USER = "user_id";
+    }
 }
