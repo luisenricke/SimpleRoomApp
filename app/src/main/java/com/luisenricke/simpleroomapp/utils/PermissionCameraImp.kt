@@ -9,7 +9,11 @@ import com.luisenricke.simpleroomapp.Constraints
 import timber.log.Timber
 
 class PermissionCameraImp(
-    override var manifest: MutableCollection<String> = arrayListOf(Manifest.permission.CAMERA),
+    override var manifest: MutableCollection<String> = arrayListOf(
+        Manifest.permission.READ_EXTERNAL_STORAGE,
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.CAMERA
+    ),
     override var token: Int = Constraints.PERMISSION_CAMERA,
     override var requestCode: Int = Constraints.REQUEST_CAMERA
 ) : Permission {

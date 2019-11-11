@@ -12,9 +12,7 @@ import java.io.IOException
 class PermissionImageGalleryImp(
     override var manifest: MutableCollection<String> = arrayListOf(
         Manifest.permission.READ_EXTERNAL_STORAGE,
-        Manifest.permission.CAMERA,
-        Manifest.permission.READ_PHONE_STATE,
-        Manifest.permission.BLUETOOTH
+        Manifest.permission.WRITE_EXTERNAL_STORAGE
     ),
     override var token: Int = Constraints.PERMISSION_IMAGE_GALLERY,
     override var requestCode: Int = Constraints.REQUEST_IMAGE_GALLERY
