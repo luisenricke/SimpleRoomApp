@@ -1,15 +1,13 @@
-package com.luisenricke.simpleroomapp.database.pet;
+package com.luisenricke.simpleroomapp.database.entity;
 
 import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
-import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import com.luisenricke.simpleroomapp.database.Schema;
-import com.luisenricke.simpleroomapp.database.user.User;
 
 @Entity(tableName = Schema.Pet.TABLE,
         foreignKeys = {@ForeignKey(

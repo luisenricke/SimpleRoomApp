@@ -1,10 +1,12 @@
-package com.luisenricke.simpleroomapp.database.pet;
+package com.luisenricke.simpleroomapp.database.dao;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
+
+import com.luisenricke.simpleroomapp.database.entity.Pet;
 
 import java.util.List;
 

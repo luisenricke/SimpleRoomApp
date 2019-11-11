@@ -1,6 +1,5 @@
-package com.luisenricke.simpleroomapp.database.user;
+package com.luisenricke.simpleroomapp.database.entity;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

@@ -6,14 +6,26 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.luisenricke.simpleroomapp.database.pet.Pet;
-import com.luisenricke.simpleroomapp.database.pet.PetDAO;
-import com.luisenricke.simpleroomapp.database.user.User;
-import com.luisenricke.simpleroomapp.database.user.UserDAO;
+import com.luisenricke.simpleroomapp.database.converter.DateConverter;
+import com.luisenricke.simpleroomapp.database.entity.Medicine;
+import com.luisenricke.simpleroomapp.database.dao.MedicineDAO;
+import com.luisenricke.simpleroomapp.database.entity.Pet;
+import com.luisenricke.simpleroomapp.database.dao.PetDAO;
+import com.luisenricke.simpleroomapp.database.entity.PetMedicineJoin;
+import com.luisenricke.simpleroomapp.database.dao.PetMedicineJoinDAO;
+import com.luisenricke.simpleroomapp.database.entity.User;
+import com.luisenricke.simpleroomapp.database.dao.UserDAO;
 
-@Database(entities = {User.class, Pet.class}, version = 1, exportSchema = false)
+@Database(entities = {
+        User.class,
+        Pet.class,
+        Medicine.class,
+        PetMedicineJoin.class},
+        version = 1, exportSchema = false)
+@TypeConverters({DateConverter.class})
 public abstract class DatabaseRoom extends RoomDatabase {
 
     private static volatile DatabaseRoom INSTANCE;
@@ -21,6 +33,10 @@ public abstract class DatabaseRoom extends RoomDatabase {
     public abstract UserDAO userDAO();
 
     public abstract PetDAO petDAO();
+
+    public abstract MedicineDAO medicineDAO();
+
+    public abstract PetMedicineJoinDAO petMedicineJoinDAO();
 
     public static DatabaseRoom getInstance(Context context) {
         if (INSTANCE == null) {
