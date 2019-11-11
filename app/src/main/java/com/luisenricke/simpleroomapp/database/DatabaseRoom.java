@@ -20,10 +20,10 @@ import com.luisenricke.simpleroomapp.database.entity.User;
 import com.luisenricke.simpleroomapp.database.dao.UserDAO;
 
 @Database(entities = {
-        User.class,
-        Pet.class,
         Medicine.class,
-        PetMedicineJoin.class},
+        Pet.class,
+        PetMedicineJoin.class,
+        User.class},
         version = 1, exportSchema = false)
 @TypeConverters({DateConverter.class})
 public abstract class DatabaseRoom extends RoomDatabase {
@@ -31,13 +31,13 @@ public abstract class DatabaseRoom extends RoomDatabase {
     private static final String NAME = "SimpleDatabase.db";
     private static volatile DatabaseRoom INSTANCE;
 
-    public abstract UserDAO userDAO();
+    public abstract MedicineDAO medicineDAO();
 
     public abstract PetDAO petDAO();
 
-    public abstract MedicineDAO medicineDAO();
-
     public abstract PetMedicineJoinDAO petMedicineJoinDAO();
+
+    public abstract UserDAO userDAO();
 
     public static DatabaseRoom getInstance(Context context) {
         if (INSTANCE == null) {
