@@ -6,16 +6,23 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-import com.luisenricke.simpleroomapp.database.Schema;
+import static com.luisenricke.simpleroomapp.database.entity.User.COLUMN.*;
 
-@Entity(tableName = Schema.User.TABLE)
+@Entity(tableName = TABLE)
 public class User {
+    public interface COLUMN {
+        String TABLE = "User";
+        String ID = "id";
+        String EMAIL = "email";
+        String PASSWORD = "password";
+    }
+
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = Schema.User.ID)
+    @ColumnInfo(name = ID)
     private int id;
-    @ColumnInfo(name = Schema.User.EMAIL)
+    @ColumnInfo(name = EMAIL)
     private String correo;
-    @ColumnInfo(name = Schema.User.PASSWORD)
+    @ColumnInfo(name = PASSWORD)
     private String password;
 
     @Ignore

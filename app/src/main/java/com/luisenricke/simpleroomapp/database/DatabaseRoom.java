@@ -28,6 +28,7 @@ import com.luisenricke.simpleroomapp.database.dao.UserDAO;
 @TypeConverters({DateConverter.class})
 public abstract class DatabaseRoom extends RoomDatabase {
 
+    private static final String NAME = "SimpleDatabase.db";
     private static volatile DatabaseRoom INSTANCE;
 
     public abstract UserDAO userDAO();
@@ -49,7 +50,7 @@ public abstract class DatabaseRoom extends RoomDatabase {
     }
 
     private static DatabaseRoom build(Context context) {
-        return Room.databaseBuilder(context, DatabaseRoom.class, Schema.NAME)
+        return Room.databaseBuilder(context, DatabaseRoom.class, NAME)
                 .addCallback(new Callback() {
                     @Override
                     public void onCreate(@NonNull SupportSQLiteDatabase db) {

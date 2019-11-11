@@ -6,20 +6,29 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-import com.luisenricke.simpleroomapp.database.Schema;
+import static com.luisenricke.simpleroomapp.database.entity.Medicine.COLUMN.*;
 
-@Entity(tableName = Schema.Medicine.TABLE)
+@Entity(tableName = TABLE)
 public class Medicine {
+    public interface COLUMN {
+        String TABLE = "Medicine";
+        String ID = "id";
+        String NAME = "name";
+        String DOSE = "dose";
+        String APPLICATION_METHOD = "application_method";
+        String PRODUCER = "producer";
+    }
+
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = Schema.Medicine.ID)
+    @ColumnInfo(name = ID)
     private int id;
-    @ColumnInfo(name = Schema.Medicine.NOMBRE)
+    @ColumnInfo(name = NAME)
     private String nombre;
-    @ColumnInfo(name = Schema.Medicine.CANTIDAD)
+    @ColumnInfo(name = DOSE)
     private int cantidad;
-    @ColumnInfo(name = Schema.Medicine.APLICACION)
+    @ColumnInfo(name = APPLICATION_METHOD)
     private String aplicacion;
-    @ColumnInfo(name = Schema.Medicine.FABRICANTE)
+    @ColumnInfo(name = PRODUCER)
     private String fabricante;
 
     @Ignore

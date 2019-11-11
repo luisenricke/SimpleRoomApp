@@ -7,25 +7,33 @@ import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-import com.luisenricke.simpleroomapp.database.Schema;
+import static com.luisenricke.simpleroomapp.database.entity.Pet.COLUMN.*;
 
-@Entity(tableName = Schema.Pet.TABLE,
+@Entity(tableName = TABLE,
         foreignKeys = {@ForeignKey(
                 entity = User.class,
-                parentColumns = Schema.User.ID,
-                childColumns = Schema.Pet.USER,
+                parentColumns = User.COLUMN.ID,
+                childColumns = USER,
                 onDelete = ForeignKey.CASCADE
         )}
 )
 public class Pet {
+    public interface COLUMN {
+        String TABLE = "Pet";
+        String ID = "id";
+        String NAME = "name";
+        String BORN_DAY = "born";
+        String USER = "user_id";
+    }
+
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = Schema.Pet.ID)
+    @ColumnInfo(name = ID)
     private int id;
-    @ColumnInfo(name = Schema.Pet.NOMBRE)
+    @ColumnInfo(name = NAME)
     private String nombre;
-    @ColumnInfo(name = Schema.Pet.NACIMIENTO)
+    @ColumnInfo(name = BORN_DAY)
     private String nacimiento;
-    @ColumnInfo(name = Schema.Pet.USER)
+    @ColumnInfo(name = USER)
     private int userId;
 
     @Ignore
@@ -91,3 +99,5 @@ public class Pet {
         return cast.id == getId() && cast.nombre.equals(getNombre()) && cast.nacimiento.equals(getNacimiento()) && cast.userId == getUserId();
     }
 }
+
+

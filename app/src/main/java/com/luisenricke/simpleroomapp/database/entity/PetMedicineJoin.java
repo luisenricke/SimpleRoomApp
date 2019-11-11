@@ -6,29 +6,37 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 
-import com.luisenricke.simpleroomapp.database.Schema;
-
 import java.util.Date;
 
-@Entity(tableName = Schema.PetMedicineJoin.TABLE,
-        primaryKeys = {Schema.PetMedicineJoin.PET,
-                Schema.PetMedicineJoin.MEDICINE},
+import static com.luisenricke.simpleroomapp.database.entity.PetMedicineJoin.COLUMN.*;
+
+@Entity(tableName = TABLE,
+        primaryKeys = {PET,
+                MEDICINE},
         foreignKeys = {
                 @ForeignKey(entity = Pet.class,
-                        parentColumns = Schema.Pet.ID,
-                        childColumns = Schema.PetMedicineJoin.PET),
+                        parentColumns = Pet.COLUMN.ID,
+                        childColumns = PET),
                 @ForeignKey(entity = Medicine.class,
-                        parentColumns = Schema.Medicine.ID,
-                        childColumns = Schema.PetMedicineJoin.MEDICINE)}
+                        parentColumns = Medicine.COLUMN.ID,
+                        childColumns = MEDICINE)}
 )
 public class PetMedicineJoin {
-    @ColumnInfo(name = Schema.PetMedicineJoin.PET)
+    public interface COLUMN {
+        String TABLE = "PetMedicineJoin";
+        String PET = "pet_id";
+        String MEDICINE = "medicine_id";
+        String CREATED_AT = "created_at";
+        String UPDATED_AT = "updated_at";
+    }
+
+    @ColumnInfo(name = PET)
     private int pet_id;
-    @ColumnInfo(name = Schema.PetMedicineJoin.MEDICINE)
+    @ColumnInfo(name = MEDICINE)
     private int medicine_id;
-    @ColumnInfo(name = Schema.PetMedicineJoin.CREATED_AT, defaultValue = "CURRENT_TIMESTAMP")
+    @ColumnInfo(name = CREATED_AT, defaultValue = "CURRENT_TIMESTAMP")
     private Date created_at;
-    @ColumnInfo(name = Schema.PetMedicineJoin.UPDATED_AT, defaultValue = "CURRENT_TIMESTAMP")
+    @ColumnInfo(name = UPDATED_AT, defaultValue = "CURRENT_TIMESTAMP")
     private Date updated_at;
 
     @Ignore
