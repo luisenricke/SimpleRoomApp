@@ -8,9 +8,9 @@ import androidx.room.Room;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.runner.AndroidJUnit4;
 
-import com.luisenricke.simpleroomapp.database.pet.Pet;
-import com.luisenricke.simpleroomapp.database.pet.PetDAO;
-import com.luisenricke.simpleroomapp.database.user.User;
+import com.luisenricke.simpleroomapp.database.entity.Pet;
+import com.luisenricke.simpleroomapp.database.dao.PetDAO;
+import com.luisenricke.simpleroomapp.database.entity.User;
 
 import org.junit.After;
 import org.junit.Assert;

@@ -7,9 +7,8 @@ import androidx.room.Room;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.runner.AndroidJUnit4;
 
-import com.luisenricke.simpleroomapp.database.DatabaseRoom;
-import com.luisenricke.simpleroomapp.database.user.User;
-import com.luisenricke.simpleroomapp.database.user.UserDAO;
+import com.luisenricke.simpleroomapp.database.entity.User;
+import com.luisenricke.simpleroomapp.database.dao.UserDAO;
 
 import org.junit.After;
 import org.junit.Assert;

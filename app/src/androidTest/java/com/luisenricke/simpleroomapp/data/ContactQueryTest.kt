@@ -1,10 +1,9 @@
-package com.luisenricke.simpleroomapp
+package com.luisenricke.simpleroomapp.data
 
 import android.content.Context
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
-import com.luisenricke.simpleroomapp.data.AppDatabase
 import com.luisenricke.simpleroomapp.data.contact.Contact
 import com.luisenricke.simpleroomapp.data.contact.ContactDAO
 import org.junit.After
@@ -15,7 +14,7 @@ import org.junit.runner.RunWith
 import java.io.IOException
 
 @RunWith(AndroidJUnit4::class)
-class RoomQueryTest {
+class ContactQueryTest {
     private lateinit var instrumentationContext: Context
     private lateinit var dao: ContactDAO
     private lateinit var db: AppDatabase

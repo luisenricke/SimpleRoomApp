@@ -1,34 +1,26 @@
-package com.luisenricke.simpleroomapp
+package com.luisenricke.simpleroomapp.data
 
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.provider.MediaStore
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
-import com.luisenricke.simpleroomapp.data.AppDatabase
-import com.luisenricke.simpleroomapp.data.contact.Contact
-import com.luisenricke.simpleroomapp.data.contact.ContactDAO
 import com.luisenricke.simpleroomapp.data.image.Image
 import com.luisenricke.simpleroomapp.data.image.ImageDAO
 import org.junit.After
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
-import org.junit.internal.Classes.getClass
 import org.junit.runner.RunWith
 import java.io.ByteArrayOutputStream
-import java.io.File
 import java.io.IOException
-import java.io.InputStream
-import java.nio.file.Files
-import java.nio.file.Paths
 import android.graphics.Bitmap.CompressFormat
+import com.luisenricke.simpleroomapp.R
 
 
 @RunWith(AndroidJUnit4::class)
-class RoomImageTest {
+class ImageQueryTest {
     private lateinit var instrumentationContext: Context
     private lateinit var dao: ImageDAO
     private lateinit var db: AppDatabase
