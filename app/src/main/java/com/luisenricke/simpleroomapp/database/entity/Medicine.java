@@ -23,32 +23,32 @@ public class Medicine {
     @ColumnInfo(name = ID)
     private int id;
     @ColumnInfo(name = NAME)
-    private String nombre;
+    private String name;
     @ColumnInfo(name = DOSE)
-    private int cantidad;
+    private int dose;
     @ColumnInfo(name = APPLICATION_METHOD)
-    private String aplicacion;
+    private String application;
     @ColumnInfo(name = PRODUCER)
-    private String fabricante;
+    private String producer;
 
     @Ignore
     public Medicine() {
     }
 
     @Ignore
-    public Medicine(int id, String nombre, int cantidad, String aplicacion, String fabricante) {
+    public Medicine(int id, String name, int dose, String application, String producer) {
         this.id = id;
-        this.nombre = nombre;
-        this.cantidad = cantidad;
-        this.aplicacion = aplicacion;
-        this.fabricante = fabricante;
+        this.name = name;
+        this.dose = dose;
+        this.application = application;
+        this.producer = producer;
     }
 
-    public Medicine(String nombre, int cantidad, String aplicacion, String fabricante) {
-        this.nombre = nombre;
-        this.cantidad = cantidad;
-        this.aplicacion = aplicacion;
-        this.fabricante = fabricante;
+    public Medicine(String name, int dose, String application, String producer) {
+        this.name = name;
+        this.dose = dose;
+        this.application = application;
+        this.producer = producer;
     }
 
     public int getId() {
@@ -59,42 +59,42 @@ public class Medicine {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getCantidad() {
-        return cantidad;
+    public int getDose() {
+        return dose;
     }
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
+    public void setDose(int dose) {
+        this.dose = dose;
     }
 
-    public String getAplicacion() {
-        return aplicacion;
+    public String getApplication() {
+        return application;
     }
 
-    public void setAplicacion(String aplicacion) {
-        this.aplicacion = aplicacion;
+    public void setApplication(String application) {
+        this.application = application;
     }
 
-    public String getFabricante() {
-        return fabricante;
+    public String getProducer() {
+        return producer;
     }
 
-    public void setFabricante(String fabricante) {
-        this.fabricante = fabricante;
+    public void setProducer(String producer) {
+        this.producer = producer;
     }
 
     @Override
     public boolean equals(@Nullable Object obj) {
         if (obj == null || obj.getClass() != Medicine.class) return false;
         Medicine cast = (Medicine) obj;
-        return cast.id == getId() && cast.nombre.equals(getNombre()) && cast.cantidad == getCantidad() && cast.aplicacion.equals(getAplicacion()) && cast.fabricante.equals(getFabricante());
+        return cast.id == getId() && cast.name.equals(getName()) && cast.dose == getDose() && cast.application.equals(getApplication()) && cast.producer.equals(getProducer());
     }
 }

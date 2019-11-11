@@ -21,7 +21,7 @@ public class User {
     @ColumnInfo(name = ID)
     private int id;
     @ColumnInfo(name = EMAIL)
-    private String correo;
+    private String email;
     @ColumnInfo(name = PASSWORD)
     private String password;
 
@@ -30,14 +30,14 @@ public class User {
     }
 
     @Ignore
-    public User(int id, String correo, String password) {
+    public User(int id, String email, String password) {
         this.id = id;
-        this.correo = correo;
+        this.email = email;
         this.password = password;
     }
 
-    public User(String correo, String password) {
-        this.correo = correo;
+    public User(String email, String password) {
+        this.email = email;
         this.password = password;
     }
 
@@ -49,12 +49,12 @@ public class User {
         this.id = id;
     }
 
-    public String getCorreo() {
-        return correo;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -69,6 +69,6 @@ public class User {
     public boolean equals(@Nullable Object obj) {
         if (obj == null || obj.getClass() != User.class) return false;
         User cast = (User) obj;
-        return cast.id == getId() && cast.correo.equals(getCorreo()) && cast.password.equals(getPassword());
+        return cast.id == getId() && cast.email.equals(getEmail()) && cast.password.equals(getPassword());
     }
 }

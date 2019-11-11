@@ -31,59 +31,59 @@ public class PetMedicineJoin {
     }
 
     @ColumnInfo(name = PET)
-    private int pet_id;
+    private int petId;
     @ColumnInfo(name = MEDICINE)
-    private int medicine_id;
+    private int medicineId;
     @ColumnInfo(name = CREATED_AT, defaultValue = "CURRENT_TIMESTAMP")
-    private Date created_at;
+    private Date created;
     @ColumnInfo(name = UPDATED_AT, defaultValue = "CURRENT_TIMESTAMP")
-    private Date updated_at;
+    private Date updated;
 
     @Ignore
     public PetMedicineJoin() {
     }
 
-    public PetMedicineJoin(int pet_id, int medicine_id) {
-        this.pet_id = pet_id;
-        this.medicine_id = medicine_id;
+    public PetMedicineJoin(int petId, int medicineId) {
+        this.petId = petId;
+        this.medicineId = medicineId;
     }
 
-    public int getPet_id() {
-        return pet_id;
+    public int getPetId() {
+        return petId;
     }
 
-    public void setPet_id(int pet_id) {
-        this.pet_id = pet_id;
+    public void setPetId(int petId) {
+        this.petId = petId;
     }
 
-    public int getMedicine_id() {
-        return medicine_id;
+    public int getMedicineId() {
+        return medicineId;
     }
 
-    public void setMedicine_id(int medicine_id) {
-        this.medicine_id = medicine_id;
+    public void setMedicineId(int medicineId) {
+        this.medicineId = medicineId;
     }
 
-    public Date getCreated_at() {
-        return created_at;
+    public Date getCreated() {
+        return created;
     }
 
-    public void setCreated_at(Date created_at) {
-        this.created_at = created_at;
+    public void setCreated(Date created) {
+        this.created = created;
     }
 
-    public Date getUpdated_at() {
-        return updated_at;
+    public Date getUpdated() {
+        return updated;
     }
 
-    public void setUpdated_at(Date updated_at) {
-        this.updated_at = updated_at;
+    public void setUpdated(Date updated) {
+        this.updated = updated;
     }
 
     @Override
     public boolean equals(@Nullable Object obj) {
         if (obj == null || obj.getClass() != PetMedicineJoin.class) return false;
         PetMedicineJoin cast = (PetMedicineJoin) obj;
-        return cast.medicine_id == getMedicine_id() && cast.pet_id == getPet_id();
+        return cast.medicineId == getMedicineId() && cast.petId == getPetId();
     }
 }

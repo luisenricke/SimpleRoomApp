@@ -30,9 +30,9 @@ public class Pet {
     @ColumnInfo(name = ID)
     private int id;
     @ColumnInfo(name = NAME)
-    private String nombre;
+    private String name;
     @ColumnInfo(name = BORN_DAY)
-    private String nacimiento;
+    private String born;
     @ColumnInfo(name = USER)
     private int userId;
 
@@ -41,22 +41,22 @@ public class Pet {
     }
 
     @Ignore
-    public Pet(int id, String nombre, String nacimiento, int userId) {
+    public Pet(int id, String name, String born, int userId) {
         this.id = id;
-        this.nombre = nombre;
-        this.nacimiento = nacimiento;
+        this.name = name;
+        this.born = born;
         this.userId = userId;
     }
 
     @Ignore
-    public Pet(String nombre, String nacimiento) {
-        this.nombre = nombre;
-        this.nacimiento = nacimiento;
+    public Pet(String name, String born) {
+        this.name = name;
+        this.born = born;
     }
 
-    public Pet(String nombre, String nacimiento, int userId) {
-        this.nombre = nombre;
-        this.nacimiento = nacimiento;
+    public Pet(String name, String born, int userId) {
+        this.name = name;
+        this.born = born;
         this.userId = userId;
     }
 
@@ -68,20 +68,20 @@ public class Pet {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getNacimiento() {
-        return nacimiento;
+    public String getBorn() {
+        return born;
     }
 
-    public void setNacimiento(String nacimiento) {
-        this.nacimiento = nacimiento;
+    public void setBorn(String born) {
+        this.born = born;
     }
 
     public int getUserId() {
@@ -96,7 +96,7 @@ public class Pet {
     public boolean equals(@Nullable Object obj) {
         if (obj == null || obj.getClass() != Pet.class) return false;
         Pet cast = (Pet) obj;
-        return cast.id == getId() && cast.nombre.equals(getNombre()) && cast.nacimiento.equals(getNacimiento()) && cast.userId == getUserId();
+        return cast.id == getId() && cast.name.equals(getName()) && cast.born.equals(getBorn()) && cast.userId == getUserId();
     }
 }
 
