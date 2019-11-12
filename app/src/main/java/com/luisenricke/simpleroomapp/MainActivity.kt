@@ -1,12 +1,16 @@
 package com.luisenricke.simpleroomapp
 
+import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
 import com.luisenricke.simpleroomapp.data.AppDatabase
+import com.luisenricke.simpleroomapp.utils.ImageHelper
 import com.luisenricke.simpleroomapp.utils.Permission
 import com.luisenricke.simpleroomapp.utils.PermissionCameraImp
 import com.luisenricke.simpleroomapp.utils.PermissionImageGalleryImp
 import kotlinx.android.synthetic.main.activity_main.*
-
+import okhttp3.internal.lockAndWaitNanos
+import okhttp3.internal.waitMillis
 
 class MainActivity : BaseActivity() {
 
@@ -21,7 +25,7 @@ class MainActivity : BaseActivity() {
 
         db = AppDatabase.getInstance(this)
 
-        gallery = PermissionImageGalleryImp()
+        gallery = PermissionImageGalleryImp(this)
 
         camara = PermissionCameraImp()
 
@@ -38,8 +42,19 @@ class MainActivity : BaseActivity() {
             .subscribe()
          */
 
+        existImage()
         btn_gallery.setOnClickListener {
             checkPermission(gallery)
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        existImage()
+    }
+
+    fun existImage(){
+        val image: Bitmap? = ImageHelper.loadIS(this, "GalleryImage")
+        img_db.setImageBitmap(image)
     }
 }

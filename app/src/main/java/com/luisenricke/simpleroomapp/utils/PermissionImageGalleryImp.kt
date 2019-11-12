@@ -2,6 +2,7 @@ package com.luisenricke.simpleroomapp.utils
 
 import android.Manifest
 import android.content.ContentResolver
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.provider.MediaStore
@@ -10,6 +11,7 @@ import timber.log.Timber
 import java.io.IOException
 
 class PermissionImageGalleryImp(
+    var context: Context,
     override var manifest: MutableCollection<String> = arrayListOf(
         Manifest.permission.READ_EXTERNAL_STORAGE,
         Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -24,6 +26,7 @@ class PermissionImageGalleryImp(
         try {
             val image: Bitmap = MediaStore.Images.Media.getBitmap(contentResolver, data?.data)
             Timber.i("${image.byteCount}")
+            ImageHelper.saveIS(context, image, "GalleryImage")
         } catch (e: IOException) {
             Timber.e(e)
         }
