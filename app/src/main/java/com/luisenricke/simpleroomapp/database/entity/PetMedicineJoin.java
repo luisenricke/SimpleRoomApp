@@ -16,10 +16,14 @@ import static com.luisenricke.simpleroomapp.database.entity.PetMedicineJoin.COLU
         foreignKeys = {
                 @ForeignKey(entity = Pet.class,
                         parentColumns = Pet.COLUMN.ID,
-                        childColumns = PET),
+                        childColumns = PET,
+                        onUpdate = ForeignKey.CASCADE,
+                        onDelete = ForeignKey.CASCADE),
                 @ForeignKey(entity = Medicine.class,
                         parentColumns = Medicine.COLUMN.ID,
-                        childColumns = MEDICINE)}
+                        childColumns = MEDICINE,
+                        onUpdate = ForeignKey.CASCADE,
+                        onDelete = ForeignKey.CASCADE)}
 )
 public class PetMedicineJoin {
     public interface COLUMN {
@@ -34,9 +38,9 @@ public class PetMedicineJoin {
     private int petId;
     @ColumnInfo(name = MEDICINE)
     private int medicineId;
-    @ColumnInfo(name = CREATED_AT, defaultValue = "CURRENT_TIMESTAMP")
+    @ColumnInfo(name = CREATED_AT)
     private Date created;
-    @ColumnInfo(name = UPDATED_AT, defaultValue = "CURRENT_TIMESTAMP")
+    @ColumnInfo(name = UPDATED_AT)
     private Date updated;
 
     @Ignore
@@ -46,6 +50,9 @@ public class PetMedicineJoin {
     public PetMedicineJoin(int petId, int medicineId) {
         this.petId = petId;
         this.medicineId = medicineId;
+        long time = System.currentTimeMillis();
+        created = new Date(time);
+        updated = new Date(time);
     }
 
     public int getPetId() {

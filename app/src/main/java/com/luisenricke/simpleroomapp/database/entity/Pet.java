@@ -14,6 +14,7 @@ import static com.luisenricke.simpleroomapp.database.entity.Pet.COLUMN.*;
                 entity = User.class,
                 parentColumns = User.COLUMN.ID,
                 childColumns = USER,
+                onUpdate = ForeignKey.CASCADE,
                 onDelete = ForeignKey.CASCADE
         )}
 )
