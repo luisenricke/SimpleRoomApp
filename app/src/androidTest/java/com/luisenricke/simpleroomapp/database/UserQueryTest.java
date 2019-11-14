@@ -16,6 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -238,5 +239,18 @@ public class UserQueryTest {
         List<User> list = dao.get();
 
         Assert.assertEquals(3, list.size());
+    }
+
+    @Test
+    public void getByIds() {
+        User rowOne = new User("test@test", "test");
+        User rowTwo = new User("test2@test", "test2");
+        User rowThree = new User("test3@test", "test3");
+
+        dao.inserts(rowOne, rowTwo, rowThree);
+        List<User> list = dao.getByIds(new long[]{1, 2, 3});
+        List<User> check = dao.get();
+
+        Assert.assertArrayEquals(check.toArray(), list.toArray());
     }
 }

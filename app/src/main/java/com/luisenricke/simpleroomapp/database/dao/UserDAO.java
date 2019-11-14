@@ -33,6 +33,10 @@ public abstract class UserDAO implements BaseDAO<User>,
     abstract public User getById(int id);
 
     @Override
+    @Query("SELECT * FROM " + SCHEMA.TABLE + " WHERE id IN(:ids)")
+    public abstract List<User> getByIds(long[] ids);
+
+    @Override
     @Query("DELETE FROM " + SCHEMA.TABLE + " WHERE id = :id")
     abstract public int deleteById(int id);
 }

@@ -20,17 +20,19 @@ public interface BaseDAO<X> {
      * Insert an vararg of objects in the table.
      *
      * @param rows: the objects to be inserted.
+     * @return the list of id's of the rows inserted.
      */
     @Insert
-    void inserts(X... rows);
+    List<Long> inserts(X... rows);
 
     /**
      * Insert a list of objects in the table.
      *
      * @param rows: the objects to be inserted.
+     * @return the list of id's of the rows inserted.
      */
     @Insert
-    void inserts(List<X> rows);
+    List<Long> inserts(List<X> rows);
 
     /**
      * Count rows from the table.
@@ -132,6 +134,15 @@ public interface BaseDAO<X> {
          * @return the object requested.
          */
         Y getById(int id);
+
+        /**
+         * Get a list of object existing in the table by ID's.
+         * <p>@Query("SELECT * FROM " + SCHEMA.TABLE + " WHERE id IN(:ids)")</p>
+         *
+         * @param ids: the list id's of the searched objects.
+         * @return the list objects requested.
+         */
+        List<Y> getByIds(long[] ids);
 
         /**
          * Delete a row existing in the table by ID.

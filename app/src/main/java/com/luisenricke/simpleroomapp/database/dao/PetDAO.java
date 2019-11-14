@@ -36,6 +36,10 @@ public abstract class PetDAO implements BaseDAO<Pet>,
     abstract public Pet getById(int id);
 
     @Override
+    @Query("SELECT * FROM " + SCHEMA.TABLE + " WHERE id IN(:ids)")
+    public abstract List<Pet> getByIds(long[] ids);
+
+    @Override
     @Query("DELETE FROM " + SCHEMA.TABLE + " WHERE id = :id")
     abstract public int deleteById(int id);
 
