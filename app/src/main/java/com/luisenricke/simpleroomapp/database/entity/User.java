@@ -6,11 +6,11 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-import static com.luisenricke.simpleroomapp.database.entity.User.COLUMN.*;
+import static com.luisenricke.simpleroomapp.database.entity.User.SCHEMA.*;
 
 @Entity(tableName = TABLE)
 public class User {
-    public interface COLUMN {
+    public interface SCHEMA {
         String TABLE = "User";
         String ID = "id";
         String EMAIL = "email";

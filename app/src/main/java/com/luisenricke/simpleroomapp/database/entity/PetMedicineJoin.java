@@ -8,25 +8,25 @@ import androidx.room.Ignore;
 
 import java.util.Date;
 
-import static com.luisenricke.simpleroomapp.database.entity.PetMedicineJoin.COLUMN.*;
+import static com.luisenricke.simpleroomapp.database.entity.PetMedicineJoin.SCHEMA.*;
 
 @Entity(tableName = TABLE,
         primaryKeys = {PET,
                 MEDICINE},
         foreignKeys = {
                 @ForeignKey(entity = Pet.class,
-                        parentColumns = Pet.COLUMN.ID,
+                        parentColumns = Pet.SCHEMA.ID,
                         childColumns = PET,
                         onUpdate = ForeignKey.CASCADE,
                         onDelete = ForeignKey.CASCADE),
                 @ForeignKey(entity = Medicine.class,
-                        parentColumns = Medicine.COLUMN.ID,
+                        parentColumns = Medicine.SCHEMA.ID,
                         childColumns = MEDICINE,
                         onUpdate = ForeignKey.CASCADE,
                         onDelete = ForeignKey.CASCADE)}
 )
 public class PetMedicineJoin {
-    public interface COLUMN {
+    public interface SCHEMA {
         String TABLE = "PetMedicineJoin";
         String PET = "pet_id";
         String MEDICINE = "medicine_id";

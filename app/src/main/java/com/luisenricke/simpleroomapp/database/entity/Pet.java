@@ -7,19 +7,19 @@ import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-import static com.luisenricke.simpleroomapp.database.entity.Pet.COLUMN.*;
+import static com.luisenricke.simpleroomapp.database.entity.Pet.SCHEMA.*;
 
 @Entity(tableName = TABLE,
         foreignKeys = {@ForeignKey(
                 entity = User.class,
-                parentColumns = User.COLUMN.ID,
+                parentColumns = User.SCHEMA.ID,
                 childColumns = USER,
                 onUpdate = ForeignKey.CASCADE,
                 onDelete = ForeignKey.CASCADE
         )}
 )
 public class Pet {
-    public interface COLUMN {
+    public interface SCHEMA {
         String TABLE = "Pet";
         String ID = "id";
         String NAME = "name";

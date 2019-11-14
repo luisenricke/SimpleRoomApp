@@ -208,7 +208,7 @@ public class PetMedicineJoinQueryTest {
 
         petMedicineJoin.inserts(rowOne, rowTwo, rowThree, rowFour, rowFive, rowSix);
 
-        List<Pet> petsFromMedicine = petMedicineJoin.getPetsOfMedicine(1);
+        List<Pet> petsFromMedicine = petMedicineJoin.getLeftJoinRight(1);
         List<PetMedicineJoin> list = petMedicineJoin.get();
 
         for (Pet row : petsFromMedicine) {
@@ -233,7 +233,7 @@ public class PetMedicineJoinQueryTest {
 
         petMedicineJoin.inserts(rowOne, rowTwo, rowThree, rowFour, rowFive, rowSix);
 
-        List<Medicine> medicinesFromPet = petMedicineJoin.getMedicinesOfPet(1);
+        List<Medicine> medicinesFromPet = petMedicineJoin.getRightJoinLeft(1);
         List<PetMedicineJoin> list = petMedicineJoin.get();
 
         for (Medicine row : medicinesFromPet) {

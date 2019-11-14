@@ -6,61 +6,48 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import com.luisenricke.simpleroomapp.database.BaseDAO;
 import com.luisenricke.simpleroomapp.database.entity.Pet;
+import com.luisenricke.simpleroomapp.database.entity.Pet.SCHEMA;
 
 import java.util.List;
 
 @Dao
-public abstract class PetDAO {
+public abstract class PetDAO implements BaseDAO<Pet>,
+        BaseDAO.UpdateDAO<Pet>,
+        BaseDAO.DeleteDAO<Pet>,
+        BaseDAO.OperationsPrimaryKeyDAO<Pet>,
+        BaseDAO.OperationsForeignKeyDAO<Pet> {
 
-    @Insert
-    public abstract long insert(Pet row);
+    @Override
+    @Query("SELECT COUNT(*) FROM " + SCHEMA.TABLE)
+    abstract public int count();
 
-    @Insert
-    public abstract void inserts(Pet... row);
+    @Override
+    @Query("SELECT * FROM " + SCHEMA.TABLE)
+    abstract public List<Pet> get();
 
-    @Insert
-    public abstract void inserts(List<Pet> rows);
+    @Override
+    @Query("DELETE FROM " + SCHEMA.TABLE)
+    abstract public void drop();
 
-    @Update
-    public abstract int update(Pet row);
+    @Override
+    @Query("SELECT * FROM " + SCHEMA.TABLE + " WHERE id = :id")
+    abstract public Pet getById(int id);
 
-    @Update
-    public abstract int updates(Pet... rows);
+    @Override
+    @Query("DELETE FROM " + SCHEMA.TABLE + " WHERE id = :id")
+    abstract public int deleteById(int id);
 
-    @Update
-    public abstract int updates(List<Pet> rows);
+    @Override
+    @Query("SELECT COUNT(*) FROM " + SCHEMA.TABLE + " WHERE user_id = :foreignKeyValue")
+    abstract public long countByReference(int foreignKeyValue);
 
-    @Delete
-    public abstract int delete(Pet row);
+    @Override
+    @Query("SELECT * FROM " + SCHEMA.TABLE + " WHERE user_id = :foreignKeyValue")
+    abstract public List<Pet> getByReference(int foreignKeyValue);
 
-    @Delete
-    public abstract int deletes(Pet... row);
-
-    @Delete
-    public abstract int deletes(List<Pet> rows);
-
-    @Query("DELETE FROM Pet WHERE id = :id")
-    public abstract int deleteById(int id);
-
-    @Query("DELETE FROM Pet")
-    public abstract void drop();
-
-    @Query("DELETE FROM Pet WHERE user_id = :idUser")
-    public abstract void dropByUser(int idUser);
-
-    @Query("SELECT * FROM Pet")
-    public abstract List<Pet> get();
-
-    @Query("SELECT * FROM Pet WHERE user_id = :idUser")
-    public abstract List<Pet> getByUser(int idUser);
-
-    @Query("SELECT * FROM Pet WHERE id = :id")
-    public abstract Pet getById(int id);
-
-    @Query("SELECT COUNT(*) FROM Pet")
-    public abstract long count();
-
-    @Query("SELECT COUNT(*) FROM Pet where user_id = :idUser")
-    public abstract long countByUser(int idUser);
+    @Override
+    @Query("DELETE FROM " + SCHEMA.TABLE + " WHERE user_id = :foreignKeyValue")
+    abstract public void dropByReference(int foreignKeyValue);
 }

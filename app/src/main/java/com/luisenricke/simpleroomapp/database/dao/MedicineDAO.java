@@ -1,57 +1,37 @@
 package com.luisenricke.simpleroomapp.database.dao;
 
 import androidx.room.Dao;
-import androidx.room.Delete;
-import androidx.room.Insert;
 import androidx.room.Query;
-import androidx.room.Update;
 
+import com.luisenricke.simpleroomapp.database.BaseDAO;
 import com.luisenricke.simpleroomapp.database.entity.Medicine;
+import com.luisenricke.simpleroomapp.database.entity.Medicine.SCHEMA;
 
 import java.util.List;
 
 @Dao
-public abstract class MedicineDAO {
+public abstract class MedicineDAO implements BaseDAO<Medicine>,
+        BaseDAO.UpdateDAO<Medicine>,
+        BaseDAO.DeleteDAO<Medicine>,
+        BaseDAO.OperationsPrimaryKeyDAO<Medicine> {
 
-    @Insert
-    public abstract long insert(Medicine row);
+    @Override
+    @Query("SELECT COUNT(*) FROM " + SCHEMA.TABLE)
+    abstract public int count();
 
-    @Insert
-    public abstract void inserts(Medicine... row);
+    @Override
+    @Query("SELECT * FROM " + SCHEMA.TABLE)
+    abstract public List<Medicine> get();
 
-    @Insert
-    public abstract void inserts(List<Medicine> rows);
+    @Override
+    @Query("DELETE FROM " + SCHEMA.TABLE)
+    abstract public void drop();
 
-    @Update
-    public abstract int update(Medicine row);
+    @Override
+    @Query("SELECT * FROM " + SCHEMA.TABLE + " WHERE id = :id")
+    abstract public Medicine getById(int id);
 
-    @Update
-    public abstract int updates(Medicine... rows);
-
-    @Update
-    public abstract int updates(List<Medicine> rows);
-
-    @Delete
-    public abstract int delete(Medicine row);
-
-    @Delete
-    public abstract int deletes(Medicine... row);
-
-    @Delete
-    public abstract int deletes(List<Medicine> rows);
-
-    @Query("DELETE FROM Medicine WHERE id = :id")
-    public abstract int deleteById(int id);
-
-    @Query("DELETE FROM Medicine")
-    public abstract void drop();
-
-    @Query("SELECT * FROM Medicine")
-    public abstract List<Medicine> get();
-
-    @Query("SELECT * FROM Medicine WHERE id = :id")
-    public abstract Medicine getById(int id);
-
-    @Query("SELECT COUNT(*) FROM Medicine")
-    public abstract long count();
+    @Override
+    @Query("DELETE FROM " + SCHEMA.TABLE + " WHERE id = :id")
+    abstract public int deleteById(int id);
 }
