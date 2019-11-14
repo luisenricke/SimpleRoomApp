@@ -32,13 +32,13 @@ public abstract class UserDAO {
     public abstract int updates(List<User> rows);
 
     @Delete
-    public abstract void delete(User row);
+    public abstract int delete(User row);
 
     @Delete
-    public abstract void deletes(User... row);
+    public abstract int deletes(User... row);
 
     @Delete
-    public abstract void deletes(List<User> rows);
+    public abstract int deletes(List<User> rows);
 
     @Query("DELETE FROM User WHERE id = :id")
     public abstract int deleteById(int id);

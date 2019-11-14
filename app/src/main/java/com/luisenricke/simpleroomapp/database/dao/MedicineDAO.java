@@ -32,13 +32,13 @@ public abstract class MedicineDAO {
     public abstract int updates(List<Medicine> rows);
 
     @Delete
-    public abstract void delete(Medicine row);
+    public abstract int delete(Medicine row);
 
     @Delete
-    public abstract void deletes(Medicine... row);
+    public abstract int deletes(Medicine... row);
 
     @Delete
-    public abstract void deletes(List<Medicine> rows);
+    public abstract int deletes(List<Medicine> rows);
 
     @Query("DELETE FROM Medicine WHERE id = :id")
     public abstract int deleteById(int id);

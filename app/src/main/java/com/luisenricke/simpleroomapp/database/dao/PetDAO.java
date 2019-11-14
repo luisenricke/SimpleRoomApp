@@ -32,13 +32,13 @@ public abstract class PetDAO {
     public abstract int updates(List<Pet> rows);
 
     @Delete
-    public abstract void delete(Pet row);
+    public abstract int delete(Pet row);
 
     @Delete
-    public abstract void deletes(Pet... row);
+    public abstract int deletes(Pet... row);
 
     @Delete
-    public abstract void deletes(List<Pet> rows);
+    public abstract int deletes(List<Pet> rows);
 
     @Query("DELETE FROM Pet WHERE id = :id")
     public abstract int deleteById(int id);
@@ -46,14 +46,14 @@ public abstract class PetDAO {
     @Query("DELETE FROM Pet")
     public abstract void drop();
 
-    @Query("DELETE FROM Pet WHERE user_id = :user_id")
-    public abstract void dropByUser(int user_id);
+    @Query("DELETE FROM Pet WHERE user_id = :idUser")
+    public abstract void dropByUser(int idUser);
 
     @Query("SELECT * FROM Pet")
     public abstract List<Pet> get();
 
-    @Query("SELECT * FROM Pet WHERE user_id = :user_id")
-    public abstract List<Pet> getByUser(int user_id);
+    @Query("SELECT * FROM Pet WHERE user_id = :idUser")
+    public abstract List<Pet> getByUser(int idUser);
 
     @Query("SELECT * FROM Pet WHERE id = :id")
     public abstract Pet getById(int id);
@@ -61,6 +61,6 @@ public abstract class PetDAO {
     @Query("SELECT COUNT(*) FROM Pet")
     public abstract long count();
 
-    @Query("SELECT COUNT(*) FROM Pet where user_id = :user_id")
-    public abstract long countByUser(int user_id);
+    @Query("SELECT COUNT(*) FROM Pet where user_id = :idUser")
+    public abstract long countByUser(int idUser);
 }

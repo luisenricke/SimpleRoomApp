@@ -14,7 +14,7 @@ import java.util.List;
 public abstract class PetMedicineJoinDAO {
 
     @Insert
-    public abstract void insert(PetMedicineJoin row);
+    public abstract long insert(PetMedicineJoin row);
 
     @Insert
     public abstract void inserts(PetMedicineJoin... row);

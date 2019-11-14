@@ -1,12 +1,12 @@
 package com.luisenricke.simpleroomapp.database;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.room.Room;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.runner.AndroidJUnit4;
 
+import com.luisenricke.simpleroomapp.database.entity.Pet;
 import com.luisenricke.simpleroomapp.database.entity.User;
 import com.luisenricke.simpleroomapp.database.dao.UserDAO;
 
@@ -106,7 +106,7 @@ public class UserQueryTest {
         list = Arrays.asList(rowOneModified, rowTwoModified, rowFailUpdate);
 
         int aux = dao.updates(list);
-        Log.i("Update", aux + "");
+        System.out.println(aux + "");
 
         list = Arrays.asList(rowOneModified, rowTwoModified, rowThreeNotModified);
 
@@ -129,7 +129,7 @@ public class UserQueryTest {
         User rowFailUpdate = new User(100, "fail", "fail");
 
         int aux = dao.updates(rowOneModified, rowThreeModified, rowFailUpdate);
-        Log.i("Update", aux + "");
+        System.out.println(aux + "");
 
         List<User> list = Arrays.asList(rowOneModified, rowTwoNotModified, rowThreeModified);
 
@@ -157,6 +157,7 @@ public class UserQueryTest {
     @Test
     public void delete() {
         long count = 0;
+        int deletes = 0;
 
         User rowOne = new User("test@test", "test");
         User rowTwo = new User("test2@test", "test2");
@@ -164,8 +165,9 @@ public class UserQueryTest {
 
         dao.inserts(rowOne, rowTwo, rowThree);
 
-        dao.delete(new User(2, "test2@test", "test2"));
+        deletes = dao.delete(new User(2, "test2@test", "test2"));
         count = dao.count();
+        System.out.println("Count of deletes: " + deletes);
 
         Assert.assertEquals(2, count);
     }
@@ -173,6 +175,7 @@ public class UserQueryTest {
     @Test
     public void deletesList() {
         long count = 0;
+        int deletes = 0;
 
         User rowOne = new User("test@test", "test");
         User rowTwo = new User("test2@test", "test2");
@@ -183,8 +186,9 @@ public class UserQueryTest {
         List<User> deleteRows = Arrays.asList(new User(1, "test@test", "test"),
                 new User(2, "test2@test", "test2"),
                 new User(3, "test3@test", "test3"));
-        dao.deletes(deleteRows);
+        deletes = dao.deletes(deleteRows);
         count = dao.count();
+        System.out.println("Count of deletes: " + deletes);
 
         Assert.assertEquals(0, count);
     }
@@ -192,6 +196,7 @@ public class UserQueryTest {
     @Test
     public void deletesVarags() {
         long count = 0;
+        int deletes = 0;
 
         User rowOne = new User("test@test", "test");
         User rowTwo = new User("test2@test", "test2");
@@ -199,9 +204,11 @@ public class UserQueryTest {
 
         dao.inserts(rowOne, rowTwo, rowThree);
 
-        dao.deletes(new User(1, "test@test", "test"),
-                new User(2, "test2@test", "test2"));
+        deletes = dao.deletes(new User(1, "test@test", "test"),
+                new User(2, "test2@test", "test2"),
+                new User(100, "random", "random"));
         count = dao.count();
+        System.out.println("Count of deletes: " + deletes);
 
         Assert.assertEquals(1, count);
     }
