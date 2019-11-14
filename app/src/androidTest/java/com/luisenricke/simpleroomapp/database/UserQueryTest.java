@@ -80,14 +80,14 @@ public class UserQueryTest {
 
     @Test
     public void update() {
+        int count = 0;
         User rowOne = new User("test@test", "test");
 
         dao.insert(rowOne);
         User modified = new User(1, "modified", "modified");
-        dao.update(modified);
-        User userDB = dao.getById(1);
+        count = dao.update(modified);
 
-        Assert.assertEquals(modified, userDB);
+        Assert.assertEquals(1, count);
     }
 
     @Test
@@ -168,6 +168,57 @@ public class UserQueryTest {
         count = dao.count();
 
         Assert.assertEquals(2, count);
+    }
+
+    @Test
+    public void deletesList() {
+        long count = 0;
+
+        User rowOne = new User("test@test", "test");
+        User rowTwo = new User("test2@test", "test2");
+        User rowThree = new User("test3@test", "test3");
+
+        dao.inserts(rowOne, rowTwo, rowThree);
+
+        List<User> deleteRows = Arrays.asList(new User(1, "test@test", "test"),
+                new User(2, "test2@test", "test2"),
+                new User(3, "test3@test", "test3"));
+        dao.deletes(deleteRows);
+        count = dao.count();
+
+        Assert.assertEquals(0, count);
+    }
+
+    @Test
+    public void deletesVarags() {
+        long count = 0;
+
+        User rowOne = new User("test@test", "test");
+        User rowTwo = new User("test2@test", "test2");
+        User rowThree = new User("test3@test", "test3");
+
+        dao.inserts(rowOne, rowTwo, rowThree);
+
+        dao.deletes(new User(1, "test@test", "test"),
+                new User(2, "test2@test", "test2"));
+        count = dao.count();
+
+        Assert.assertEquals(1, count);
+    }
+
+    @Test
+    public void deleteById() {
+        long count = 0;
+
+        User rowOne = new User("test@test", "test");
+        User rowTwo = new User("test2@test", "test2");
+        User rowThree = new User("test3@test", "test3");
+
+        dao.inserts(rowOne, rowTwo, rowThree);
+
+        count = dao.deleteById(1);
+
+        Assert.assertEquals(1, count);
     }
 
     @Test

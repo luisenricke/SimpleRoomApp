@@ -23,7 +23,7 @@ public abstract class UserDAO {
     public abstract void inserts(List<User> rows);
 
     @Update
-    public abstract void update(User row);
+    public abstract int update(User row);
 
     @Update
     public abstract int updates(User... rows);
@@ -33,6 +33,15 @@ public abstract class UserDAO {
 
     @Delete
     public abstract void delete(User row);
+
+    @Delete
+    public abstract void deletes(User... row);
+
+    @Delete
+    public abstract void deletes(List<User> rows);
+
+    @Query("DELETE FROM User WHERE id = :id")
+    public abstract int deleteById(int id);
 
     @Query("DELETE FROM User")
     public abstract void drop();

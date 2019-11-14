@@ -23,7 +23,7 @@ public abstract class MedicineDAO {
     public abstract void inserts(List<Medicine> rows);
 
     @Update
-    public abstract void update(Medicine row);
+    public abstract int update(Medicine row);
 
     @Update
     public abstract int updates(Medicine... rows);
@@ -33,6 +33,15 @@ public abstract class MedicineDAO {
 
     @Delete
     public abstract void delete(Medicine row);
+
+    @Delete
+    public abstract void deletes(Medicine... row);
+
+    @Delete
+    public abstract void deletes(List<Medicine> rows);
+
+    @Query("DELETE FROM Medicine WHERE id = :id")
+    public abstract int deleteById(int id);
 
     @Query("DELETE FROM Medicine")
     public abstract void drop();

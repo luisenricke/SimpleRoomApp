@@ -23,7 +23,7 @@ public abstract class PetDAO {
     public abstract void inserts(List<Pet> rows);
 
     @Update
-    public abstract void update(Pet row);
+    public abstract int update(Pet row);
 
     @Update
     public abstract int updates(Pet... rows);
@@ -33,6 +33,15 @@ public abstract class PetDAO {
 
     @Delete
     public abstract void delete(Pet row);
+
+    @Delete
+    public abstract void deletes(Pet... row);
+
+    @Delete
+    public abstract void deletes(List<Pet> rows);
+
+    @Query("DELETE FROM Pet WHERE id = :id")
+    public abstract int deleteById(int id);
 
     @Query("DELETE FROM Pet")
     public abstract void drop();
