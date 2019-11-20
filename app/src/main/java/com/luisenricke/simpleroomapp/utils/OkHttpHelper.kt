@@ -1,7 +1,7 @@
 package com.luisenricke.simpleroomapp.utils
 
-import com.luisenricke.simpleroomapp.data.cache.Cache
-import com.luisenricke.simpleroomapp.data.cache.CacheDAO
+import com.luisenricke.simpleroomapp.data_kotlin.cache.Cache
+import com.luisenricke.simpleroomapp.data_kotlin.cache.CacheDAO
 import io.reactivex.Observable
 import okhttp3.Call
 import okhttp3.OkHttpClient
