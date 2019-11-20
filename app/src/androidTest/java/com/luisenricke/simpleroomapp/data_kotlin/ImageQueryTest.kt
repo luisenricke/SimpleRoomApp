@@ -76,26 +76,10 @@ class ImageQueryTest {
         val row = Image("Tes", byteArray, 1)
         dao.insert(row)
 
-        image = dao.filterId(1)
+        image = dao.getById(1)
 
         Assert.assertTrue(bitmap.sameAs(image.src?.toBitmap()))
     }
-
-/*
-    @Test
-    @Throws(Exception::class)
-    fun getListOfRows() {
-        val rowOne = Contact("test@test.com,", "test", 1)
-        val rowTwo = Contact("test@test.com,", "test", 2)
-        val rowThree =
-            Contact("test@test.com,", "test", 3)
-        val list = listOf(rowOne, rowTwo, rowThree)
-        dao.inserts(list)
-        val checkList = dao.get()
-
-        Assert.assertArrayEquals(list.toTypedArray(), checkList.toTypedArray())
-    }
-     */
 
     private fun Bitmap.toByteArray(): ByteArray? {
         val blob = ByteArrayOutputStream()

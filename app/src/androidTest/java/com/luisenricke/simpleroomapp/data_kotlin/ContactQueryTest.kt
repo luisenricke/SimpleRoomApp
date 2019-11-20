@@ -49,20 +49,6 @@ class ContactQueryTest {
 
     @Test
     @Throws(Exception::class)
-    fun getListOfRowsCompact() {
-        val rowOne = Contact("test@test.com,", "test", 1)
-        val rowTwo = Contact("test@test.com,", "test2", 2)
-        val rowThree =
-            Contact("test@test.com,", "test3", 3)
-        val list = listOf(rowOne, rowTwo, rowThree)
-        dao.inserts(list)
-        val checkList = dao.getCustomColumns()
-
-        Assert.assertEquals(list[0].name, checkList[0].name)
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun insertSimpleRowDifferentId() {
         val row = Contact("test@test.com,", "test", 10)
         val idGenerated = dao.insert(row)
@@ -114,35 +100,13 @@ class ContactQueryTest {
             Contact("test@test.com,", "test", 3)
         val list = listOf(rowOne, rowTwo, rowThree)
         dao.inserts(list)
-        val updatedRow = dao.filterId(2)
+        val updatedRow = dao.getById(2)
         updatedRow.name = "changed"
         dao.update(updatedRow)
 
-        val checkRow = dao.filterId(2)
+        val checkRow = dao.getById(2)
 
         Assert.assertEquals(updatedRow.name, checkRow.name)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun updateAllRows() {
-        val rowOne = Contact("test@test.com,", "test", 1)
-        val rowTwo = Contact("test@test.com,", "test", 2)
-        val rowThree =
-            Contact("test@test.com,", "test", 3)
-        val list = listOf(rowOne, rowTwo, rowThree)
-        dao.inserts(list)
-        val rowOneUpdated =
-            Contact("test@test.com,", "One", 1)
-        val rowTwoUpdated =
-            Contact("test@test.com,", "Two", 2)
-        val rowThreeUpdated =
-            Contact("test@test.com,", "Three", 3)
-        val listUpdated = listOf(rowOneUpdated, rowTwoUpdated, rowThreeUpdated)
-        dao.reset(listUpdated)
-        val checkListRows = dao.get()
-
-        Assert.assertArrayEquals(listUpdated.toTypedArray(), checkListRows.toTypedArray())
     }
 
     @Test
@@ -150,7 +114,7 @@ class ContactQueryTest {
     fun deleteByObjectRow() {
         val row = Contact("test@test.com,", "test")
         dao.insert(row)
-        val rowFind = dao.filterId(1)
+        val rowFind = dao.getById(1)
         dao.delete(rowFind)
         val checkRow = dao.count()
 
@@ -161,7 +125,8 @@ class ContactQueryTest {
     @Throws(Exception::class)
     fun deleteByIdRow() {
         val row = Contact("test@test.com,", "test")
-        val rowInserted = dao.insert(row)
+        dao.insert(row)
+        val rowInserted = dao.getById(1)
         dao.delete(rowInserted)
         val checkRow = dao.count()
 

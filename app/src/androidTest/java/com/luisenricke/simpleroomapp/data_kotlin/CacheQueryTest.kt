@@ -36,7 +36,7 @@ class CacheQueryTest {
     @Test
     fun getEmptyRow() {
         val row = dao.get()
-        Assert.assertEquals(null, row)
+        Assert.assertEquals(0, row.size)
     }
 
     @Test
