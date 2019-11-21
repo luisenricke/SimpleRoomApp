@@ -13,8 +13,7 @@ import java.util.List;
 public abstract class PetDAO implements BaseDAO<Pet>,
         BaseDAO.UpdateDAO<Pet>,
         BaseDAO.DeleteDAO<Pet>,
-        BaseDAO.OperationsPrimaryKeyDAO<Pet>,
-        BaseDAO.OperationsForeignKeyDAO<Pet> {
+        BaseDAO.OperationsPrimaryKeyDAO<Pet>{
 
     @Override
     @Query("SELECT COUNT(*) FROM " + SCHEMA.TABLE)
@@ -39,16 +38,4 @@ public abstract class PetDAO implements BaseDAO<Pet>,
     @Override
     @Query("DELETE FROM " + SCHEMA.TABLE + " WHERE id = :id")
     abstract public int deleteById(int id);
-
-    @Override
-    @Query("SELECT COUNT(*) FROM " + SCHEMA.TABLE + " WHERE user_id = :foreignKeyValue")
-    abstract public long countByReference(int foreignKeyValue);
-
-    @Override
-    @Query("SELECT * FROM " + SCHEMA.TABLE + " WHERE user_id = :foreignKeyValue")
-    abstract public List<Pet> getByReference(int foreignKeyValue);
-
-    @Override
-    @Query("DELETE FROM " + SCHEMA.TABLE + " WHERE user_id = :foreignKeyValue")
-    abstract public void dropByReference(int foreignKeyValue);
 }

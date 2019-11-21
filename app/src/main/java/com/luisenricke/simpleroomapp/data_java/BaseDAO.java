@@ -115,16 +115,6 @@ public interface BaseDAO<X> {
     }
 
     interface OperationsPrimaryKeyDAO<Y> {
-        // TODO: Test this function
-
-        /**
-         * Get the id of the row in the table.
-         * <p>@Query("SELECT COUNT(*) FROM " + SCHEMA.TABLE)</p>
-         *
-         * @param row: the object without ID searched.
-         * @return id of the row searched.
-         */
-        //long getIdByEntity(Y row);
 
         /**
          * Get a object existing in the table by ID.
@@ -154,7 +144,12 @@ public interface BaseDAO<X> {
         int deleteById(int id);
     }
 
-    interface OperationsForeignKeyDAO<Y> {
+    /**
+     * @param <Y> is a child table.
+     * @param <Z> is a parent table.
+     * @deprecated This interfaces its just a reference query.
+     */
+    interface OperationsForeignKeyDAO<Y, Z> {
         /**
          * Count rows from the table by ID of the reference.
          * <p>@Query("SELECT COUNT(*) FROM " + SCHEMA.TABLE + " WHERE parent_id = :foreignKeyValue")</p>
@@ -172,6 +167,26 @@ public interface BaseDAO<X> {
          * @return the list of objects requested.
          */
         List<Y> getByReference(int foreignKeyValue);
+        // TODO: MAke other two functions with WHERE statement
+        /**
+         * Count rows from the table Y in Z.
+         * <p>@Query("SELECT COUNT(*) FROM " + Y.SCHEMA.TABLE + " AS CHILD" </p>
+         * <p>+ " INNER JOIN " + Z.SCHEMA.TABLE + " AS PARENT" </p>
+         * <p>+ " ON CHILD.parent_id = PARENT.id ")</p>
+         *
+         * @return the total number of rows.
+         */
+        long countListChildByJoin();
+
+        /**
+         * Get a list of objects existing in the table Y in Z.
+         * <p>@Query("SELECT CHILD.* FROM " + Y.SCHEMA.TABLE + " AS CHILD" </p>
+         * <p>+ " INNER JOIN " + Z.SCHEMA.TABLE + " AS PARENT" </p>
+         * <p>+ " ON CHILD.parent_id = PARENT.id ")</p>
+         *
+         * @return the list of objects requested.
+         */
+        List<Y> getListChildByJoin();
 
         /**
          * Drop all rows existing in the table by ID of the reference.
