@@ -36,7 +36,7 @@ public class PetQueryTest {
 
         //Provide one user for Tests
         database.userDAO().insert(new User("test@test", "test"));
-        user = database.userDAO().getById(1);
+        user = database.userDAO().get(1);
     }
 
     @After
@@ -127,7 +127,7 @@ public class PetQueryTest {
         dao.insert(rowOne);
         Pet modified = new Pet(1, "modified", "12/08/2019", user.getId());
         dao.update(modified);
-        Pet userDB = dao.getById(1);
+        Pet userDB = dao.get(1);
 
         Assert.assertEquals(modified, userDB);
     }
@@ -206,7 +206,7 @@ public class PetQueryTest {
         Pet rowThree = new Pet("Adonis3", "13/08/2019", user.getId());
 
         database.userDAO().insert(new User("test2@test", "test2"));
-        User otherUser = database.userDAO().getById(2);
+        User otherUser = database.userDAO().get(2);
         Pet rowFour = new Pet("Adonis4", "14/08/2019", otherUser.getId());
 
         dao.inserts(rowOne, rowTwo, rowThree, rowFour);
@@ -252,12 +252,12 @@ public class PetQueryTest {
         Pet rowThree = new Pet("Adonis3", "13/08/2019", user.getId());
 
         database.userDAO().insert(new User("test2@test", "test2"));
-        User otherUser = database.userDAO().getById(2);
+        User otherUser = database.userDAO().get(2);
         Pet rowFour = new Pet("Adonis4", "14/08/2019", otherUser.getId());
 
         dao.inserts(rowOne, rowTwo, rowThree, rowFour);
 
-        Pet petFromOtherUser = dao.getById(4);
+        Pet petFromOtherUser = dao.get(4);
 
         List<Pet> checkList = dao.getByReference(otherUser.getId());
 

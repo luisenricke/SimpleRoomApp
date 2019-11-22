@@ -29,13 +29,13 @@ public abstract class PetDAO implements BaseDAO<Pet>,
 
     @Override
     @Query("SELECT * FROM " + SCHEMA.TABLE + " WHERE id = :id")
-    abstract public Pet getById(int id);
+    abstract public Pet get(int id);
 
     @Override
     @Query("SELECT * FROM " + SCHEMA.TABLE + " WHERE id IN(:ids)")
-    public abstract List<Pet> getByIds(long[] ids);
+    public abstract List<Pet> get(long[] ids);
 
     @Override
     @Query("DELETE FROM " + SCHEMA.TABLE + " WHERE id = :id")
-    abstract public int deleteById(int id);
+    abstract public int delete(int id);
 }

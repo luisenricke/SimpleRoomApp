@@ -222,7 +222,7 @@ public class UserQueryTest {
 
         dao.inserts(rowOne, rowTwo, rowThree);
 
-        count = dao.deleteById(1);
+        count = dao.delete(1);
 
         Assert.assertEquals(1, count);
     }
@@ -246,7 +246,7 @@ public class UserQueryTest {
         User rowThree = new User("test3@test", "test3");
 
         dao.inserts(rowOne, rowTwo, rowThree);
-        List<User> list = dao.getByIds(new long[]{1, 2, 3});
+        List<User> list = dao.get(new long[]{1, 2, 3});
         List<User> check = dao.get();
 
         Assert.assertArrayEquals(check.toArray(), list.toArray());

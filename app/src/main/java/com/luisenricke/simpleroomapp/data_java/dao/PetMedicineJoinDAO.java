@@ -32,14 +32,14 @@ public abstract class PetMedicineJoinDAO implements BaseDAO<PetMedicineJoin>,
             "INNER JOIN " + SCHEMA.TABLE + " " +
             "ON Pet.id = " + SCHEMA.TABLE + ".Pet_id " +
             "WHERE " + SCHEMA.TABLE + ".Medicine_id = :idRight")
-    abstract public List<Pet> getLeftJoinRight(int idRight);
+    abstract public List<Pet> getLeftRightJoin(int idRight);
 
     @Override
     @Query("SELECT * FROM Medicine " +
             "INNER JOIN " + SCHEMA.TABLE + " " +
             "ON Medicine.id = " + SCHEMA.TABLE + ".Medicine_id " +
             "WHERE " + SCHEMA.TABLE + ".Pet_id = :idLeft")
-    abstract public List<Medicine> getRightJoinLeft(int idLeft);
+    abstract public List<Medicine> getRightLeftJoin(int idLeft);
 
 /*
     @Query("SELECT * FROM Pet " +

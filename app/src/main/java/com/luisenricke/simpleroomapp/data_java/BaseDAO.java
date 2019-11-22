@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface BaseDAO<X> {
     /**
-     * Insert an row in the table.
+     * Insert a row to the table.
      *
      * @param row: the object to be inserted.
      * @return id of the row inserted.
@@ -17,7 +17,7 @@ public interface BaseDAO<X> {
     long insert(X row);
 
     /**
-     * Insert an vararg of objects in the table.
+     * Insert a list of objects with vararg to the table.
      *
      * @param rows: the objects to be inserted.
      * @return the list of id's of the rows inserted.
@@ -26,7 +26,7 @@ public interface BaseDAO<X> {
     List<Long> inserts(X... rows);
 
     /**
-     * Insert a list of objects in the table.
+     * Insert a list of objects to the table.
      *
      * @param rows: the objects to be inserted.
      * @return the list of id's of the rows inserted.
@@ -67,7 +67,7 @@ public interface BaseDAO<X> {
         int update(Y row);
 
         /**
-         * Update a vararg of rows with an existing ID in the table and change the data.
+         * Update a list of objects with vararg which contains existing ID in the table and change the data.
          *
          * @param rows: the objects to be updated.
          * @return the total number of rows changed.
@@ -87,7 +87,7 @@ public interface BaseDAO<X> {
 
     interface DeleteDAO<Y> {
         /**
-         * Delete an row from the table.
+         * Delete a row from the table.
          *
          * @param row: the object to be deleted.
          * @return the total number of rows dropped.
@@ -96,7 +96,7 @@ public interface BaseDAO<X> {
         int delete(Y row);
 
         /**
-         * Delete a vararg of rows from the table.
+         * Delete a list of rows with vararg from the table.
          *
          * @param rows: the objects to be deleted.
          * @return the total number of rows dropped.
@@ -123,7 +123,7 @@ public interface BaseDAO<X> {
          * @param id: the id of the searched object.
          * @return the object requested.
          */
-        Y getById(int id);
+        Y get(int id);
 
         /**
          * Get a list of object existing in the table by ID's.
@@ -132,7 +132,7 @@ public interface BaseDAO<X> {
          * @param ids: the list id's of the searched objects.
          * @return the list objects requested.
          */
-        List<Y> getByIds(long[] ids);
+        List<Y> get(long[] ids);
 
         /**
          * Delete a row existing in the table by ID.
@@ -141,7 +141,7 @@ public interface BaseDAO<X> {
          * @param id: the id of the searched object.
          * @return the total number of rows dropped.
          */
-        int deleteById(int id);
+        int delete(int id);
     }
 
     /**
@@ -154,20 +154,11 @@ public interface BaseDAO<X> {
          * Count rows from the table by ID of the reference.
          * <p>@Query("SELECT COUNT(*) FROM " + SCHEMA.TABLE + " WHERE parent_id = :foreignKeyValue")</p>
          *
-         * @param foreignKeyValue: the id of the reference table.
+         * @param fk: the id of the reference table.
          * @return the total number of rows.
          */
-        long countByReference(int foreignKeyValue);
+        long countChild(int fk);
 
-        /**
-         * Get a list of objects existing in the table by ID of the reference.
-         * <p>@Query("SELECT * FROM " + SCHEMA.TABLE + " WHERE parent_id = :foreignKeyValue")</p>
-         *
-         * @param foreignKeyValue: the id of the reference table.
-         * @return the list of objects requested.
-         */
-        List<Y> getByReference(int foreignKeyValue);
-        // TODO: MAke other two functions with WHERE statement
         /**
          * Count rows from the table Y in Z.
          * <p>@Query("SELECT COUNT(*) FROM " + Y.SCHEMA.TABLE + " AS CHILD" </p>
@@ -176,7 +167,16 @@ public interface BaseDAO<X> {
          *
          * @return the total number of rows.
          */
-        long countListChildByJoin();
+        long countChildJoin();
+
+        /**
+         * Get a list of objects existing in the table by ID of the reference.
+         * <p>@Query("SELECT * FROM " + SCHEMA.TABLE + " WHERE parent_id = :foreignKeyValue")</p>
+         *
+         * @param fk: the id of the reference table.
+         * @return the list of objects requested.
+         */
+        List<Y> getChild(int fk);
 
         /**
          * Get a list of objects existing in the table Y in Z.
@@ -186,15 +186,39 @@ public interface BaseDAO<X> {
          *
          * @return the list of objects requested.
          */
-        List<Y> getListChildByJoin();
+        List<Y> getChildJoin();
+
+        /**
+         * Count rows from the table Y in Z filtering with foreign key.
+         * <p>@Query("SELECT COUNT(*) FROM " + Y.SCHEMA.TABLE + " AS CHILD" </p>
+         * <p>+ " INNER JOIN " + Z.SCHEMA.TABLE + " AS PARENT" </p>
+         * <p>+ " ON CHILD.parent_id = PARENT.id" </p>
+         * <p>+ " WHERE CHILD.parent_id = :foreignKey")</p>
+         *
+         * @param fk: the id of the reference table.
+         * @return the total number of rows.
+         */
+        long countChildJoin(int fk);
+
+        /**
+         * Count rows from the table Y in Z filtering with foreign key
+         * <p>@Query("SELECT CHILD.* FROM " + Y.SCHEMA.TABLE + " AS CHILD" </p>
+         * <p>+ " INNER JOIN " + Z.SCHEMA.TABLE + " AS PARENT" </p>
+         * <p>+ " ON CHILD.parent_id = PARENT.id" </p>
+         * <p>+ " WHERE CHILD.parent_id = :foreignKey")</p>
+         *
+         * @param fk: the id of the reference table.
+         * @return the list of objects requested.
+         */
+        List<Y> getChildJoin(int fk);
 
         /**
          * Drop all rows existing in the table by ID of the reference.
          * <p>@Query("DELETE FROM " + SCHEMA.TABLE + " WHERE parent_id = :foreignKeyValue")</p>
          *
-         * @param foreignKeyValue: the id of the reference table.
+         * @param fk: the id of the reference table.
          */
-        void dropByReference(int foreignKeyValue);
+        void drop(int fk);
     }
 
     interface InnerJoinDAO<A, B> {
@@ -208,7 +232,7 @@ public interface BaseDAO<X> {
          * @param idRight: the id of the right table.
          * @return the list of objects matches.
          */
-        List<A> getLeftJoinRight(int idRight);
+        List<A> getLeftRightJoin(int idRight);
 
         /**
          * Get a list of objects in the right table existing in the left table.
@@ -220,6 +244,6 @@ public interface BaseDAO<X> {
          * @param idLeft: the id of the right table.
          * @return the list of objects matches.
          */
-        List<B> getRightJoinLeft(int idLeft);
+        List<B> getRightLeftJoin(int idLeft);
     }
 }

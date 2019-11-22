@@ -42,7 +42,7 @@ public class PetMedicineJoinQueryTest {
 
         //Provide one user for Tests
         database.userDAO().insert(new User("test@test", "test"));
-        User user = database.userDAO().getById(1);
+        User user = database.userDAO().get(1);
 
         Pet petRowOne = new Pet("Adonis", "11/08/2019", user.getId());
         Pet petRowTwo = new Pet("Adonis2", "12/08/2019", user.getId());
@@ -138,7 +138,7 @@ public class PetMedicineJoinQueryTest {
 
         petMedicineJoin.inserts(rowOne, rowTwo, rowThree, rowFour, rowFive, rowSix, rowSeven, rowEight, rowNine);
 
-        pet.delete(pet.getById(1));
+        pet.delete(pet.get(1));
         List<PetMedicineJoin> aux = petMedicineJoin.get();
 
         for (PetMedicineJoin row : aux) {
@@ -162,9 +162,9 @@ public class PetMedicineJoinQueryTest {
 
         petMedicineJoin.inserts(rowOne, rowTwo, rowThree, rowFour, rowFive, rowSix, rowSeven, rowEight, rowNine);
 
-        medicine.delete(medicine.getById(1));
-        medicine.delete(medicine.getById(2));
-        medicine.delete(medicine.getById(3));
+        medicine.delete(medicine.get(1));
+        medicine.delete(medicine.get(2));
+        medicine.delete(medicine.get(3));
         List<PetMedicineJoin> aux = petMedicineJoin.get();
 
         for (PetMedicineJoin row : aux) {
@@ -208,7 +208,7 @@ public class PetMedicineJoinQueryTest {
 
         petMedicineJoin.inserts(rowOne, rowTwo, rowThree, rowFour, rowFive, rowSix);
 
-        List<Pet> petsFromMedicine = petMedicineJoin.getLeftJoinRight(1);
+        List<Pet> petsFromMedicine = petMedicineJoin.getLeftRightJoin(1);
         List<PetMedicineJoin> list = petMedicineJoin.get();
 
         for (Pet row : petsFromMedicine) {
@@ -233,7 +233,7 @@ public class PetMedicineJoinQueryTest {
 
         petMedicineJoin.inserts(rowOne, rowTwo, rowThree, rowFour, rowFive, rowSix);
 
-        List<Medicine> medicinesFromPet = petMedicineJoin.getRightJoinLeft(1);
+        List<Medicine> medicinesFromPet = petMedicineJoin.getRightLeftJoin(1);
         List<PetMedicineJoin> list = petMedicineJoin.get();
 
         for (Medicine row : medicinesFromPet) {
