@@ -101,7 +101,7 @@ public class PetQueryTest {
 
         List<Pet> list = Arrays.asList(rowOne, rowTwo, rowThree);
         dao.inserts(list);
-        count = dao.countByReference(user.getId());
+        count = dao.countChild(user.getId());
 
         Assert.assertEquals(3, count);
     }
@@ -115,7 +115,7 @@ public class PetQueryTest {
         Pet rowThree = new Pet("Adonis3", "13/08/2019", user.getId());
 
         dao.inserts(rowOne, rowTwo, rowThree);
-        count = dao.countByReference(user.getId());
+        count = dao.countChildJoin(user.getId());
 
         Assert.assertEquals(3, count);
     }
@@ -176,7 +176,7 @@ public class PetQueryTest {
 
         List<Pet> list = Arrays.asList(rowOneModified, rowTwoNotModified, rowThreeModified);
 
-        List<Pet> petDB = dao.getByReference(user.getId());
+        List<Pet> petDB = dao.getChild(user.getId());
 
         Assert.assertArrayEquals(list.toArray(), petDB.toArray());
     }
@@ -211,7 +211,7 @@ public class PetQueryTest {
 
         dao.inserts(rowOne, rowTwo, rowThree, rowFour);
 
-        dao.dropByReference(user.getId());
+        dao.drop(user.getId());
         count = dao.count();
 
         Assert.assertEquals(1, count);
@@ -228,7 +228,7 @@ public class PetQueryTest {
         dao.inserts(rowOne, rowTwo, rowThree);
 
         dao.delete(new Pet(1, "Adonis", "11/08/2019", user.getId()));
-        count = dao.countByReference(user.getId());
+        count = dao.countChildJoin(user.getId());
 
         Assert.assertEquals(2, count);
     }
@@ -259,7 +259,7 @@ public class PetQueryTest {
 
         Pet petFromOtherUser = dao.get(4);
 
-        List<Pet> checkList = dao.getByReference(otherUser.getId());
+        List<Pet> checkList = dao.getChildJoin(otherUser.getId());
 
         Assert.assertArrayEquals(new Pet[]{petFromOtherUser}, checkList.toArray());
     }

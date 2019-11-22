@@ -151,15 +151,6 @@ public interface BaseDAO<X> {
      */
     interface OperationsForeignKeyDAO<Y, Z> {
         /**
-         * Count rows from the table by ID of the reference.
-         * <p>@Query("SELECT COUNT(*) FROM " + SCHEMA.TABLE + " WHERE parent_id = :foreignKeyValue")</p>
-         *
-         * @param fk: the id of the reference table.
-         * @return the total number of rows.
-         */
-        long countChild(int fk);
-
-        /**
          * Count rows from the table Y in Z.
          * <p>@Query("SELECT COUNT(*) FROM " + Y.SCHEMA.TABLE + " AS CHILD" </p>
          * <p>+ " INNER JOIN " + Z.SCHEMA.TABLE + " AS PARENT" </p>
@@ -170,13 +161,25 @@ public interface BaseDAO<X> {
         long countChildJoin();
 
         /**
-         * Get a list of objects existing in the table by ID of the reference.
-         * <p>@Query("SELECT * FROM " + SCHEMA.TABLE + " WHERE parent_id = :foreignKeyValue")</p>
+         * Count rows from the table by ID of the reference.
+         * <p>@Query("SELECT COUNT(*) FROM " + SCHEMA.TABLE + " WHERE parent_id = :fk")</p>
          *
          * @param fk: the id of the reference table.
-         * @return the list of objects requested.
+         * @return the total number of rows.
          */
-        List<Y> getChild(int fk);
+        long countChild(int fk);
+
+        /**
+         * Count rows from the table Y in Z filtering with foreign key.
+         * <p>@Query("SELECT COUNT(*) FROM " + Y.SCHEMA.TABLE + " AS CHILD" </p>
+         * <p>+ " INNER JOIN " + Z.SCHEMA.TABLE + " AS PARENT" </p>
+         * <p>+ " ON CHILD.parent_id = PARENT.id" </p>
+         * <p>+ " WHERE CHILD.parent_id = :fk")</p>
+         *
+         * @param fk: the id of the reference table.
+         * @return the total number of rows.
+         */
+        long countChildJoin(int fk);
 
         /**
          * Get a list of objects existing in the table Y in Z.
@@ -189,23 +192,20 @@ public interface BaseDAO<X> {
         List<Y> getChildJoin();
 
         /**
-         * Count rows from the table Y in Z filtering with foreign key.
-         * <p>@Query("SELECT COUNT(*) FROM " + Y.SCHEMA.TABLE + " AS CHILD" </p>
-         * <p>+ " INNER JOIN " + Z.SCHEMA.TABLE + " AS PARENT" </p>
-         * <p>+ " ON CHILD.parent_id = PARENT.id" </p>
-         * <p>+ " WHERE CHILD.parent_id = :foreignKey")</p>
+         * Get a list of objects existing in the table by ID of the reference.
+         * <p>@Query("SELECT * FROM " + SCHEMA.TABLE + " WHERE parent_id = :fk")</p>
          *
          * @param fk: the id of the reference table.
-         * @return the total number of rows.
+         * @return the list of objects requested.
          */
-        long countChildJoin(int fk);
+        List<Y> getChild(int fk);
 
         /**
          * Count rows from the table Y in Z filtering with foreign key
          * <p>@Query("SELECT CHILD.* FROM " + Y.SCHEMA.TABLE + " AS CHILD" </p>
          * <p>+ " INNER JOIN " + Z.SCHEMA.TABLE + " AS PARENT" </p>
          * <p>+ " ON CHILD.parent_id = PARENT.id" </p>
-         * <p>+ " WHERE CHILD.parent_id = :foreignKey")</p>
+         * <p>+ " WHERE CHILD.parent_id = :fk")</p>
          *
          * @param fk: the id of the reference table.
          * @return the list of objects requested.
@@ -214,7 +214,7 @@ public interface BaseDAO<X> {
 
         /**
          * Drop all rows existing in the table by ID of the reference.
-         * <p>@Query("DELETE FROM " + SCHEMA.TABLE + " WHERE parent_id = :foreignKeyValue")</p>
+         * <p>@Query("DELETE FROM " + SCHEMA.TABLE + " WHERE parent_id = :fk")</p>
          *
          * @param fk: the id of the reference table.
          */
