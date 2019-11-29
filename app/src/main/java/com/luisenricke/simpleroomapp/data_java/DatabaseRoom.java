@@ -10,11 +10,13 @@ import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.luisenricke.simpleroomapp.data_java.converter.DateConverter;
+import com.luisenricke.simpleroomapp.data_java.dao.DateTimeDAO;
+import com.luisenricke.simpleroomapp.data_java.entity.DateTime;
 import com.luisenricke.simpleroomapp.data_java.entity.Medicine;
 import com.luisenricke.simpleroomapp.data_java.dao.MedicineDAO;
 import com.luisenricke.simpleroomapp.data_java.entity.Pet;
 import com.luisenricke.simpleroomapp.data_java.dao.PetDAO;
-import com.luisenricke.simpleroomapp.data_java.entity.PetMedicineJoin;
+import com.luisenricke.simpleroomapp.data_java.entity.PetMedicine;
 import com.luisenricke.simpleroomapp.data_java.dao.PetMedicineJoinDAO;
 import com.luisenricke.simpleroomapp.data_java.entity.User;
 import com.luisenricke.simpleroomapp.data_java.dao.UserDAO;
@@ -22,8 +24,9 @@ import com.luisenricke.simpleroomapp.data_java.dao.UserDAO;
 @Database(entities = {
         Medicine.class,
         Pet.class,
-        PetMedicineJoin.class,
-        User.class},
+        PetMedicine.class,
+        User.class,
+        DateTime.class},
         version = 1, exportSchema = false)
 @TypeConverters({DateConverter.class})
 public abstract class DatabaseRoom extends RoomDatabase {
@@ -38,6 +41,8 @@ public abstract class DatabaseRoom extends RoomDatabase {
     public abstract PetMedicineJoinDAO petMedicineJoinDAO();
 
     public abstract UserDAO userDAO();
+
+    public abstract DateTimeDAO dateTimeDAO();
 
     public static DatabaseRoom getInstance(Context context) {
         if (INSTANCE == null) {
