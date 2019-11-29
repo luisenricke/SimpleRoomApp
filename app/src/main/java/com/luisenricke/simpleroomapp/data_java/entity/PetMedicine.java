@@ -5,14 +5,13 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
 import java.util.Date;
 
-import static com.luisenricke.simpleroomapp.data_java.entity.PetMedicineJoin.SCHEMA.*;
+import static com.luisenricke.simpleroomapp.data_java.entity.PetMedicine.SCHEMA.*;
 
 @Entity(tableName = TABLE,
-        primaryKeys = {PET,
-                MEDICINE},
         foreignKeys = {
                 @ForeignKey(entity = Pet.class,
                         parentColumns = Pet.SCHEMA.ID,
@@ -25,15 +24,19 @@ import static com.luisenricke.simpleroomapp.data_java.entity.PetMedicineJoin.SCH
                         onUpdate = ForeignKey.CASCADE,
                         onDelete = ForeignKey.CASCADE)}
 )
-public class PetMedicineJoin {
+public class PetMedicine {
     public interface SCHEMA {
-        String TABLE = "PetMedicineJoin";
+        String TABLE = "PetMedicine";
+        String ID = "id";
         String PET = "pet_id";
         String MEDICINE = "medicine_id";
         String CREATED_AT = "created_at";
         String UPDATED_AT = "updated_at";
     }
 
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = ID)
+    private int id;
     @ColumnInfo(name = PET)
     private int petId;
     @ColumnInfo(name = MEDICINE)
@@ -44,15 +47,33 @@ public class PetMedicineJoin {
     private Date updated;
 
     @Ignore
-    public PetMedicineJoin() {
+    public PetMedicine() {
     }
 
-    public PetMedicineJoin(int petId, int medicineId) {
+    @Ignore
+    public PetMedicine(int id, int petId, int medicineId) {
+        this.id = id;
         this.petId = petId;
         this.medicineId = medicineId;
         long time = System.currentTimeMillis();
         created = new Date(time);
         updated = new Date(time);
+    }
+
+    public PetMedicine(int petId, int medicineId) {
+        this.petId = petId;
+        this.medicineId = medicineId;
+        long time = System.currentTimeMillis();
+        created = new Date(time);
+        updated = new Date(time);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getPetId() {
@@ -89,8 +110,8 @@ public class PetMedicineJoin {
 
     @Override
     public boolean equals(@Nullable Object obj) {
-        if (obj == null || obj.getClass() != PetMedicineJoin.class) return false;
-        PetMedicineJoin cast = (PetMedicineJoin) obj;
-        return cast.medicineId == getMedicineId() && cast.petId == getPetId();
+        if (obj == null || obj.getClass() != PetMedicine.class) return false;
+        PetMedicine cast = (PetMedicine) obj;
+        return cast.id == getId() && cast.medicineId == getMedicineId() && cast.petId == getPetId();
     }
 }

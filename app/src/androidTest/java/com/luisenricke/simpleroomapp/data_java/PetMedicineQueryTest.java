@@ -12,7 +12,7 @@ import com.luisenricke.simpleroomapp.data_java.dao.PetDAO;
 import com.luisenricke.simpleroomapp.data_java.dao.PetMedicineJoinDAO;
 import com.luisenricke.simpleroomapp.data_java.entity.Medicine;
 import com.luisenricke.simpleroomapp.data_java.entity.Pet;
-import com.luisenricke.simpleroomapp.data_java.entity.PetMedicineJoin;
+import com.luisenricke.simpleroomapp.data_java.entity.PetMedicine;
 import com.luisenricke.simpleroomapp.data_java.entity.User;
 
 import org.junit.After;
@@ -25,7 +25,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
-public class PetMedicineJoinQueryTest {
+public class PetMedicineQueryTest {
 
     private PetDAO pet;
     private MedicineDAO medicine;
@@ -64,13 +64,13 @@ public class PetMedicineJoinQueryTest {
 
     @Test
     public void insert() {
-        PetMedicineJoin rowOne = new PetMedicineJoin(1, 1);
+        PetMedicine rowOne = new PetMedicine(1, 1);
 
         petMedicineJoin.insert(rowOne);
 
-        List<PetMedicineJoin> list = petMedicineJoin.get();
+        List<PetMedicine> list = petMedicineJoin.get();
 
-        for (PetMedicineJoin row : list) {
+        for (PetMedicine row : list) {
             System.out.println("JOIN -> Pet: " + row.getPetId() + " Medicine: " + row.getMedicineId() + " created: " + DateConverter.toString(row.getCreated()));
         }
 
@@ -79,22 +79,22 @@ public class PetMedicineJoinQueryTest {
 
     @Test
     public void insertsList() {
-        PetMedicineJoin rowOne = new PetMedicineJoin(1, 1);
-        PetMedicineJoin rowTwo = new PetMedicineJoin(2, 1);
-        PetMedicineJoin rowThree = new PetMedicineJoin(3, 1);
-        PetMedicineJoin rowFour = new PetMedicineJoin(1, 2);
-        PetMedicineJoin rowFive = new PetMedicineJoin(2, 2);
-        PetMedicineJoin rowSix = new PetMedicineJoin(3, 2);
-        PetMedicineJoin rowSeven = new PetMedicineJoin(1, 3);
-        PetMedicineJoin rowEight = new PetMedicineJoin(2, 3);
-        PetMedicineJoin rowNine = new PetMedicineJoin(3, 3);
+        PetMedicine rowOne = new PetMedicine(1, 1);
+        PetMedicine rowTwo = new PetMedicine(2, 1);
+        PetMedicine rowThree = new PetMedicine(3, 1);
+        PetMedicine rowFour = new PetMedicine(1, 2);
+        PetMedicine rowFive = new PetMedicine(2, 2);
+        PetMedicine rowSix = new PetMedicine(3, 2);
+        PetMedicine rowSeven = new PetMedicine(1, 3);
+        PetMedicine rowEight = new PetMedicine(2, 3);
+        PetMedicine rowNine = new PetMedicine(3, 3);
 
-        List<PetMedicineJoin> list = Arrays.asList(rowOne, rowTwo, rowThree, rowFour, rowFive, rowSix, rowSeven, rowEight, rowNine);
+        List<PetMedicine> list = Arrays.asList(rowOne, rowTwo, rowThree, rowFour, rowFive, rowSix, rowSeven, rowEight, rowNine);
         petMedicineJoin.inserts(list);
 
-        List<PetMedicineJoin> aux = petMedicineJoin.get();
+        List<PetMedicine> aux = petMedicineJoin.get();
 
-        for (PetMedicineJoin row : aux) {
+        for (PetMedicine row : aux) {
             System.out.println("JOIN -> Pet: " + row.getPetId() + " Medicine: " + row.getMedicineId() + " created: " + DateConverter.toString(row.getCreated()));
         }
 
@@ -103,21 +103,21 @@ public class PetMedicineJoinQueryTest {
 
     @Test
     public void insertsVarags() {
-        PetMedicineJoin rowOne = new PetMedicineJoin(1, 1);
-        PetMedicineJoin rowTwo = new PetMedicineJoin(2, 1);
-        PetMedicineJoin rowThree = new PetMedicineJoin(3, 1);
-        PetMedicineJoin rowFour = new PetMedicineJoin(1, 2);
-        PetMedicineJoin rowFive = new PetMedicineJoin(2, 2);
-        PetMedicineJoin rowSix = new PetMedicineJoin(3, 2);
-        PetMedicineJoin rowSeven = new PetMedicineJoin(1, 3);
-        PetMedicineJoin rowEight = new PetMedicineJoin(2, 3);
-        PetMedicineJoin rowNine = new PetMedicineJoin(3, 3);
+        PetMedicine rowOne = new PetMedicine(1, 1);
+        PetMedicine rowTwo = new PetMedicine(2, 1);
+        PetMedicine rowThree = new PetMedicine(3, 1);
+        PetMedicine rowFour = new PetMedicine(1, 2);
+        PetMedicine rowFive = new PetMedicine(2, 2);
+        PetMedicine rowSix = new PetMedicine(3, 2);
+        PetMedicine rowSeven = new PetMedicine(1, 3);
+        PetMedicine rowEight = new PetMedicine(2, 3);
+        PetMedicine rowNine = new PetMedicine(3, 3);
 
         petMedicineJoin.inserts(rowOne, rowTwo, rowThree, rowFour, rowFive, rowSix, rowSeven, rowEight, rowNine);
 
-        List<PetMedicineJoin> aux = petMedicineJoin.get();
+        List<PetMedicine> aux = petMedicineJoin.get();
 
-        for (PetMedicineJoin row : aux) {
+        for (PetMedicine row : aux) {
             System.out.println("JOIN -> Pet: " + row.getPetId() + " Medicine: " + row.getMedicineId() + " created: " + DateConverter.toString(row.getCreated()));
         }
 
@@ -126,22 +126,22 @@ public class PetMedicineJoinQueryTest {
 
     @Test
     public void deletePet() {
-        PetMedicineJoin rowOne = new PetMedicineJoin(1, 1);
-        PetMedicineJoin rowTwo = new PetMedicineJoin(2, 1);
-        PetMedicineJoin rowThree = new PetMedicineJoin(3, 1);
-        PetMedicineJoin rowFour = new PetMedicineJoin(1, 2);
-        PetMedicineJoin rowFive = new PetMedicineJoin(2, 2);
-        PetMedicineJoin rowSix = new PetMedicineJoin(3, 2);
-        PetMedicineJoin rowSeven = new PetMedicineJoin(1, 3);
-        PetMedicineJoin rowEight = new PetMedicineJoin(2, 3);
-        PetMedicineJoin rowNine = new PetMedicineJoin(3, 3);
+        PetMedicine rowOne = new PetMedicine(1, 1);
+        PetMedicine rowTwo = new PetMedicine(2, 1);
+        PetMedicine rowThree = new PetMedicine(3, 1);
+        PetMedicine rowFour = new PetMedicine(1, 2);
+        PetMedicine rowFive = new PetMedicine(2, 2);
+        PetMedicine rowSix = new PetMedicine(3, 2);
+        PetMedicine rowSeven = new PetMedicine(1, 3);
+        PetMedicine rowEight = new PetMedicine(2, 3);
+        PetMedicine rowNine = new PetMedicine(3, 3);
 
         petMedicineJoin.inserts(rowOne, rowTwo, rowThree, rowFour, rowFive, rowSix, rowSeven, rowEight, rowNine);
 
         pet.delete(pet.get(1));
-        List<PetMedicineJoin> aux = petMedicineJoin.get();
+        List<PetMedicine> aux = petMedicineJoin.get();
 
-        for (PetMedicineJoin row : aux) {
+        for (PetMedicine row : aux) {
             System.out.println("JOIN -> Pet: " + row.getPetId() + " Medicine: " + row.getMedicineId() + " created: " + DateConverter.toString(row.getCreated()));
         }
 
@@ -150,24 +150,24 @@ public class PetMedicineJoinQueryTest {
 
     @Test
     public void deleteMedicines() {
-        PetMedicineJoin rowOne = new PetMedicineJoin(1, 1);
-        PetMedicineJoin rowTwo = new PetMedicineJoin(2, 1);
-        PetMedicineJoin rowThree = new PetMedicineJoin(3, 1);
-        PetMedicineJoin rowFour = new PetMedicineJoin(1, 2);
-        PetMedicineJoin rowFive = new PetMedicineJoin(2, 2);
-        PetMedicineJoin rowSix = new PetMedicineJoin(3, 2);
-        PetMedicineJoin rowSeven = new PetMedicineJoin(1, 3);
-        PetMedicineJoin rowEight = new PetMedicineJoin(2, 3);
-        PetMedicineJoin rowNine = new PetMedicineJoin(3, 3);
+        PetMedicine rowOne = new PetMedicine(1, 1);
+        PetMedicine rowTwo = new PetMedicine(2, 1);
+        PetMedicine rowThree = new PetMedicine(3, 1);
+        PetMedicine rowFour = new PetMedicine(1, 2);
+        PetMedicine rowFive = new PetMedicine(2, 2);
+        PetMedicine rowSix = new PetMedicine(3, 2);
+        PetMedicine rowSeven = new PetMedicine(1, 3);
+        PetMedicine rowEight = new PetMedicine(2, 3);
+        PetMedicine rowNine = new PetMedicine(3, 3);
 
         petMedicineJoin.inserts(rowOne, rowTwo, rowThree, rowFour, rowFive, rowSix, rowSeven, rowEight, rowNine);
 
         medicine.delete(medicine.get(1));
         medicine.delete(medicine.get(2));
         medicine.delete(medicine.get(3));
-        List<PetMedicineJoin> aux = petMedicineJoin.get();
+        List<PetMedicine> aux = petMedicineJoin.get();
 
-        for (PetMedicineJoin row : aux) {
+        for (PetMedicine row : aux) {
             System.out.println("JOIN -> Pet: " + row.getPetId() + " Medicine: " + row.getMedicineId() + " created: " + DateConverter.toString(row.getCreated()));
         }
 
@@ -176,21 +176,21 @@ public class PetMedicineJoinQueryTest {
 
     @Test
     public void get() {
-        PetMedicineJoin rowOne = new PetMedicineJoin(1, 1);
-        PetMedicineJoin rowTwo = new PetMedicineJoin(2, 1);
-        PetMedicineJoin rowThree = new PetMedicineJoin(3, 1);
-        PetMedicineJoin rowFour = new PetMedicineJoin(1, 2);
-        PetMedicineJoin rowFive = new PetMedicineJoin(2, 2);
-        PetMedicineJoin rowSix = new PetMedicineJoin(3, 2);
-        PetMedicineJoin rowSeven = new PetMedicineJoin(1, 3);
-        PetMedicineJoin rowEight = new PetMedicineJoin(2, 3);
-        PetMedicineJoin rowNine = new PetMedicineJoin(3, 3);
+        PetMedicine rowOne = new PetMedicine(1, 1);
+        PetMedicine rowTwo = new PetMedicine(2, 1);
+        PetMedicine rowThree = new PetMedicine(3, 1);
+        PetMedicine rowFour = new PetMedicine(1, 2);
+        PetMedicine rowFive = new PetMedicine(2, 2);
+        PetMedicine rowSix = new PetMedicine(3, 2);
+        PetMedicine rowSeven = new PetMedicine(1, 3);
+        PetMedicine rowEight = new PetMedicine(2, 3);
+        PetMedicine rowNine = new PetMedicine(3, 3);
 
         petMedicineJoin.inserts(rowOne, rowTwo, rowThree, rowFour, rowFive, rowSix, rowSeven, rowEight, rowNine);
 
-        List<PetMedicineJoin> list = petMedicineJoin.get();
+        List<PetMedicine> list = petMedicineJoin.get();
 
-        for (PetMedicineJoin row : list) {
+        for (PetMedicine row : list) {
             System.out.println("JOIN -> Pet: " + row.getPetId() + " Medicine: " + row.getMedicineId() + " created: " + DateConverter.toString(row.getCreated()));
         }
 
@@ -199,23 +199,23 @@ public class PetMedicineJoinQueryTest {
 
     @Test
     public void petsInMedicine() {
-        PetMedicineJoin rowOne = new PetMedicineJoin(1, 1);
-        PetMedicineJoin rowTwo = new PetMedicineJoin(2, 1);
-        PetMedicineJoin rowThree = new PetMedicineJoin(3, 1);
-        PetMedicineJoin rowFour = new PetMedicineJoin(1, 2);
-        PetMedicineJoin rowFive = new PetMedicineJoin(2, 2);
-        PetMedicineJoin rowSix = new PetMedicineJoin(3, 2);
+        PetMedicine rowOne = new PetMedicine(1, 1);
+        PetMedicine rowTwo = new PetMedicine(2, 1);
+        PetMedicine rowThree = new PetMedicine(3, 1);
+        PetMedicine rowFour = new PetMedicine(1, 2);
+        PetMedicine rowFive = new PetMedicine(2, 2);
+        PetMedicine rowSix = new PetMedicine(3, 2);
 
         petMedicineJoin.inserts(rowOne, rowTwo, rowThree, rowFour, rowFive, rowSix);
 
         List<Pet> petsFromMedicine = petMedicineJoin.getLeftRightJoin(1);
-        List<PetMedicineJoin> list = petMedicineJoin.get();
+        List<PetMedicine> list = petMedicineJoin.get();
 
         for (Pet row : petsFromMedicine) {
             System.out.println("Pet -> id: " + row.getId() + " name: " + row.getName() + " born: " + row.getBorn());
         }
 
-        for (PetMedicineJoin row : list) {
+        for (PetMedicine row : list) {
             System.out.println("JOIN -> Pet: " + row.getPetId() + " Medicine: " + row.getMedicineId() + " created: " + DateConverter.toString(row.getCreated()));
         }
 
@@ -224,23 +224,23 @@ public class PetMedicineJoinQueryTest {
 
     @Test
     public void medicinesInPet() {
-        PetMedicineJoin rowOne = new PetMedicineJoin(1, 1);
-        PetMedicineJoin rowTwo = new PetMedicineJoin(1, 2);
-        PetMedicineJoin rowThree = new PetMedicineJoin(1, 3);
-        PetMedicineJoin rowFour = new PetMedicineJoin(2, 1);
-        PetMedicineJoin rowFive = new PetMedicineJoin(2, 2);
-        PetMedicineJoin rowSix = new PetMedicineJoin(2, 3);
+        PetMedicine rowOne = new PetMedicine(1, 1);
+        PetMedicine rowTwo = new PetMedicine(1, 2);
+        PetMedicine rowThree = new PetMedicine(1, 3);
+        PetMedicine rowFour = new PetMedicine(2, 1);
+        PetMedicine rowFive = new PetMedicine(2, 2);
+        PetMedicine rowSix = new PetMedicine(2, 3);
 
         petMedicineJoin.inserts(rowOne, rowTwo, rowThree, rowFour, rowFive, rowSix);
 
         List<Medicine> medicinesFromPet = petMedicineJoin.getRightLeftJoin(1);
-        List<PetMedicineJoin> list = petMedicineJoin.get();
+        List<PetMedicine> list = petMedicineJoin.get();
 
         for (Medicine row : medicinesFromPet) {
             System.out.println("Medicine -> id: " + row.getId() + " name: " + row.getName() + " application: " + row.getApplication());
         }
 
-        for (PetMedicineJoin row : list) {
+        for (PetMedicine row : list) {
             System.out.println("JOIN -> Pet: " + row.getPetId() + " Medicine: " + row.getMedicineId() + " created: " + DateConverter.toString(row.getCreated()));
         }
 

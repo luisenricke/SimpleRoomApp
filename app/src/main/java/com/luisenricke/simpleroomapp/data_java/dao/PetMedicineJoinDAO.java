@@ -6,13 +6,13 @@ import androidx.room.Query;
 import com.luisenricke.simpleroomapp.data_java.BaseDAO;
 import com.luisenricke.simpleroomapp.data_java.entity.Medicine;
 import com.luisenricke.simpleroomapp.data_java.entity.Pet;
-import com.luisenricke.simpleroomapp.data_java.entity.PetMedicineJoin;
-import com.luisenricke.simpleroomapp.data_java.entity.PetMedicineJoin.SCHEMA;
+import com.luisenricke.simpleroomapp.data_java.entity.PetMedicine;
+import com.luisenricke.simpleroomapp.data_java.entity.PetMedicine.SCHEMA;
 
 import java.util.List;
 
 @Dao
-public abstract class PetMedicineJoinDAO implements BaseDAO<PetMedicineJoin>,
+public abstract class PetMedicineJoinDAO implements BaseDAO<PetMedicine>,
         BaseDAO.InnerJoinDAO<Pet, Medicine> {
 
     @Override
@@ -20,8 +20,8 @@ public abstract class PetMedicineJoinDAO implements BaseDAO<PetMedicineJoin>,
     abstract public int count();
 
     @Override
-    @Query("SELECT * FROM PetMedicineJoin")
-    public abstract List<PetMedicineJoin> get();
+    @Query("SELECT * FROM PetMedicine")
+    public abstract List<PetMedicine> get();
 
     @Override
     @Query("DELETE FROM " + SCHEMA.TABLE)
@@ -43,16 +43,16 @@ public abstract class PetMedicineJoinDAO implements BaseDAO<PetMedicineJoin>,
 
 /*
     @Query("SELECT * FROM Pet " +
-            "INNER JOIN PetMedicineJoin " +
-            "ON Pet.id = PetMedicineJoin.Pet_id " +
-            "WHERE PetMedicineJoin.Medicine_id = :id")
+            "INNER JOIN PetMedicine " +
+            "ON Pet.id = PetMedicine.Pet_id " +
+            "WHERE PetMedicine.Medicine_id = :id")
     public abstract List<Pet> getPetsOfMedicine(int id);
 
 
     @Query("SELECT * FROM Medicine " +
-            "INNER JOIN PetMedicineJoin " +
-            "ON Medicine.id = PetMedicineJoin.Medicine_id " +
-            "WHERE PetMedicineJoin.Pet_id = :id")
+            "INNER JOIN PetMedicine " +
+            "ON Medicine.id = PetMedicine.Medicine_id " +
+            "WHERE PetMedicine.Pet_id = :id")
     public abstract List<Medicine> getMedicinesOfPet(int id);
  */
 }
