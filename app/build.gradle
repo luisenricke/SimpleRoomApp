@@ -40,6 +40,7 @@ dependencies {
 
     implementation roomDependencies.runtime
     kapt roomDependencies.compiler
+    annotationProcessor roomDependencies.compiler
     implementation roomDependencies.rxjava
     testImplementation roomDependencies.testing
 
