@@ -227,7 +227,7 @@ interface BaseDAO<X> {
          * @param fk: the id of the reference table.
          * @return the list of objects requested.
          */
-        fun getChildJoin(fk: Int): List<Y>?
+        fun getChildJoin(fk: Int): List<Y>
 
         /**
          * Drop all rows existing in the table by ID of the reference.

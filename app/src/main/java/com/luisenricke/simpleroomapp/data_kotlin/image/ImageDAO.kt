@@ -11,8 +11,7 @@ import com.luisenricke.simpleroomapp.data_kotlin.image.Image.SCHEMA
 abstract class ImageDAO : BaseDAO<Image>,
     BaseDAO.UpdateDAO<Image>,
     BaseDAO.DeleteDAO<Image>,
-    BaseDAO.OperationsPrimaryKeyDAO<Image> ,
-BaseDAO.OperationsForeignKeyDAO<Image,Image>{
+    BaseDAO.OperationsPrimaryKeyDAO<Image> {
 
     @Query("SELECT COUNT(*) FROM ${SCHEMA.TABLE}")
     abstract override fun count(): Int
@@ -37,24 +36,4 @@ BaseDAO.OperationsForeignKeyDAO<Image,Image>{
         drop()
         inserts(rows)
     }
-
-    /*
-    //TODO: Terminar los querys
-   abstract override fun countChild(fk: Int): Long
-
-    @Query("SELECT COUNT(*) FROM ${SCHEMA.TABLE} AS CHILD"
-            + "INNER JOIN ${Z.SCHEMA.TABLE} AS PARENT"
-            + " ON CHILD.parent_id = PARENT.id"
-            + " WHERE CHILD.parent_id = :fk")
-   abstract override fun countChildJoin(fk: Int): Long
-
-   abstract override fun getChildJoin(): List<Image>?
-
-   abstract override fun getChild(fk: Int): List<Image>?
-
-   abstract override fun getChildJoin(fk: Int): List<Image>?
-
-   abstract override fun drop(fk: Int)
-
- */
 }
