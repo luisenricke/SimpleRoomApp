@@ -1,10 +1,12 @@
 package com.luisenricke.simpleroomapp.data_kotlin
 
-import androidx.room.*
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.Update
 
 interface BaseDAO<X> {
     /**
-     * Insert an row in the table.
+     * Insert a row in the table.
      *
      * @param row: the object to be inserted.
      * @return id of the row inserted.
@@ -13,7 +15,7 @@ interface BaseDAO<X> {
     fun insert(row: X): Long
 
     /**
-     * Insert an vararg of objects in the table.
+     * Insert a list of objects with vararg to the table.
      *
      * @param rows: the objects to be inserted.
      * @return the list of id's of the rows inserted.
@@ -22,7 +24,7 @@ interface BaseDAO<X> {
     fun inserts(vararg rows: X): List<Long>
 
     /**
-     * Insert a list of objects in the table.
+     * Insert a list of objects to the table.
      *
      * @param rows: the objects to be inserted.
      * @return the list of id's of the rows inserted.
@@ -66,7 +68,7 @@ interface BaseDAO<X> {
         fun update(row: Y): Int
 
         /**
-         * Update a vararg of rows with an existing ID in the table and change the data.
+         * Update a list of objects with vararg which contains existing ID in the table and change the data.
          *
          * @param rows: the objects to be updated.
          * @return the total number of rows changed.
@@ -86,7 +88,7 @@ interface BaseDAO<X> {
 
     interface DeleteDAO<Y> {
         /**
-         * Delete an row from the table.
+         * Delete a row from the table.
          *
          * @param row: the object to be deleted.
          * @return the total number of rows dropped.
@@ -95,7 +97,7 @@ interface BaseDAO<X> {
         fun delete(row: Y): Int
 
         /**
-         * Delete a vararg of rows from the table.
+         * Delete a list of rows with vararg from the table.
          *
          * @param rows: the objects to be deleted.
          * @return the total number of rows dropped.
@@ -123,7 +125,7 @@ interface BaseDAO<X> {
          * @param id: the id of the searched object.
          * @return the object requested.
          */
-        fun getById(id: Int): Y
+        fun get(id: Int): Y
 
         /**
          * Get a list of object existing in the table by ID's.
@@ -134,7 +136,7 @@ interface BaseDAO<X> {
          * @return the list objects requested.
          *
          */
-        fun getByIds(ids: LongArray): List<Y>
+        fun get(ids: LongArray): List<Y>
 
         /**
          * Delete a row existing in the table by ID.
@@ -144,38 +146,97 @@ interface BaseDAO<X> {
          * @param id: the id of the searched object.
          * @return the total number of rows dropped.
          */
-        fun deleteById(id: Int): Int
+        fun delete(id: Int): Int
     }
 
-    interface OperationsForeignKeyDAO<Y> {
+    @Deprecated("This interfaces its just a reference query.")
+    /**
+     * @param <Y> is a child table.
+     * @param <Z> is a parent table.
+     */
+    interface OperationsForeignKeyDAO<Y,Z> {
+        /**
+         * Count rows from the table Y in Z.
+         *
+         * ``@Query("SELECT COUNT(*) FROM  ${Y.SCHEMA.TABLE}  AS CHILD INNER JOIN  ${Z.SCHEMA.TABLE}  AS PARENT ON CHILD.parent_id = PARENT.id")``
+         *
+         * @return the total number of rows.
+         */
+        fun countChildJoin(): Long
+
         /**
          * Count rows from the table by ID of the reference.
          *
-         * ``@Query("SELECT COUNT(*) FROM ${SCHEMA.TABLE} WHERE parent_id = :foreignKeyValue")``
+         * ``@Query("SELECT COUNT(*) FROM " + SCHEMA.TABLE + " WHERE parent_id = :fk")``
          *
-         * @param foreignKeyValue: the id of the reference table.
+         * @param fk: the id of the reference table.
          * @return the total number of rows.
          */
-        fun countByReference(foreignKeyValue: Int): Long
+        fun countChild(fk: Int): Long
+
+        /**
+         * Count rows from the table Y in Z filtering with foreign key.
+         *
+         * ``@Query("SELECT COUNT(*) FROM  ${Y.SCHEMA.TABLE}  AS CHILD"``
+         *
+         * `` + "INNER JOIN  ${Z.SCHEMA.TABLE}  AS PARENT"``
+         *
+         * ``+ " ON CHILD.parent_id = PARENT.id"``
+         *
+         * ``+ " WHERE CHILD.parent_id = :fk")``
+         *
+         * @param fk: the id of the reference table.
+         * @return the total number of rows.
+         */
+        fun countChildJoin(fk: Int): Long
+
+        /**
+         * Get a list of objects existing in the table Y in Z.
+         *
+         * ``@Query("SELECT CHILD.* FROM " + Y.SCHEMA.TABLE + " AS CHILD"``
+         *
+         * ``+ " INNER JOIN " + Z.SCHEMA.TABLE + " AS PARENT"``
+         *
+         * ``+ " ON CHILD.parent_id = PARENT.id ")``
+         *
+         * @return the list of objects requested.
+         */
+        fun getChildJoin(): List<Y>
 
         /**
          * Get a list of objects existing in the table by ID of the reference.
          *
-         * ``@Query("SELECT * FROM ${SCHEMA.TABLE} WHERE parent_id = :foreignKeyValue")``
+         * ``@Query("SELECT * FROM " + SCHEMA.TABLE + " WHERE parent_id = :fk")``
          *
-         * @param foreignKeyValue: the id of the reference table.
+         * @param fk: the id of the reference table.
          * @return the list of objects requested.
          */
-        fun getByReference(foreignKeyValue: Int): List<Y>
+        fun getChild(fk: Int): List<Y>
+
+        /**
+         * Count rows from the table Y in Z filtering with foreign key
+         *
+         * ``@Query("SELECT CHILD.* FROM " + Y.SCHEMA.TABLE + " AS CHILD"``
+         *
+         * ``+ " INNER JOIN " + Z.SCHEMA.TABLE + " AS PARENT"``
+         *
+         * ``+ " ON CHILD.parent_id = PARENT.id"``
+         *
+         * ``+ " WHERE CHILD.parent_id = :fk")``
+         *
+         * @param fk: the id of the reference table.
+         * @return the list of objects requested.
+         */
+        fun getChildJoin(fk: Int): List<Y>?
 
         /**
          * Drop all rows existing in the table by ID of the reference.
          *
-         * ``@Query("DELETE FROM ${SCHEMA.TABLE} WHERE parent_id = :foreignKeyValue")``
+         * ``@Query("DELETE FROM " + SCHEMA.TABLE + " WHERE parent_id = :fk")``
          *
-         * @param foreignKeyValue: the id of the reference table.
+         * @param fk: the id of the reference table.
          */
-        fun dropByReference(foreignKeyValue: Int)
+        fun drop(fk: Int)
     }
 
     interface InnerJoinDAO<A, B> {
@@ -193,7 +254,6 @@ interface BaseDAO<X> {
          * @param idRight: the id of the right table.
          * @return the list of objects matches.
          */
-
         fun getLeftJoinRight(idRight: Int): List<A>
 
         /**

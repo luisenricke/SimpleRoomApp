@@ -22,13 +22,13 @@ abstract class CacheDAO :  BaseDAO<Cache>,
     abstract override fun drop()
 
     @Query("SELECT * FROM ${SCHEMA.TABLE} WHERE id = :id")
-    abstract override fun getById(id: Int): Cache
+    abstract override fun get(id: Int): Cache
 
     @Query("SELECT * FROM ${SCHEMA.TABLE} WHERE id IN(:ids)")
-    abstract override fun getByIds(ids: LongArray): List<Cache>
+    abstract override fun get(ids: LongArray): List<Cache>
 
     @Query("DELETE FROM ${SCHEMA.TABLE} WHERE id = :id")
-    abstract override fun deleteById(id: Int): Int
+    abstract override fun delete(id: Int): Int
 
     @Query("SELECT * FROM ${SCHEMA.TABLE} ORDER BY ${SCHEMA.ID} LIMIT 1")
     abstract fun last(): Cache?

@@ -100,11 +100,11 @@ class ContactQueryTest {
             Contact("test@test.com,", "test", 3)
         val list = listOf(rowOne, rowTwo, rowThree)
         dao.inserts(list)
-        val updatedRow = dao.getById(2)
+        val updatedRow = dao.get(2)
         updatedRow.name = "changed"
         dao.update(updatedRow)
 
-        val checkRow = dao.getById(2)
+        val checkRow = dao.get(2)
 
         Assert.assertEquals(updatedRow.name, checkRow.name)
     }
@@ -114,7 +114,7 @@ class ContactQueryTest {
     fun deleteByObjectRow() {
         val row = Contact("test@test.com,", "test")
         dao.insert(row)
-        val rowFind = dao.getById(1)
+        val rowFind = dao.get(1)
         dao.delete(rowFind)
         val checkRow = dao.count()
 
@@ -126,7 +126,7 @@ class ContactQueryTest {
     fun deleteByIdRow() {
         val row = Contact("test@test.com,", "test")
         dao.insert(row)
-        val rowInserted = dao.getById(1)
+        val rowInserted = dao.get(1)
         dao.delete(rowInserted)
         val checkRow = dao.count()
 

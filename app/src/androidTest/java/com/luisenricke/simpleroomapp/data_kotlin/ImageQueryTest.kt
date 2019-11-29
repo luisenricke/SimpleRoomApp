@@ -76,7 +76,7 @@ class ImageQueryTest {
         val row = Image("Tes", byteArray, 1)
         dao.insert(row)
 
-        image = dao.getById(1)
+        image = dao.get(1)
 
         Assert.assertTrue(bitmap.sameAs(image.src?.toBitmap()))
     }
