@@ -240,6 +240,26 @@ interface BaseDAO<X> {
     }
 
     interface InnerJoinDAO<A, B> {
+         /**
+         * Get a list of objects in the left table.
+         *
+         * ``@Query("SELECT * FROM  ${SCHEMA.TABLE} WHERE left_id = :idLeft")``
+         *
+         * @param idLeft: the id of the left table.
+         * @return the list of objects matches.
+         */
+        fun getLeft(idLeft: Int): List<A>
+
+        /**
+         * Get a list of objects in the right table.
+         *
+         * ``@Query("SELECT * FROM  ${SCHEMA.TABLE} WHERE right_id = :idRight")``
+         *
+         * @param idRight: the id of the right table.
+         * @return the list of objects matches.
+         */
+        fun getRight(idRight: Int): List<B>
+
         /**
          * Get a list of objects in the left table existing in the right table.
          *
