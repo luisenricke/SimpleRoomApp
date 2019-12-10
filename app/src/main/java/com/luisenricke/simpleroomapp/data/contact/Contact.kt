@@ -1,12 +1,12 @@
-package com.luisenricke.simpleroomapp.data_kotlin.contact
+package com.luisenricke.simpleroomapp.data.contact
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.luisenricke.simpleroomapp.data_kotlin.contact.Contact.SCHEMA.EMAIL
-import com.luisenricke.simpleroomapp.data_kotlin.contact.Contact.SCHEMA.ID
-import com.luisenricke.simpleroomapp.data_kotlin.contact.Contact.SCHEMA.NAME
-import com.luisenricke.simpleroomapp.data_kotlin.contact.Contact.SCHEMA.TABLE
+import com.luisenricke.simpleroomapp.data.contact.Contact.SCHEMA.EMAIL
+import com.luisenricke.simpleroomapp.data.contact.Contact.SCHEMA.ID
+import com.luisenricke.simpleroomapp.data.contact.Contact.SCHEMA.NAME
+import com.luisenricke.simpleroomapp.data.contact.Contact.SCHEMA.TABLE
 
 
 @Entity(tableName = TABLE)

@@ -1,11 +1,10 @@
-package com.luisenricke.simpleroomapp.data_kotlin.image
+package com.luisenricke.simpleroomapp.data.image
 
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Transaction
-import com.luisenricke.simpleroomapp.data_kotlin.BaseDAO
-import com.luisenricke.simpleroomapp.data_kotlin.contact.Contact
-import com.luisenricke.simpleroomapp.data_kotlin.image.Image.SCHEMA
+import com.luisenricke.simpleroomapp.data.BaseDAO
+import com.luisenricke.simpleroomapp.data.image.Image.SCHEMA
 
 @Dao
 abstract class ImageDAO : BaseDAO<Image>,

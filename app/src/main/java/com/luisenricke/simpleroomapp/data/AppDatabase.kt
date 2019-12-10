@@ -1,16 +1,16 @@
-package com.luisenricke.simpleroomapp.data_kotlin
+package com.luisenricke.simpleroomapp.data
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.luisenricke.simpleroomapp.data_kotlin.cache.Cache
-import com.luisenricke.simpleroomapp.data_kotlin.cache.CacheDAO
-import com.luisenricke.simpleroomapp.data_kotlin.contact.Contact
-import com.luisenricke.simpleroomapp.data_kotlin.contact.ContactDAO
-import com.luisenricke.simpleroomapp.data_kotlin.image.Image
-import com.luisenricke.simpleroomapp.data_kotlin.image.ImageDAO
+import com.luisenricke.simpleroomapp.data.cache.Cache
+import com.luisenricke.simpleroomapp.data.cache.CacheDAO
+import com.luisenricke.simpleroomapp.data.contact.Contact
+import com.luisenricke.simpleroomapp.data.contact.ContactDAO
+import com.luisenricke.simpleroomapp.data.image.Image
+import com.luisenricke.simpleroomapp.data.image.ImageDAO
 import com.luisenricke.simpleroomapp.utils.ioThread
 
 @Database(

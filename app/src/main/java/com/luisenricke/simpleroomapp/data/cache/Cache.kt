@@ -1,11 +1,11 @@
-package com.luisenricke.simpleroomapp.data_kotlin.cache
+package com.luisenricke.simpleroomapp.data.cache
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.luisenricke.simpleroomapp.data_kotlin.cache.Cache.SCHEMA.ID
-import com.luisenricke.simpleroomapp.data_kotlin.cache.Cache.SCHEMA.SRC
-import com.luisenricke.simpleroomapp.data_kotlin.cache.Cache.SCHEMA.TABLE
+import com.luisenricke.simpleroomapp.data.cache.Cache.SCHEMA.ID
+import com.luisenricke.simpleroomapp.data.cache.Cache.SCHEMA.SRC
+import com.luisenricke.simpleroomapp.data.cache.Cache.SCHEMA.TABLE
 
 @Entity(tableName = TABLE)
 data class Cache(

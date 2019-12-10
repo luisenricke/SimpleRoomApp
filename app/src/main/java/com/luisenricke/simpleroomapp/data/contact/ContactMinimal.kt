@@ -1,4 +1,4 @@
-package com.luisenricke.simpleroomapp.data_kotlin.contact
+package com.luisenricke.simpleroomapp.data.contact
 
 import androidx.room.Ignore
 

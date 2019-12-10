@@ -2,8 +2,8 @@ package com.luisenricke.simpleroomapp
 
 import android.app.Application
 import android.graphics.BitmapFactory
-import com.luisenricke.simpleroomapp.data_kotlin.AppDatabase
-import com.luisenricke.simpleroomapp.data_kotlin.image.Image
+import com.luisenricke.simpleroomapp.data.AppDatabase
+import com.luisenricke.simpleroomapp.data.image.Image
 import com.luisenricke.simpleroomapp.utils.ImageHelper
 import timber.log.Timber
 

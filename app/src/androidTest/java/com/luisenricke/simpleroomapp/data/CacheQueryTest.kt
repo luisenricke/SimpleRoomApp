@@ -1,11 +1,11 @@
-package com.luisenricke.simpleroomapp.data_kotlin
+package com.luisenricke.simpleroomapp.data
 
 import android.content.Context
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
-import com.luisenricke.simpleroomapp.data_kotlin.cache.Cache
-import com.luisenricke.simpleroomapp.data_kotlin.cache.CacheDAO
+import com.luisenricke.simpleroomapp.data.cache.Cache
+import com.luisenricke.simpleroomapp.data.cache.CacheDAO
 import org.junit.After
 import org.junit.Assert
 import org.junit.Before

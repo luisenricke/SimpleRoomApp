@@ -3,7 +3,7 @@ package com.luisenricke.simpleroomapp
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
-import com.luisenricke.simpleroomapp.data_kotlin.AppDatabase
+import com.luisenricke.simpleroomapp.data.AppDatabase
 import com.luisenricke.simpleroomapp.utils.ImageHelper
 import com.luisenricke.simpleroomapp.utils.Permission
 import com.luisenricke.simpleroomapp.utils.PermissionCameraImp

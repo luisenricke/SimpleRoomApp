@@ -1,4 +1,4 @@
-package com.luisenricke.simpleroomapp.data_kotlin
+package com.luisenricke.simpleroomapp.data
 
 import androidx.room.Delete
 import androidx.room.Insert

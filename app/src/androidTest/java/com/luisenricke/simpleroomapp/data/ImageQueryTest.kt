@@ -1,4 +1,4 @@
-package com.luisenricke.simpleroomapp.data_kotlin
+package com.luisenricke.simpleroomapp.data
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -6,8 +6,8 @@ import android.graphics.BitmapFactory
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
-import com.luisenricke.simpleroomapp.data_kotlin.image.Image
-import com.luisenricke.simpleroomapp.data_kotlin.image.ImageDAO
+import com.luisenricke.simpleroomapp.data.image.Image
+import com.luisenricke.simpleroomapp.data.image.ImageDAO
 import org.junit.After
 import org.junit.Assert
 import org.junit.Before
