@@ -1,10 +1,11 @@
-package com.luisenricke.simpleroomapp.data
+package com.luisenricke.simpleroomapp.data.dao
 
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Update
 
-interface BaseDAO<X> {
+@Suppress("unused")
+interface Base<X> {
     /**
      * Insert a row in the table.
      *
@@ -150,10 +151,6 @@ interface BaseDAO<X> {
     }
 
     @Deprecated("This interfaces its just a reference query.")
-    /**
-     * @param <Y> is a child table.
-     * @param <Z> is a parent table.
-     */
     interface ForeignKeyDAO<Y, Z> {
         /**
          * Count rows from the table Y in Z.
@@ -174,7 +171,7 @@ interface BaseDAO<X> {
          *
          * @return the total number of rows.
          */
-        fun countChildJoin(): Long
+        fun countJoinByParent(): Long
 
         /**
          * Count rows from the table by ID of the reference.
@@ -184,7 +181,7 @@ interface BaseDAO<X> {
          * @param fk: the id of the reference table.
          * @return the total number of rows.
          */
-        fun countChild(fk: Int): Long
+        fun countByParent(fk: Int): Long
 
         /**
          * Count rows from the table Y in Z filtering with foreign key.
@@ -208,7 +205,7 @@ interface BaseDAO<X> {
          * @param fk: the id of the reference table.
          * @return the total number of rows.
          */
-        fun countChildJoin(fk: Int): Long
+        fun countJoinByParent(fk: Int): Long
 
         /**
          * Get a list of objects existing in the table Y in Z.
@@ -229,7 +226,7 @@ interface BaseDAO<X> {
          *
          * @return the list of objects requested.
          */
-        fun getChildJoin(): List<Y>
+        fun getJoinByParent(): List<Y>
 
         /**
          * Get a list of objects existing in the table by ID of the reference.
@@ -239,7 +236,7 @@ interface BaseDAO<X> {
          * @param fk: the id of the reference table.
          * @return the list of objects requested.
          */
-        fun getChild(fk: Int): List<Y>
+        fun getByParent(fk: Int): List<Y>
 
         /**
          * Count rows from the table Y in Z filtering with foreign key
@@ -263,7 +260,7 @@ interface BaseDAO<X> {
          * @param fk: the id of the reference table.
          * @return the list of objects requested.
          */
-        fun getChildJoin(fk: Int): List<Y>
+        fun getJoinByParent(fk: Int): List<Y>
 
         /**
          * Drop all rows existing in the table by ID of the reference.
@@ -272,9 +269,10 @@ interface BaseDAO<X> {
          *
          * @param fk: the id of the reference table.
          */
-        fun drop(fk: Int)
+        fun dropByParent(fk: Int)
     }
 
+    @Deprecated("This interfaces its just a reference query.")
     interface InnerJoinDAO<A, B> {
         /**
          * Get a list of objects in the left table.
