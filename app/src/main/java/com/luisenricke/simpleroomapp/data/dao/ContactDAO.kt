@@ -1,15 +1,16 @@
-package com.luisenricke.simpleroomapp.data.contact
+package com.luisenricke.simpleroomapp.data.dao
 
 import androidx.room.Dao
 import androidx.room.Query
-import com.luisenricke.simpleroomapp.data.BaseDAO
-import com.luisenricke.simpleroomapp.data.contact.Contact.SCHEMA
+import com.luisenricke.simpleroomapp.data.entity.Contact
+import com.luisenricke.simpleroomapp.data.entity.Contact.SCHEMA
 
 @Dao
-abstract class ContactDAO : BaseDAO<Contact>,
-    BaseDAO.UpdateDAO<Contact>,
-    BaseDAO.DeleteDAO<Contact>,
-    BaseDAO.OperationsPrimaryKeyDAO<Contact> {
+@Suppress("unused")
+abstract class ContactDAO : Base<Contact>,
+    Base.UpdateDAO<Contact>,
+    Base.DeleteDAO<Contact>,
+    Base.PrimaryKeyDAO<Contact> {
 
     @Query("SELECT COUNT(*) FROM ${SCHEMA.TABLE}")
     abstract override fun count(): Int

@@ -1,12 +1,12 @@
-package com.luisenricke.simpleroomapp.data.image
+package com.luisenricke.simpleroomapp.data.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.luisenricke.simpleroomapp.data.image.Image.SCHEMA.ID
-import com.luisenricke.simpleroomapp.data.image.Image.SCHEMA.NAME
-import com.luisenricke.simpleroomapp.data.image.Image.SCHEMA.SRC
-import com.luisenricke.simpleroomapp.data.image.Image.SCHEMA.TABLE
+import com.luisenricke.simpleroomapp.data.entity.Image.SCHEMA.ID
+import com.luisenricke.simpleroomapp.data.entity.Image.SCHEMA.NAME
+import com.luisenricke.simpleroomapp.data.entity.Image.SCHEMA.SRC
+import com.luisenricke.simpleroomapp.data.entity.Image.SCHEMA.TABLE
 
 @Entity(tableName = TABLE)
 data class Image(

@@ -1,4 +1,4 @@
-package com.luisenricke.simpleroomapp.data.contact
+package com.luisenricke.simpleroomapp.data.entity
 
 import androidx.room.Ignore
 
