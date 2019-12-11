@@ -3,7 +3,7 @@ package com.luisenricke.simpleroomapp
 import android.app.Application
 import android.graphics.BitmapFactory
 import com.luisenricke.simpleroomapp.data.AppDatabase
-import com.luisenricke.simpleroomapp.data.image.Image
+import com.luisenricke.simpleroomapp.data.entity.Image
 import com.luisenricke.simpleroomapp.utils.ImageHelper
 import timber.log.Timber
 
@@ -15,7 +15,7 @@ class SimpleRoomApp : Application() {
         if (BuildConfig.DEBUG)
             Timber.plant(Timber.DebugTree())
 
-        manageDB = AppDatabase.open(this)
+        manageDB = AppDatabase.getInstance(this)
 
         if (manageDB.imageDAO().count() <= 0) {
             val bitmap = BitmapFactory.decodeResource(resources, R.mipmap.img_test)

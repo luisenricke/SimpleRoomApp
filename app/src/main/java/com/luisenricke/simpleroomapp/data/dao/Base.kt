@@ -115,7 +115,7 @@ interface BaseDAO<X> {
         fun deletes(rows: List<Y>): Int
     }
 
-    interface OperationsPrimaryKeyDAO<Y> {
+    interface PrimaryKeyDAO<Y> {
 
         /**
          * Get a object existing in the table by ID.
@@ -154,11 +154,23 @@ interface BaseDAO<X> {
      * @param <Y> is a child table.
      * @param <Z> is a parent table.
      */
-    interface OperationsForeignKeyDAO<Y,Z> {
+    interface ForeignKeyDAO<Y, Z> {
         /**
          * Count rows from the table Y in Z.
          *
-         * ``@Query("SELECT COUNT(*) FROM  ${Y.SCHEMA.TABLE}  AS CHILD INNER JOIN  ${Z.SCHEMA.TABLE}  AS PARENT ON CHILD.parent_id = PARENT.id")``
+         *  ``@Query(
+         *
+         *  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; """
+         *
+         *  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SELECT COUNT(*) FROM  ${SCHEMA.TABLE}  AS CHILD
+         *
+         *  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; INNER JOIN  ${Z.SCHEMA.TABLE}  AS PARENT
+         *
+         *  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ON CHILD.parent_id = PARENT.id
+         *
+         *  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; """
+         *
+         *  )``
          *
          * @return the total number of rows.
          */
@@ -167,7 +179,7 @@ interface BaseDAO<X> {
         /**
          * Count rows from the table by ID of the reference.
          *
-         * ``@Query("SELECT COUNT(*) FROM " + SCHEMA.TABLE + " WHERE parent_id = :fk")``
+         * ``@Query("SELECT COUNT(*) FROM ${SCHEMA.TABLE} WHERE parent_id = :fk")``
          *
          * @param fk: the id of the reference table.
          * @return the total number of rows.
@@ -177,13 +189,21 @@ interface BaseDAO<X> {
         /**
          * Count rows from the table Y in Z filtering with foreign key.
          *
-         * ``@Query("SELECT COUNT(*) FROM  ${Y.SCHEMA.TABLE}  AS CHILD"``
+         *  ``@Query(
          *
-         * `` + "INNER JOIN  ${Z.SCHEMA.TABLE}  AS PARENT"``
+         *  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; """
          *
-         * ``+ " ON CHILD.parent_id = PARENT.id"``
+         *  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SELECT COUNT(*) FROM  ${SCHEMA.TABLE}  AS CHILD
          *
-         * ``+ " WHERE CHILD.parent_id = :fk")``
+         *  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; INNER JOIN  ${Z.SCHEMA.TABLE}  AS PARENT
+         *
+         *  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ON CHILD.parent_id = PARENT.id
+         *
+         *  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; WHERE parent_id = :fk
+         *
+         *  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; """
+         *
+         *  )``
          *
          * @param fk: the id of the reference table.
          * @return the total number of rows.
@@ -193,11 +213,19 @@ interface BaseDAO<X> {
         /**
          * Get a list of objects existing in the table Y in Z.
          *
-         * ``@Query("SELECT CHILD.* FROM " + Y.SCHEMA.TABLE + " AS CHILD"``
+         *  ``@Query(
          *
-         * ``+ " INNER JOIN " + Z.SCHEMA.TABLE + " AS PARENT"``
+         *  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; """
          *
-         * ``+ " ON CHILD.parent_id = PARENT.id ")``
+         *  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SELECT CHILD.* FROM  ${SCHEMA.TABLE}  AS CHILD
+         *
+         *  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; INNER JOIN  ${Z.SCHEMA.TABLE}  AS PARENT
+         *
+         *  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ON CHILD.parent_id = PARENT.id
+         *
+         *  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; """
+         *
+         *  )``
          *
          * @return the list of objects requested.
          */
@@ -206,7 +234,7 @@ interface BaseDAO<X> {
         /**
          * Get a list of objects existing in the table by ID of the reference.
          *
-         * ``@Query("SELECT * FROM " + SCHEMA.TABLE + " WHERE parent_id = :fk")``
+         * ``@Query("SELECT * FROM ${SCHEMA.TABLE} WHERE parent_id = :fk")``
          *
          * @param fk: the id of the reference table.
          * @return the list of objects requested.
@@ -216,13 +244,21 @@ interface BaseDAO<X> {
         /**
          * Count rows from the table Y in Z filtering with foreign key
          *
-         * ``@Query("SELECT CHILD.* FROM " + Y.SCHEMA.TABLE + " AS CHILD"``
+         *  ``@Query(
          *
-         * ``+ " INNER JOIN " + Z.SCHEMA.TABLE + " AS PARENT"``
+         *  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; """
          *
-         * ``+ " ON CHILD.parent_id = PARENT.id"``
+         *  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SELECT CHILD.* FROM  ${SCHEMA.TABLE}  AS CHILD
          *
-         * ``+ " WHERE CHILD.parent_id = :fk")``
+         *  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; INNER JOIN  ${Z.SCHEMA.TABLE}  AS PARENT
+         *
+         *  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ON CHILD.parent_id = PARENT.id
+         *
+         *  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; WHERE parent_id = :fk
+         *
+         *  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; """
+         *
+         *  )``
          *
          * @param fk: the id of the reference table.
          * @return the list of objects requested.
@@ -240,7 +276,7 @@ interface BaseDAO<X> {
     }
 
     interface InnerJoinDAO<A, B> {
-         /**
+        /**
          * Get a list of objects in the left table.
          *
          * ``@Query("SELECT * FROM  ${SCHEMA.TABLE} WHERE left_id = :idLeft")``
@@ -263,13 +299,21 @@ interface BaseDAO<X> {
         /**
          * Get a list of objects in the left table existing in the right table.
          *
-         * ``@Query("SELECT * FROM  TABLEA " +
+         *  ``@Query(
          *
-         * "INNER JOIN ${SCHEMA.TABLE}  " +
+         *  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; """
          *
-         * "ON TABLEA.id = ${SCHEMA.TABLE}.TABLEA_id " +
+         *  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SELECT * FROM  TABLEA
          *
-         * "WHERE ${SCHEMA.TABLE}.TABLEB_id = :idRight")``
+         *  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; INNER JOIN ${SCHEMA.TABLE}
+         *
+         *  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ON TABLEA.id = ${SCHEMA.TABLE}.TABLEA_id
+         *
+         *  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; WHERE ${SCHEMA.TABLE}.TABLEB_id = :idLeft
+         *
+         *  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; """
+         *
+         *  )``
          *
          * @param idRight: the id of the right table.
          * @return the list of objects matches.
@@ -279,13 +323,21 @@ interface BaseDAO<X> {
         /**
          * Get a list of objects in the right table existing in the left table.
          *
-         * ``@Query("SELECT * FROM  TABLEB " +
+         *  ``@Query(
          *
-         * "INNER JOIN ${SCHEMA.TABLE}  " +
+         *  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; """
          *
-         * "ON TABLEB.id = ${SCHEMA.TABLE}.TABLEB_id " +
+         *  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SELECT * FROM  TABLEB
          *
-         * "WHERE ${SCHEMA.TABLE}.TABLEA_id = :idLeft")``
+         *  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; INNER JOIN ${SCHEMA.TABLE}
+         *
+         *  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ON TABLEB.id = ${SCHEMA.TABLE}.TABLEB_id
+         *
+         *  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; WHERE ${SCHEMA.TABLE}.TABLEA_id = :idLeft
+         *
+         *  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; """
+         *
+         *  )``
          *
          * @param idLeft: the id of the right table.
          * @return the list of objects matches.
