@@ -30,6 +30,9 @@ abstract class ContactDAO : Base<Contact>,
     @Query("DELETE FROM ${SCHEMA.TABLE} WHERE id = :id")
     abstract override fun delete(id: Int): Int
 
+    @Query("DELETE FROM ${SCHEMA.TABLE} WHERE id IN(:ids)")
+    abstract override fun deletes(ids: IntArray): Int
+
     @Query("SELECT * FROM ${SCHEMA.TABLE} ORDER BY ${SCHEMA.ID} LIMIT 1")
     abstract fun last(): Contact?
 

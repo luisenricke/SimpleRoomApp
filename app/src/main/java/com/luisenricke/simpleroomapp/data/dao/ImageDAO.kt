@@ -31,6 +31,9 @@ abstract class ImageDAO : Base<Image>,
     @Query("DELETE FROM ${SCHEMA.TABLE} WHERE id = :id")
     abstract override fun delete(id: Int): Int
 
+    @Query("DELETE FROM ${SCHEMA.TABLE} WHERE id IN(:ids)")
+    abstract override fun deletes(ids: IntArray): Int
+
     @Transaction
     open fun reset(rows: List<Image>) {
         drop()
