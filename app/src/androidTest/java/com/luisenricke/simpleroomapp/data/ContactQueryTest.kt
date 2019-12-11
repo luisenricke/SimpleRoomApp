@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
-import com.luisenricke.simpleroomapp.data.contact.Contact
-import com.luisenricke.simpleroomapp.data.contact.ContactDAO
+import com.luisenricke.simpleroomapp.data.entity.Contact
+import com.luisenricke.simpleroomapp.data.dao.ContactDAO
 import org.junit.After
 import org.junit.Assert
 import org.junit.Before
