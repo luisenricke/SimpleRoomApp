@@ -1,5 +1,4 @@
-package com.luisenricke.simpleroomapp.utils
-
+package com.luisenricke.simpleroomapp.common.extension
 
 import android.annotation.SuppressLint
 import androidx.annotation.Nullable
@@ -8,8 +7,8 @@ import java.util.Date
 import java.util.Calendar
 
 const val PATTERN_TIME = "HH:mm:ss"
-const val PATTERN_DATE_TIME = "dd/MM/yyyy HH:mm:ss"
 const val PATTERN_DATE = "dd/MM/yyyy"
+const val PATTERN_DATE_TIME = "dd/MM/yyyy HH:mm:ss"
 
 @SuppressLint("SimpleDateFormat")
 @Nullable
@@ -17,11 +16,11 @@ fun Long.formatDate(): String = SimpleDateFormat(PATTERN_DATE).format(Date(this)
 
 @SuppressLint("SimpleDateFormat")
 @Nullable
-fun Long.formatTime(date: Long): String = SimpleDateFormat(PATTERN_TIME).format(Date(this))
+fun Long.formatTime(): String = SimpleDateFormat(PATTERN_TIME).format(Date(this))
 
 @SuppressLint("SimpleDateFormat")
 @Nullable
-fun Long.formatDateTime(date: Long): String = SimpleDateFormat(PATTERN_DATE_TIME).format(Date(this))
+fun Long.formatDateTime(): String = SimpleDateFormat(PATTERN_DATE_TIME).format(Date(this))
 
 fun Date.addMinute(i: Int): Date? {
     val cal: Calendar = Calendar.getInstance()
