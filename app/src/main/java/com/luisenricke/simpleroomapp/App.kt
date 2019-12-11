@@ -7,20 +7,20 @@ import com.luisenricke.simpleroomapp.data.entity.Image
 import com.luisenricke.simpleroomapp.utils.ImageHelper
 import timber.log.Timber
 
-class SimpleRoomApp : Application() {
+class App : Application() {
     private lateinit var manageDB: AppDatabase
     override fun onCreate() {
         super.onCreate()
 
-        if (BuildConfig.DEBUG)
-            Timber.plant(Timber.DebugTree())
+        if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
 
         manageDB = AppDatabase.getInstance(this)
 
         if (manageDB.imageDAO().count() <= 0) {
             val bitmap = BitmapFactory.decodeResource(resources, R.mipmap.img_test)
             val byteArray = ImageHelper.bitmaptoByteArray(bitmap)
-            val row = Image("Tes", byteArray, 1)
+            val row = Image("Tes", byteArray)
+            Timber.i("row: $row")
             manageDB.imageDAO().insert(row)
         }
     }
