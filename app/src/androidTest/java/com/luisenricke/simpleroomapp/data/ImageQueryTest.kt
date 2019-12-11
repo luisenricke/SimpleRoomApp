@@ -18,7 +18,6 @@ import java.io.IOException
 import android.graphics.Bitmap.CompressFormat
 import com.luisenricke.simpleroomapp.R
 
-
 @RunWith(AndroidJUnit4::class)
 class ImageQueryTest {
     private lateinit var instrumentationContext: Context
