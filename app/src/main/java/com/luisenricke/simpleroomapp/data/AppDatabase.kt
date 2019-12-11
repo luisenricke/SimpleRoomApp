@@ -5,26 +5,27 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.luisenricke.simpleroomapp.data.cache.Cache
-import com.luisenricke.simpleroomapp.data.cache.CacheDAO
-import com.luisenricke.simpleroomapp.data.contact.Contact
-import com.luisenricke.simpleroomapp.data.contact.ContactDAO
-import com.luisenricke.simpleroomapp.data.image.Image
-import com.luisenricke.simpleroomapp.data.image.ImageDAO
-import com.luisenricke.simpleroomapp.utils.ioThread
+import com.luisenricke.simpleroomapp.data.entity.Contact
+import com.luisenricke.simpleroomapp.data.dao.ContactDAO
+import com.luisenricke.simpleroomapp.data.entity.Image
+import com.luisenricke.simpleroomapp.data.dao.ImageDAO
+import com.luisenricke.simpleroomapp.data.dao.UserDAO
+import com.luisenricke.simpleroomapp.data.entity.User
 
 @Database(
     entities = [
         Contact::class,
         Image::class,
-        Cache::class],
+        User::class
+    ],
     version = 1, exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun contactDAO(): ContactDAO
     abstract fun imageDAO(): ImageDAO
-    abstract fun cacheDAO(): CacheDAO
+
+    abstract fun user(): UserDAO
 
     companion object {
         const val NAME = "Database.db"
@@ -33,13 +34,9 @@ abstract class AppDatabase : RoomDatabase() {
 
         fun getInstance(context: Context): AppDatabase {
             return INSTANCE ?: synchronized(this) {
-                INSTANCE ?: buildDatabase(context)
+                INSTANCE ?: build(context)
                     .also { INSTANCE = it }
             }
-        }
-
-        fun open(context: Context): AppDatabase {
-            return getInstance(context)
         }
 
         fun close() {
@@ -49,7 +46,7 @@ abstract class AppDatabase : RoomDatabase() {
             INSTANCE = null
         }
 
-        private fun buildDatabase(context: Context): AppDatabase {
+        private fun build(context: Context): AppDatabase {
             return Room.databaseBuilder(context, AppDatabase::class.java, NAME)
                 .addCallback(object : Callback() {
                     override fun onCreate(db: SupportSQLiteDatabase) { //When is created do....
