@@ -4,28 +4,35 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.luisenricke.simpleroomapp.data.converter.DateConverter
 import com.luisenricke.simpleroomapp.data.entity.Contact
 import com.luisenricke.simpleroomapp.data.dao.ContactDAO
 import com.luisenricke.simpleroomapp.data.entity.Image
 import com.luisenricke.simpleroomapp.data.dao.ImageDAO
+import com.luisenricke.simpleroomapp.data.dao.PetDAO
 import com.luisenricke.simpleroomapp.data.dao.UserDAO
+import com.luisenricke.simpleroomapp.data.entity.Pet
 import com.luisenricke.simpleroomapp.data.entity.User
 
 @Database(
     entities = [
         Contact::class,
         Image::class,
-        User::class
+        User::class,
+        Pet::class
     ],
     version = 1, exportSchema = false
 )
+@TypeConverters(DateConverter::class)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun contactDAO(): ContactDAO
     abstract fun imageDAO(): ImageDAO
 
     abstract fun user(): UserDAO
+    abstract fun pet(): PetDAO
 
     companion object {
         const val NAME = "Database.db"
