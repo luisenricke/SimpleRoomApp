@@ -137,7 +137,7 @@ interface Base<X> {
          * @return the list objects requested.
          *
          */
-        fun get(ids: LongArray): List<Y>
+        fun get(ids: IntArray): List<Y>
 
         /**
          * Delete a row existing in the table by ID.
@@ -148,6 +148,17 @@ interface Base<X> {
          * @return the total number of rows dropped.
          */
         fun delete(id: Int): Int
+
+        /**
+         * Delete a list of object existing in the table by ID's.
+         *
+         *  ``@Query("DELETE FROM ${SCHEMA.TABLE} WHERE id IN(:ids)")``
+         *
+         * @param ids: the list id's of the searched objects.
+         * @return the total number of rows dropped.
+         *
+         */
+        fun deletes(ids: IntArray): Int
     }
 
     @Deprecated("This interfaces its just a reference query.")

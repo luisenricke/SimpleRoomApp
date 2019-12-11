@@ -25,7 +25,7 @@ abstract class ContactDAO : Base<Contact>,
     abstract override fun get(id: Int): Contact
 
     @Query("SELECT * FROM ${SCHEMA.TABLE} WHERE id IN(:ids)")
-    abstract override fun get(ids: LongArray): List<Contact>
+    abstract override fun get(ids: IntArray): List<Contact>
 
     @Query("DELETE FROM ${SCHEMA.TABLE} WHERE id = :id")
     abstract override fun delete(id: Int): Int
