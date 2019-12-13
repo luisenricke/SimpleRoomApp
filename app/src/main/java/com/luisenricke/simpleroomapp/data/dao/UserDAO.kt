@@ -13,7 +13,7 @@ abstract class UserDAO : Base<User>,
     Base.PrimaryKeyDAO<User> {
 
     @Query("SELECT COUNT(*) FROM ${SCHEMA.TABLE}")
-    abstract override fun count(): Int
+    abstract override fun count(): Long
 
     @Query("SELECT * FROM ${SCHEMA.TABLE}")
     abstract override fun get(): List<User>
@@ -22,14 +22,14 @@ abstract class UserDAO : Base<User>,
     abstract override fun drop()
 
     @Query("SELECT * FROM ${SCHEMA.TABLE} WHERE id = :id")
-    abstract override fun get(id: Int): User
+    abstract override fun get(id: Long): User
 
     @Query("SELECT * FROM ${SCHEMA.TABLE} WHERE id IN(:ids)")
-    abstract override fun get(ids: IntArray): List<User>
+    abstract override fun get(ids: LongArray): List<User>
 
     @Query("DELETE FROM ${SCHEMA.TABLE} WHERE id = :id")
-    abstract override fun delete(id: Int): Int
+    abstract override fun delete(id: Long): Int
 
     @Query("DELETE FROM ${SCHEMA.TABLE} WHERE id IN(:ids)")
-    abstract override fun deletes(ids: IntArray): Int
+    abstract override fun deletes(ids: LongArray): Int
 }

@@ -15,7 +15,7 @@ abstract class PetDAO : Base<Pet>,
 
 
     @Query("SELECT COUNT(*) FROM ${SCHEMA.TABLE}")
-    abstract override fun count(): Int
+    abstract override fun count(): Long
 
     @Query("SELECT * FROM ${SCHEMA.TABLE}")
     abstract override fun get(): List<Pet>
@@ -24,22 +24,22 @@ abstract class PetDAO : Base<Pet>,
     abstract override fun drop()
 
     @Query("SELECT * FROM ${SCHEMA.TABLE} WHERE id = :id")
-    abstract override fun get(id: Int): Pet
+    abstract override fun get(id: Long): Pet
 
     @Query("SELECT * FROM ${SCHEMA.TABLE} WHERE id IN(:ids)")
-    abstract override fun get(ids: IntArray): List<Pet>
+    abstract override fun get(ids: LongArray): List<Pet>
 
     @Query("DELETE FROM ${SCHEMA.TABLE} WHERE id = :id")
-    abstract override fun delete(id: Int): Int
+    abstract override fun delete(id: Long): Int
 
     @Query("DELETE FROM ${SCHEMA.TABLE} WHERE id IN(:ids)")
-    abstract override fun deletes(ids: IntArray): Int
+    abstract override fun deletes(ids: LongArray): Int
 
     @Query("SELECT COUNT(*) FROM ${SCHEMA.TABLE} WHERE user_id = :fk")
-    abstract fun countByUser(fk: Int): Int
+    abstract fun countByUser(fk: Long): Long
 
     @Query("SELECT * FROM ${SCHEMA.TABLE} WHERE user_id = :fk")
-    abstract fun getByUser(fk: Int): List<Pet>
+    abstract fun getByUser(fk: Long): List<Pet>
 
     @Query(
         """
@@ -48,7 +48,7 @@ abstract class PetDAO : Base<Pet>,
             ON CHILD.user_id = PARENT.id
         """
     )
-    abstract fun countJoinByUser(): Int
+    abstract fun countJoinByUser(): Long
 
     @Query(
         """
@@ -58,7 +58,7 @@ abstract class PetDAO : Base<Pet>,
             WHERE user_id = :fk
         """
     )
-    abstract fun countJoinByUser(fk: Int): Int
+    abstract fun countJoinByUser(fk: Long): Long
 
     @Query(
         """
@@ -77,8 +77,8 @@ abstract class PetDAO : Base<Pet>,
             WHERE user_id = :fk
         """
     )
-    abstract fun getJoinByUser(fk: Int): List<Pet>
+    abstract fun getJoinByUser(fk: Long): List<Pet>
 
     @Query("DELETE FROM  ${SCHEMA.TABLE}  WHERE user_id = :fk")
-    abstract fun dropByUser(fk: Int)
+    abstract fun dropByUser(fk: Long)
 }

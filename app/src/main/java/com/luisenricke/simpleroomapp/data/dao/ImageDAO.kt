@@ -14,7 +14,7 @@ abstract class ImageDAO : Base<Image>,
     Base.PrimaryKeyDAO<Image> {
 
     @Query("SELECT COUNT(*) FROM ${SCHEMA.TABLE}")
-    abstract override fun count(): Int
+    abstract override fun count(): Long
 
     @Query("SELECT * FROM ${SCHEMA.TABLE}")
     abstract override fun get(): List<Image>
@@ -23,16 +23,16 @@ abstract class ImageDAO : Base<Image>,
     abstract override fun drop()
 
     @Query("SELECT * FROM ${SCHEMA.TABLE} WHERE id = :id")
-    abstract override fun get(id: Int): Image
+    abstract override fun get(id: Long): Image
 
     @Query("SELECT * FROM ${SCHEMA.TABLE} WHERE id IN(:ids)")
-    abstract override fun get(ids: IntArray): List<Image>
+    abstract override fun get(ids: LongArray): List<Image>
 
     @Query("DELETE FROM ${SCHEMA.TABLE} WHERE id = :id")
-    abstract override fun delete(id: Int): Int
+    abstract override fun delete(id: Long): Int
 
     @Query("DELETE FROM ${SCHEMA.TABLE} WHERE id IN(:ids)")
-    abstract override fun deletes(ids: IntArray): Int
+    abstract override fun deletes(ids: LongArray): Int
 
     @Transaction
     open fun reset(rows: List<Image>) {

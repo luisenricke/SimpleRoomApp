@@ -15,7 +15,7 @@ abstract class PetMedicineDAO : Base<PetMedicine>,
     Base.PrimaryKeyDAO<PetMedicine> {
 
     @Query("SELECT COUNT(*) FROM ${SCHEMA.TABLE}")
-    abstract override fun count(): Int
+    abstract override fun count(): Long
 
     @Query("SELECT * FROM ${SCHEMA.TABLE}")
     abstract override fun get(): List<PetMedicine>
@@ -24,35 +24,35 @@ abstract class PetMedicineDAO : Base<PetMedicine>,
     abstract override fun drop()
 
     @Query("SELECT * FROM ${SCHEMA.TABLE} WHERE id = :id")
-    abstract override fun get(id: Int): PetMedicine
+    abstract override fun get(id: Long): PetMedicine
 
     @Query("SELECT * FROM ${SCHEMA.TABLE} WHERE id IN(:ids)")
-    abstract override fun get(ids: IntArray): List<PetMedicine>
+    abstract override fun get(ids: LongArray): List<PetMedicine>
 
     @Query("DELETE FROM ${SCHEMA.TABLE} WHERE id = :id")
-    abstract override fun delete(id: Int): Int
+    abstract override fun delete(id: Long): Int
 
     @Query("DELETE FROM ${SCHEMA.TABLE} WHERE id IN(:ids)")
-    abstract override fun deletes(ids: IntArray): Int
+    abstract override fun deletes(ids: LongArray): Int
+
 
     @Query(
         """
-            SELECT * FROM ${Pet.SCHEMA.TABLE}
-            INNER JOIN ${SCHEMA.TABLE}
-            ON Pet.id = ${SCHEMA.TABLE}.pet_id
-            WHERE ${SCHEMA.TABLE}.medicine_id = :idMedicine
+            SELECT * FROM ${Pet.SCHEMA.TABLE} AS LEFT_
+            INNER JOIN ${SCHEMA.TABLE} AS RIGHT_
+            ON LEFT_.${Pet.SCHEMA.ID} = RIGHT_.${SCHEMA.PET_ID}
+            WHERE RIGHT_.${SCHEMA.MEDICINE_ID} = :idMedicine
         """
     )
-    abstract fun getJoinPets(idMedicine: Int): List<Pet>
+    abstract fun getJoinPets(idMedicine: Long): List<Pet>
 
     @Query(
         """
-            SELECT * FROM ${Medicine.SCHEMA.TABLE}
-            INNER JOIN ${SCHEMA.TABLE}
-            ON Medicine.id = ${SCHEMA.TABLE}.medicine_id
-            WHERE ${SCHEMA.TABLE}.pet_id = :idPet
+            SELECT * FROM ${Medicine.SCHEMA.TABLE} AS RIGHT_
+            INNER JOIN ${SCHEMA.TABLE} AS LEFT_
+            ON RIGHT_.${Medicine.SCHEMA.ID} = LEFT_.${SCHEMA.MEDICINE_ID}
+            WHERE LEFT_.${SCHEMA.PET_ID} = :idPet
         """
     )
-    abstract fun getJoinMedicines(idPet: Int): List<Medicine>
-
+    abstract fun getJoinMedicines(idPet: Long): List<Medicine>
 }
