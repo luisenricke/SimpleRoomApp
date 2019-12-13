@@ -35,7 +35,6 @@ abstract class PetMedicineDAO : Base<PetMedicine>,
     @Query("DELETE FROM ${SCHEMA.TABLE} WHERE id IN(:ids)")
     abstract override fun deletes(ids: LongArray): Int
 
-
     @Query(
         """
             SELECT * FROM ${Pet.SCHEMA.TABLE} AS LEFT_

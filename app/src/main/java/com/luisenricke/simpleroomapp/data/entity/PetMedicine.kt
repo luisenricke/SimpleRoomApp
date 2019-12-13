@@ -27,9 +27,9 @@ import java.util.*
     ]
 )
 data class PetMedicine(
-    @ColumnInfo(name = SCHEMA.PET_ID)
+    @ColumnInfo(name = SCHEMA.PET_ID, index = true)
     val petId: Int,
-    @ColumnInfo(name = SCHEMA.MEDICINE_ID)
+    @ColumnInfo(name = SCHEMA.MEDICINE_ID, index = true)
     val medicineId: Int,
     @ColumnInfo(name = SCHEMA.CREATED_AT)
     val createdAt: Date,

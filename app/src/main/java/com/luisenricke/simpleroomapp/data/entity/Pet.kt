@@ -7,13 +7,13 @@ import java.util.*
 @Entity(
     tableName = Pet.SCHEMA.TABLE,
     foreignKeys = [
-         ForeignKey(
-             entity = User::class,
-             parentColumns = arrayOf(User.SCHEMA.ID),
-             childColumns = arrayOf(Pet.SCHEMA.USER),
-             onUpdate = ForeignKey.CASCADE,
-             onDelete = ForeignKey.CASCADE
-         )
+        ForeignKey(
+            entity = User::class,
+            parentColumns = arrayOf(User.SCHEMA.ID),
+            childColumns = arrayOf(Pet.SCHEMA.USER),
+            onUpdate = ForeignKey.CASCADE,
+            onDelete = ForeignKey.CASCADE
+        )
     ]
 )
 data class Pet(
@@ -21,7 +21,7 @@ data class Pet(
     val name: String,
     @ColumnInfo(name = SCHEMA.BORN_DAY)
     val bornDay: Date,
-    @ColumnInfo(name = SCHEMA.USER)
+    @ColumnInfo(name = SCHEMA.USER, index = true)
     val userId: Int,
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = SCHEMA.ID)

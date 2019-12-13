@@ -80,13 +80,27 @@ class PetMedicineQueryTest {
 
     @Test fun getJoinPets() {
         val pets = petMedicine.getJoinPets(1)
-        pets.forEach { println("dog: ${it.name}") }
+        pets.forEach { println("Dog: ${it.name}") }
         Assert.assertEquals(2, pets.size)
     }
 
     @Test fun getJoinMedicine() {
         val medicines = petMedicine.getJoinMedicines(3)
-        medicines.forEach { println("medicine: ${it.name}") }
+        medicines.forEach { println("Medicine: ${it.name}") }
         Assert.assertEquals(3, medicines.size)
+    }
+
+    @Test fun insertSameForeignKeys() {
+        val timestamp = System.currentTimeMillis()
+        val currentDate = Date(timestamp)
+        petMedicine.insert(
+            PetMedicine(3, 3, currentDate, currentDate)
+        )
+        var row = petMedicine.get(6)
+        println("PetMedecine: ${row.id} :: ${row.petId} - ${row.medicineId} :: ${row.createdAt}")
+        row = petMedicine.get(7)
+        println("PetMedecine: ${row.id} :: ${row.petId} - ${row.medicineId} :: ${row.createdAt}")
+        val petMedicines = petMedicine.get()
+        Assert.assertEquals(7, petMedicines.size)
     }
 }
