@@ -5,7 +5,6 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Suppress("SpellCheckingInspection")
-
 @Entity(tableName = User.SCHEMA.TABLE)
 data class User(
 
@@ -15,7 +14,7 @@ data class User(
     var password: String,
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = SCHEMA.ID)
-    val id: Int = 0
+    val id: Long = 0
 ) {
     object SCHEMA {
         const val TABLE = "User"

@@ -13,7 +13,7 @@ data class Medicine(
     val application: String,
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = SCHEMA.ID)
-    val id: Int = 0
+    val id: Long = 0
 ){
     object SCHEMA {
         const val TABLE = "Medicine"

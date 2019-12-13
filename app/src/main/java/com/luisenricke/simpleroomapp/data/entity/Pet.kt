@@ -1,9 +1,6 @@
 package com.luisenricke.simpleroomapp.data.entity
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
+import androidx.room.*
 import java.util.*
 
 @Suppress("SpellCheckingInspection")
@@ -28,7 +25,7 @@ data class Pet(
     val userId: Int,
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = SCHEMA.ID)
-    val id: Int = 0
+    val id: Long = 0
 ) {
     object SCHEMA {
         const val TABLE = "Pet"

@@ -33,7 +33,7 @@ class UserQueryTest {
         val rowThree = User("test3@test", "test3")
         dao.inserts(rowOne, rowTwo, rowThree)
         val list = dao.get()
-        Assert.assertEquals(3, list.size.toLong())
+        Assert.assertEquals(3, list.size)
     }
 
     @Test fun drop() {
@@ -42,7 +42,7 @@ class UserQueryTest {
         val rowThree = User("test3@test", "test3")
         dao.inserts(rowOne, rowTwo, rowThree)
         dao.drop()
-        val count = dao.count().toLong()
+        val count = dao.count()
         Assert.assertEquals(0, count)
     }
 
@@ -51,7 +51,7 @@ class UserQueryTest {
         val rowTwo = User("test2@test", "test2")
         val rowThree = User("test3@test", "test3")
         dao.inserts(rowOne, rowTwo, rowThree)
-        val list = dao.get(intArrayOf(1, 2, 3))
+        val list = dao.get(longArrayOf(1, 2, 3))
         val check = dao.get()
         Assert.assertArrayEquals(check.toTypedArray(), list.toTypedArray())
     }
@@ -62,7 +62,7 @@ class UserQueryTest {
         val rowThree = User("test3@test", "test3")
         dao.inserts(rowOne, rowTwo, rowThree)
         val deletes = dao.delete(2)
-        val count = dao.count().toLong()
+        val count = dao.count()
         println("deleted: $deletes")
         Assert.assertEquals(2, count)
     }
@@ -72,8 +72,8 @@ class UserQueryTest {
         val rowTwo = User("test2@test", "test2")
         val rowThree = User("test3@test", "test3")
         dao.inserts(rowOne, rowTwo, rowThree)
-        val deleteRows = dao.deletes(intArrayOf(1, 2, 3))
-        val count = dao.count().toLong()
+        val deleteRows = dao.deletes(longArrayOf(1, 2, 3))
+        val count = dao.count()
         println("Count of deletes: $deleteRows")
         Assert.assertEquals(0, count)
     }
@@ -81,7 +81,7 @@ class UserQueryTest {
     @Test fun insert() {
         val rowOne = User("test@test", "test")
         dao.insert(rowOne)
-        val count = dao.count().toLong()
+        val count = dao.count()
         Assert.assertEquals(1, count)
     }
 
@@ -91,7 +91,7 @@ class UserQueryTest {
         val rowThree = User("test3@test", "test3")
         val list: List<User> = listOf(rowOne, rowTwo, rowThree)
         dao.inserts(list)
-        val count = dao.count().toLong()
+        val count = dao.count()
         Assert.assertEquals(3, count)
     }
 
@@ -100,7 +100,7 @@ class UserQueryTest {
         val rowTwo = User("test2@test", "test2")
         val rowThree = User("test3@test", "test3")
         dao.inserts(rowOne, rowTwo, rowThree)
-        val count = dao.count().toLong()
+        val count = dao.count()
         Assert.assertEquals(3, count)
     }
 
@@ -109,7 +109,7 @@ class UserQueryTest {
         dao.insert(rowOne)
         val modified = User("modified", "modified", 1)
         val count = dao.update(modified)
-        Assert.assertEquals(1, count.toLong())
+        Assert.assertEquals(1, count)
     }
 
     @Test fun updatesList() {
@@ -123,7 +123,7 @@ class UserQueryTest {
         val rowThreeNotModified = User("test3@test", "test3", 3)
         val rowFailUpdate = User("fail", "fail", 100)
         list = listOf(rowOneModified, rowTwoModified, rowFailUpdate)
-        val aux: Int = dao.updates(list)
+        val aux = dao.updates(list)
         println(aux.toString() + "")
         list = listOf(rowOneModified, rowTwoModified, rowThreeNotModified)
         val usersDB = dao.get()
@@ -152,7 +152,7 @@ class UserQueryTest {
         val rowThree = User("test3@test", "test3")
         dao.inserts(rowOne, rowTwo, rowThree)
         val deletes = dao.delete(User("test@test", "test", 1))
-        val count = dao.count().toLong()
+        val count = dao.count()
         println("deleted: $deletes")
         Assert.assertEquals(2, count)
     }
@@ -168,7 +168,7 @@ class UserQueryTest {
             User("test3@test", "test3", 3)
         )
         val deletes = dao.deletes(deleteRows)
-        val count = dao.count().toLong()
+        val count = dao.count()
         println("Count of deletes: $deletes")
         Assert.assertEquals(0, count)
     }
@@ -183,13 +183,13 @@ class UserQueryTest {
             User("test2@test", "test2", 2),
             User("test3@test", "test3", 3)
         )
-        val count = dao.count().toLong()
+        val count = dao.count()
         println("Count of deletes: $deletes")
         Assert.assertEquals(0, count)
     }
 
     @Test fun countNothing() {
-        val count = dao.count().toLong()
+        val count = dao.count()
         Assert.assertEquals(0, count)
     }
 
@@ -201,17 +201,17 @@ class UserQueryTest {
 
     @Test fun dropInEmpty() {
         dao.drop()
-        val count = dao.count().toLong()
+        val count = dao.count()
         Assert.assertEquals(0, count)
     }
 
     @Test fun getByIdsInEmpty() {
-        val list = dao.get(intArrayOf(1, 2, 3))
+        val list = dao.get(longArrayOf(1, 2, 3))
         Assert.assertEquals(0, list.size)
     }
 
     @Test fun deleteByIdInEmpty() {
-        val delete: Int = dao.delete(2)
+        val delete = dao.delete(2)
         println("deleted: $delete")
         Assert.assertEquals(0, delete)
     }
@@ -221,13 +221,13 @@ class UserQueryTest {
         val rowTwo = User("test2@test", "test2")
         val rowThree = User("test3@test", "test3")
         dao.inserts(rowOne, rowTwo, rowThree)
-        val delete: Int = dao.delete(5)
+        val delete = dao.delete(5)
         println("deleted: $delete")
         Assert.assertEquals(0, delete)
     }
 
     @Test fun deletesByIdsInEmpty() {
-        val deleteRows = dao.deletes(intArrayOf(1, 2, 3))
+        val deleteRows = dao.deletes(longArrayOf(1, 2, 3))
         println("Count of deletes: $deleteRows")
         Assert.assertEquals(0, deleteRows)
     }
@@ -237,8 +237,8 @@ class UserQueryTest {
         val rowTwo = User("test2@test", "test2")
         val rowThree = User("test3@test", "test3")
         dao.inserts(rowOne, rowTwo, rowThree)
-        val deleteRows = dao.deletes(intArrayOf(4, 5, 6))
-        val count = dao.count().toLong()
+        val deleteRows = dao.deletes(longArrayOf(4, 5, 6))
+        val count = dao.count()
         println("Count of deletes: $deleteRows")
         Assert.assertEquals(3, count)
     }
@@ -254,7 +254,7 @@ class UserQueryTest {
             User("random", "random", 3)
         )
         val deletes = dao.deletes(deleteRows)
-        val count = dao.count().toLong()
+        val count = dao.count()
         println("Count of deletes: $deletes")
         Assert.assertNotEquals(3, count)
     }
@@ -270,7 +270,7 @@ class UserQueryTest {
             User("test3@test", "test3", 6)
         )
         val deletes = dao.deletes(deleteRows)
-        val count = dao.count().toLong()
+        val count = dao.count()
         println("Count of deletes: $deletes")
         Assert.assertEquals(3, count)
     }

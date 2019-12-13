@@ -13,23 +13,23 @@ import java.util.*
         ForeignKey(
             entity = Pet::class,
             parentColumns = arrayOf(Pet.SCHEMA.ID),
-            childColumns = arrayOf(PetMedicine.SCHEMA.PET),
+            childColumns = arrayOf(PetMedicine.SCHEMA.PET_ID),
             onUpdate = ForeignKey.CASCADE,
             onDelete = ForeignKey.CASCADE
         ),
         ForeignKey(
             entity = Medicine::class,
             parentColumns = arrayOf(Medicine.SCHEMA.ID),
-            childColumns = arrayOf(PetMedicine.SCHEMA.MEDICINE),
+            childColumns = arrayOf(PetMedicine.SCHEMA.MEDICINE_ID),
             onUpdate = ForeignKey.CASCADE,
             onDelete = ForeignKey.CASCADE
         )
     ]
 )
 data class PetMedicine(
-    @ColumnInfo(name = SCHEMA.PET)
+    @ColumnInfo(name = SCHEMA.PET_ID)
     val petId: Int,
-    @ColumnInfo(name = SCHEMA.MEDICINE)
+    @ColumnInfo(name = SCHEMA.MEDICINE_ID)
     val medicineId: Int,
     @ColumnInfo(name = SCHEMA.CREATED_AT)
     val createdAt: Date,
@@ -37,13 +37,13 @@ data class PetMedicine(
     val updatedAt: Date,
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = SCHEMA.ID)
-    val id: Int = 0
+    val id: Long = 0
 ) {
     object SCHEMA {
         const val TABLE = "PetMedecine"
         const val ID = "id"
-        const val PET = "pet_id"
-        const val MEDICINE = "medicine_id"
+        const val PET_ID = "pet_id"
+        const val MEDICINE_ID = "medicine_id"
         const val CREATED_AT = "created_at"
         const val UPDATED_AT = "updated_at"
     }
