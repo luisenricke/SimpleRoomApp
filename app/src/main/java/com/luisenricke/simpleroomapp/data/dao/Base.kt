@@ -40,7 +40,7 @@ interface Base<X> {
      *
      * @return the total number of rows.
      */
-    fun count(): Int
+    fun count(): Long
 
     /**
      * Get a list of objects existing in the table.
@@ -126,7 +126,7 @@ interface Base<X> {
          * @param id: the id of the searched object.
          * @return the object requested.
          */
-        fun get(id: Int): Y
+        fun get(id: Long): Y
 
         /**
          * Get a list of object existing in the table by ID's.
@@ -137,7 +137,7 @@ interface Base<X> {
          * @return the list objects requested.
          *
          */
-        fun get(ids: IntArray): List<Y>
+        fun get(ids: LongArray): List<Y>
 
         /**
          * Delete a row existing in the table by ID.
@@ -147,7 +147,7 @@ interface Base<X> {
          * @param id: the id of the searched object.
          * @return the total number of rows dropped.
          */
-        fun delete(id: Int): Int
+        fun delete(id: Long): Int
 
         /**
          * Delete a list of object existing in the table by ID's.
@@ -158,7 +158,7 @@ interface Base<X> {
          * @return the total number of rows dropped.
          *
          */
-        fun deletes(ids: IntArray): Int
+        fun deletes(ids: LongArray): Int
     }
 
     @Deprecated("This interfaces its just a reference query.")
@@ -247,7 +247,7 @@ interface Base<X> {
          * @param fk: the id of the reference table.
          * @return the list of objects requested.
          */
-        fun getByParent(fk: Int): List<Y>
+        fun getByParent(fk: Long): List<Y>
 
         /**
          * Count rows from the table Y in Z filtering with foreign key
@@ -271,7 +271,7 @@ interface Base<X> {
          * @param fk: the id of the reference table.
          * @return the list of objects requested.
          */
-        fun getJoinByParent(fk: Int): List<Y>
+        fun getJoinByParent(fk: Long): List<Y>
 
         /**
          * Drop all rows existing in the table by ID of the reference.
@@ -280,7 +280,7 @@ interface Base<X> {
          *
          * @param fk: the id of the reference table.
          */
-        fun dropByParent(fk: Int)
+        fun dropByParent(fk: Long)
     }
 
     @Deprecated("This interfaces its just a reference query.")
@@ -307,7 +307,7 @@ interface Base<X> {
          * @param idRight: the id of the right table.
          * @return the list of objects matches.
          */
-        fun getJoinLeft(idRight: Int): List<A>
+        fun getJoinLeft(idRight: Long): List<A>
 
         /**
          * Get a list of objects in the right table existing in the left table.
@@ -331,6 +331,6 @@ interface Base<X> {
          * @param idLeft: the id of the right table.
          * @return the list of objects matches.
          */
-        fun getJoinRight(idLeft: Int): List<B>
+        fun getJoinRight(idLeft: Long): List<B>
     }
 }
