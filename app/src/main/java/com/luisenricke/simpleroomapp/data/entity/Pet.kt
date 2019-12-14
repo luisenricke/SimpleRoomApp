@@ -10,7 +10,7 @@ import java.util.*
         ForeignKey(
             entity = User::class,
             parentColumns = arrayOf(User.SCHEMA.ID),
-            childColumns = arrayOf(Pet.SCHEMA.USER),
+            childColumns = arrayOf(Pet.SCHEMA.USER_ID),
             onUpdate = ForeignKey.CASCADE,
             onDelete = ForeignKey.CASCADE
         )
@@ -21,7 +21,7 @@ data class Pet(
     val name: String,
     @ColumnInfo(name = SCHEMA.BORN_DAY)
     val bornDay: Date,
-    @ColumnInfo(name = SCHEMA.USER, index = true)
+    @ColumnInfo(name = SCHEMA.USER_ID, index = true)
     val userId: Int,
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = SCHEMA.ID)
@@ -32,6 +32,6 @@ data class Pet(
         const val ID = "id"
         const val NAME = "name"
         const val BORN_DAY = "born"
-        const val USER = "user_id"
+        const val USER_ID = "user_id"
     }
 }

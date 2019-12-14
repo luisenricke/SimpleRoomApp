@@ -13,7 +13,6 @@ abstract class PetDAO : Base<Pet>,
     Base.DeleteDAO<Pet>,
     Base.PrimaryKeyDAO<Pet> {
 
-
     @Query("SELECT COUNT(*) FROM ${SCHEMA.TABLE}")
     abstract override fun count(): Long
 
@@ -35,17 +34,18 @@ abstract class PetDAO : Base<Pet>,
     @Query("DELETE FROM ${SCHEMA.TABLE} WHERE id IN(:ids)")
     abstract override fun deletes(ids: LongArray): Int
 
-    @Query("SELECT COUNT(*) FROM ${SCHEMA.TABLE} WHERE user_id = :fk")
+
+    @Query("SELECT COUNT(*) FROM ${SCHEMA.TABLE} WHERE ${SCHEMA.USER_ID} = :fk")
     abstract fun countByUser(fk: Long): Long
 
-    @Query("SELECT * FROM ${SCHEMA.TABLE} WHERE user_id = :fk")
+    @Query("SELECT * FROM ${SCHEMA.TABLE} WHERE ${SCHEMA.USER_ID} = :fk")
     abstract fun getByUser(fk: Long): List<Pet>
 
     @Query(
         """
             SELECT COUNT(*) FROM ${SCHEMA.TABLE} AS CHILD
-            INNER JOIN ${SCHEMA.TABLE} AS PARENT
-            ON CHILD.user_id = PARENT.id
+            INNER JOIN ${User.SCHEMA.TABLE} AS PARENT
+            ON CHILD.${SCHEMA.USER_ID} = PARENT.${User.SCHEMA.ID}
         """
     )
     abstract fun countJoinByUser(): Long
@@ -54,8 +54,8 @@ abstract class PetDAO : Base<Pet>,
         """
             SELECT COUNT(*) FROM ${SCHEMA.TABLE} AS CHILD
             INNER JOIN ${User.SCHEMA.TABLE} AS PARENT
-            ON CHILD.user_id = PARENT.id
-            WHERE user_id = :fk
+            ON CHILD.${SCHEMA.USER_ID} = PARENT.${User.SCHEMA.ID}
+            WHERE CHILD.${SCHEMA.USER_ID} = :fk
         """
     )
     abstract fun countJoinByUser(fk: Long): Long
@@ -64,7 +64,7 @@ abstract class PetDAO : Base<Pet>,
         """
             SELECT CHILD.* FROM ${SCHEMA.TABLE} AS CHILD
             INNER JOIN ${User.SCHEMA.TABLE} AS PARENT
-            ON CHILD.user_id = PARENT.id
+            ON CHILD.${SCHEMA.USER_ID} = PARENT.${User.SCHEMA.ID}
         """
     )
     abstract fun getJoinByUser(): List<Pet>
@@ -73,12 +73,12 @@ abstract class PetDAO : Base<Pet>,
         """
             SELECT CHILD.* FROM ${SCHEMA.TABLE} AS CHILD
             INNER JOIN ${User.SCHEMA.TABLE} AS PARENT
-            ON CHILD.user_id = PARENT.id
-            WHERE user_id = :fk
+            ON CHILD.${SCHEMA.USER_ID} = PARENT.${User.SCHEMA.ID}
+            WHERE CHILD.${SCHEMA.USER_ID} = :fk
         """
     )
     abstract fun getJoinByUser(fk: Long): List<Pet>
 
-    @Query("DELETE FROM  ${SCHEMA.TABLE}  WHERE user_id = :fk")
+    @Query("DELETE FROM ${SCHEMA.TABLE} WHERE ${SCHEMA.USER_ID} = :fk")
     abstract fun dropByUser(fk: Long)
 }
