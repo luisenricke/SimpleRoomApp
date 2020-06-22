@@ -2,15 +2,22 @@ package com.luisenricke.simpleroomapp
 
 import android.graphics.Bitmap
 import android.os.Bundle
-import com.luisenricke.simpleroomapp.common.BaseActivity
+import androidx.appcompat.app.AppCompatActivity
+import com.luisenricke.simpleroomapp.databinding.ActivityMainBinding
 import com.luisenricke.simpleroomapp.utils.ImageHelper
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BaseActivity() {
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.lblTitle.text = "Binding text title"
 
         /*
         OkHttpHelper.downloadImage(Constraints.IMAGE_URL_EVANGELION, db.cacheDAO())
@@ -25,11 +32,11 @@ class MainActivity : BaseActivity() {
             .subscribe()
          */
 
-        existImage()
+//        existImage()
     }
-
-    fun existImage(){
-        val image: Bitmap? = ImageHelper.loadIS(this, "GalleryImage")
-        img_db.setImageBitmap(image)
-    }
+//
+//    fun existImage(){
+//        val image: Bitmap? = ImageHelper.loadIS(this, "GalleryImage")
+//        img_db.setImageBitmap(image)
+//    }
 }
