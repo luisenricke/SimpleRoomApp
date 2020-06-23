@@ -55,6 +55,7 @@ dependencies {
 
     implementation ViewLib.materialDesign
     implementation ViewLib.constraintLayout
+    implementation ViewLib.recyclerview
 
     testImplementation TestLib.junit
     androidTestImplementation TestLib.junitExt
