@@ -1,36 +1,34 @@
 package com.luisenricke.simpleroomapp.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.luisenricke.simpleroomapp.R
 import com.luisenricke.simpleroomapp.data.entity.Contact
-import com.luisenricke.simpleroomapp.databinding.ItemContactBinding
+import kotlinx.android.synthetic.main.item_contact.view.*
 
-class ContactAdapter(private val contacts: List<Contact>, val clickListener: (Contact) -> Unit) :
+class ContactAdapter(val contacts: List<Contact>, val clickListener: (Contact) -> Unit) :
     RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactAdapter.ViewHolder {
-        val binding = ItemContactBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(binding)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactAdapter.ViewHolder =
+        ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_contact, parent, false))
 
     override fun getItemCount(): Int = contacts.size
 
-    override fun onBindViewHolder(holder: ContactAdapter.ViewHolder, position: Int) {
-        holder.bind(contacts[position])
-    }
+    override fun onBindViewHolder(holder: ContactAdapter.ViewHolder, position: Int) = holder.bind(contacts[position])
 
-    inner class ViewHolder(private val binding: ItemContactBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(contact: Contact) {
-            with(binding) {
-                lblId.text = contact.id.toString()
-                lblName.text = contact.name
-                lblEmail.text = contact.email
+            with(itemView) {
+                lbl_id.text = contact.id.toString()
+                lbl_name.text = contact.name
+                lbl_name.text = contact.email
 
-                btnDelete.setOnClickListener { }
-                root.setOnClickListener { clickListener(contact) }
+                btn_delete.setOnClickListener { }
+                setOnClickListener { clickListener(contact) }
             }
         }
     }

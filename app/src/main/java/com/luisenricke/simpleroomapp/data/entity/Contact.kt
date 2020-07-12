@@ -8,7 +8,6 @@ import com.luisenricke.simpleroomapp.data.entity.Contact.SCHEMA.ID
 import com.luisenricke.simpleroomapp.data.entity.Contact.SCHEMA.NAME
 import com.luisenricke.simpleroomapp.data.entity.Contact.SCHEMA.TABLE
 
-
 @Entity(tableName = TABLE)
 data class Contact(
     @ColumnInfo(name = EMAIL)

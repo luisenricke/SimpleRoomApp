@@ -4,10 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Suppress("SpellCheckingInspection")
 @Entity(tableName = User.SCHEMA.TABLE)
 data class User(
-
     @ColumnInfo(name = SCHEMA.EMAIL)
     var email: String,
     @ColumnInfo(name = SCHEMA.PASSWORD)

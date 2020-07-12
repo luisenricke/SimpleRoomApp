@@ -3,15 +3,16 @@ package com.luisenricke.simpleroomapp.data.dao
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Transaction
+import com.luisenricke.room.dao.Base
+import com.luisenricke.room.dao.Delete
+import com.luisenricke.room.dao.PrimaryKey
+import com.luisenricke.room.dao.Update
 import com.luisenricke.simpleroomapp.data.entity.Image
 import com.luisenricke.simpleroomapp.data.entity.Image.SCHEMA
 
-@Dao
 @Suppress("unused")
-abstract class ImageDAO : Base<Image>,
-    Base.UpdateDAO<Image>,
-    Base.DeleteDAO<Image>,
-    Base.PrimaryKeyDAO<Image> {
+@Dao
+abstract class ImageDAO : Base<Image>, Update<Image>, Delete<Image>, PrimaryKey<Image> {
 
     @Query("SELECT COUNT(*) FROM ${SCHEMA.TABLE}")
     abstract override fun count(): Long

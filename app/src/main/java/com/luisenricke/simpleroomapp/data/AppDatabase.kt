@@ -6,7 +6,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.luisenricke.simpleroomapp.data.converter.DateConverter
+import com.luisenricke.room.converter.Date
+import com.luisenricke.room.ioThread
 import com.luisenricke.simpleroomapp.data.dao.*
 import com.luisenricke.simpleroomapp.data.entity.*
 
@@ -21,47 +22,45 @@ import com.luisenricke.simpleroomapp.data.entity.*
     ],
     version = 1, exportSchema = false
 )
-@TypeConverters(DateConverter::class)
+@TypeConverters(Date::class)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun contactDAO(): ContactDAO
     abstract fun imageDAO(): ImageDAO
-
     abstract fun user(): UserDAO
     abstract fun pet(): PetDAO
     abstract fun medicine(): MedicineDAO
     abstract fun petMedicine(): PetMedicineDAO
 
     companion object {
-        const val NAME = "Database.db"
+        private const val NAME = "Database.db"
+
         @Volatile
         private var INSTANCE: AppDatabase? = null
 
         fun getInstance(context: Context): AppDatabase {
-            return INSTANCE ?: synchronized(this) {
-                INSTANCE ?: build(context)
-                    .also { INSTANCE = it }
-            }
+            return INSTANCE ?: synchronized(this) { INSTANCE ?: build(context).also { INSTANCE = it } }
         }
 
         fun close() {
             if (INSTANCE?.isOpen == true) {
                 INSTANCE?.close()
             }
+
             INSTANCE = null
         }
 
         private fun build(context: Context): AppDatabase {
             return Room.databaseBuilder(context, AppDatabase::class.java, NAME)
                 .addCallback(object : Callback() {
-                    override fun onCreate(db: SupportSQLiteDatabase) { //When is created do....
+                    override fun onCreate(db: SupportSQLiteDatabase) {
                         super.onCreate(db)
-                        ioThread {
-                            getInstance(context).contactDAO().insert(INIT_DATA)
-                        }
+
+                        ioThread { getInstance(context).contactDAO().insert(INIT_DATA) }
+
                     }
 
-                    override fun onOpen(db: SupportSQLiteDatabase) { //When is open do...
+                    override fun onOpen(db: SupportSQLiteDatabase) {
                         super.onOpen(db)
 
                     }

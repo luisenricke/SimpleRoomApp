@@ -1,9 +1,8 @@
 package com.luisenricke.simpleroomapp.data.entity
 
 import androidx.room.*
-import java.util.*
+import java.util.Date
 
-@Suppress("SpellCheckingInspection")
 @Entity(
     tableName = Pet.SCHEMA.TABLE,
     foreignKeys = [

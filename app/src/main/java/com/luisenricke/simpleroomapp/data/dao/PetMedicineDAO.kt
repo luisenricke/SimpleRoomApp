@@ -2,17 +2,18 @@ package com.luisenricke.simpleroomapp.data.dao
 
 import androidx.room.Dao
 import androidx.room.Query
+import com.luisenricke.room.dao.Base
+import com.luisenricke.room.dao.Delete
+import com.luisenricke.room.dao.PrimaryKey
+import com.luisenricke.room.dao.Update
 import com.luisenricke.simpleroomapp.data.entity.Medicine
 import com.luisenricke.simpleroomapp.data.entity.Pet
 import com.luisenricke.simpleroomapp.data.entity.PetMedicine
 import com.luisenricke.simpleroomapp.data.entity.PetMedicine.SCHEMA
 
-@Dao
 @Suppress("unused")
-abstract class PetMedicineDAO : Base<PetMedicine>,
-    Base.UpdateDAO<PetMedicine>,
-    Base.DeleteDAO<PetMedicine>,
-    Base.PrimaryKeyDAO<PetMedicine> {
+@Dao
+abstract class PetMedicineDAO : Base<PetMedicine>, Update<PetMedicine>, Delete<PetMedicine>, PrimaryKey<PetMedicine> {
 
     @Query("SELECT COUNT(*) FROM ${SCHEMA.TABLE}")
     abstract override fun count(): Long
