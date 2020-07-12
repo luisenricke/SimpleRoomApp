@@ -34,23 +34,18 @@ android {
     kotlinOptions {
         jvmTarget = DefaultConfig.jvm.toString()
     }
-
-    buildFeatures {
-        viewBinding true
-    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation project(Modules.kotlinext)
+    implementation project(Modules.room)
 
     implementation DefaultConfig.kotlin
 
     implementation AndroidLib.appCompat
     implementation AndroidLib.coreKtx
-    implementation AndroidLib.lifecycleExt
-    implementation AndroidLib.preference
     implementation AndroidLib.legacy
 
     implementation ViewLib.materialDesign
@@ -61,15 +56,10 @@ dependencies {
     androidTestImplementation TestLib.junitExt
     androidTestImplementation TestLib.espresso
 
-    implementation DatabaseLib.runtimeRoom
-    kapt DatabaseLib.compilerRoom
-    implementation DatabaseLib.rxJavaRoom
-    testImplementation DatabaseLib.testingRoom
-
-    implementation NetworkLib.okHttp3
-
-    implementation RxLib.java
-    implementation RxLib.android
+    implementation RoomLib.runtime
+    kapt RoomLib.compiler
+    implementation RoomLib.rxJava
+    testImplementation RoomLib.testing
 
     implementation ToolLib.timber
 }
