@@ -1,3 +1,4 @@
 rootProject.name='SimpleRoomApp'
 include ':app'
+include ':room'
 include ':kotlinext'
