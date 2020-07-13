@@ -23,7 +23,7 @@ abstract class MedicineDAO : Base<Medicine>, Update<Medicine>, Delete<Medicine>,
     abstract override fun drop()
 
     @Query("SELECT * FROM ${SCHEMA.TABLE} WHERE id = :id")
-    abstract override fun get(id: Long): Medicine
+    abstract override fun get(id: Long): Medicine?
 
     @Query("SELECT * FROM ${SCHEMA.TABLE} WHERE id IN(:ids)")
     abstract override fun get(ids: LongArray): List<Medicine>

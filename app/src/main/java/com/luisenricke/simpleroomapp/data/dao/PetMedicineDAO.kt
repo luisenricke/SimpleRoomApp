@@ -6,6 +6,7 @@ import com.luisenricke.room.dao.Base
 import com.luisenricke.room.dao.Delete
 import com.luisenricke.room.dao.PrimaryKey
 import com.luisenricke.room.dao.Update
+import com.luisenricke.room.dao.InnerJoin
 import com.luisenricke.simpleroomapp.data.entity.Medicine
 import com.luisenricke.simpleroomapp.data.entity.Pet
 import com.luisenricke.simpleroomapp.data.entity.PetMedicine
@@ -25,7 +26,7 @@ abstract class PetMedicineDAO : Base<PetMedicine>, Update<PetMedicine>, Delete<P
     abstract override fun drop()
 
     @Query("SELECT * FROM ${SCHEMA.TABLE} WHERE id = :id")
-    abstract override fun get(id: Long): PetMedicine
+    abstract override fun get(id: Long): PetMedicine?
 
     @Query("SELECT * FROM ${SCHEMA.TABLE} WHERE id IN(:ids)")
     abstract override fun get(ids: LongArray): List<PetMedicine>
@@ -38,21 +39,21 @@ abstract class PetMedicineDAO : Base<PetMedicine>, Update<PetMedicine>, Delete<P
 
     @Query(
         """
-            SELECT * FROM ${Pet.SCHEMA.TABLE} AS LEFT_
-            INNER JOIN ${SCHEMA.TABLE} AS RIGHT_
-            ON LEFT_.${Pet.SCHEMA.ID} = RIGHT_.${SCHEMA.PET_ID}
-            WHERE RIGHT_.${SCHEMA.MEDICINE_ID} = :idMedicine
+            SELECT * FROM ${Pet.SCHEMA.TABLE} AS LEFT_ 
+            INNER JOIN ${SCHEMA.TABLE} AS RIGHT_ 
+            ON LEFT_.${Pet.SCHEMA.ID} = RIGHT_.${SCHEMA.PET_ID} 
+            WHERE RIGHT_.${SCHEMA.MEDICINE_ID} = :idMedicine 
         """
     )
-    abstract fun getJoinPets(idMedicine: Long): List<Pet>
+    abstract fun getPets(idMedicine: Long): List<Pet>
 
     @Query(
         """
-            SELECT * FROM ${Medicine.SCHEMA.TABLE} AS RIGHT_
-            INNER JOIN ${SCHEMA.TABLE} AS LEFT_
-            ON RIGHT_.${Medicine.SCHEMA.ID} = LEFT_.${SCHEMA.MEDICINE_ID}
-            WHERE LEFT_.${SCHEMA.PET_ID} = :idPet
+            SELECT * FROM ${Medicine.SCHEMA.TABLE} AS RIGHT_ 
+            INNER JOIN ${SCHEMA.TABLE} AS LEFT_ 
+            ON RIGHT_.${Medicine.SCHEMA.ID} = LEFT_.${SCHEMA.MEDICINE_ID} 
+            WHERE LEFT_.${SCHEMA.PET_ID} = :idPet 
         """
     )
-    abstract fun getJoinMedicines(idPet: Long): List<Medicine>
+    abstract fun getMedicines(idPet: Long): List<Medicine>
 }

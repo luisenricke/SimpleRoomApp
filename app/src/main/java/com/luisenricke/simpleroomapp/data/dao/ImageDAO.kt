@@ -24,7 +24,7 @@ abstract class ImageDAO : Base<Image>, Update<Image>, Delete<Image>, PrimaryKey<
     abstract override fun drop()
 
     @Query("SELECT * FROM ${SCHEMA.TABLE} WHERE id = :id")
-    abstract override fun get(id: Long): Image
+    abstract override fun get(id: Long): Image?
 
     @Query("SELECT * FROM ${SCHEMA.TABLE} WHERE id IN(:ids)")
     abstract override fun get(ids: LongArray): List<Image>

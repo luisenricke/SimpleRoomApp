@@ -23,7 +23,7 @@ abstract class ContactDAO : Base<Contact>, Update<Contact>, Delete<Contact>, Pri
     abstract override fun drop()
 
     @Query("SELECT * FROM ${SCHEMA.TABLE} WHERE id = :id")
-    abstract override fun get(id: Long): Contact
+    abstract override fun get(id: Long): Contact?
 
     @Query("SELECT * FROM ${SCHEMA.TABLE} WHERE id IN(:ids)")
     abstract override fun get(ids: LongArray): List<Contact>

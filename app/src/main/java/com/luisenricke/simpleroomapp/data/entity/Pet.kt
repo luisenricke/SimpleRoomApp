@@ -21,7 +21,7 @@ data class Pet(
     @ColumnInfo(name = SCHEMA.BORN_DAY)
     val bornDay: Date,
     @ColumnInfo(name = SCHEMA.USER_ID, index = true)
-    val userId: Int,
+    val userId: Int?,
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = SCHEMA.ID)
     val id: Long = 0

@@ -31,9 +31,9 @@ data class PetMedicine(
     @ColumnInfo(name = SCHEMA.MEDICINE_ID, index = true)
     val medicineId: Int,
     @ColumnInfo(name = SCHEMA.CREATED_AT)
-    val createdAt: Date,
+    val createdAt: Date = Date(),
     @ColumnInfo(name = SCHEMA.UPDATED_AT)
-    val updatedAt: Date,
+    val updatedAt: Date = Date(),
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = SCHEMA.ID)
     val id: Long = 0
