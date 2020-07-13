@@ -1,0 +1,7 @@
+CREATE TABLE `Contact_` (
+`email_` TEXT NOT NULL, 
+`name_` TEXT NOT NULL, 
+`id_` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
+);
+
+INSERT INTO `Contact_` VALUES ('test@test.com', 'test', 1);

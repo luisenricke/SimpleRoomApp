@@ -10,27 +10,13 @@ import com.luisenricke.room.converter.Date
 import com.luisenricke.room.ioThread
 import com.luisenricke.simpleroomapp.data.dao.*
 import com.luisenricke.simpleroomapp.data.entity.*
+import timber.log.Timber
 
-@Database(
-    entities = [
-        Contact::class,
-        Image::class,
-        User::class,
-        Pet::class,
-        Medicine::class,
-        PetMedicine::class
-    ],
-    version = 1, exportSchema = false
-)
+@Database(entities = [Contact::class], version = 1, exportSchema = false)
 @TypeConverters(Date::class)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun contactDAO(): ContactDAO
-    abstract fun imageDAO(): ImageDAO
-    abstract fun user(): UserDAO
-    abstract fun pet(): PetDAO
-    abstract fun medicine(): MedicineDAO
-    abstract fun petMedicine(): PetMedicineDAO
 
     companion object {
         private const val NAME = "Database.db"
@@ -52,12 +38,17 @@ abstract class AppDatabase : RoomDatabase() {
 
         private fun build(context: Context): AppDatabase {
             return Room.databaseBuilder(context, AppDatabase::class.java, NAME)
+                .createFromAsset("ExternalDatabase.db")
                 .addCallback(object : Callback() {
                     override fun onCreate(db: SupportSQLiteDatabase) {
                         super.onCreate(db)
 
-                        ioThread { getInstance(context).contactDAO().insert(INIT_DATA) }
-
+                        ioThread {
+                            Timber.i("Start migration")
+                            db.execSQL(MIGRATE_CONTACT_TABLE)
+                            db.execSQL("DROP TABLE Contact_")
+                            Timber.i("Finish migration")
+                        }
                     }
 
                     override fun onOpen(db: SupportSQLiteDatabase) {
@@ -69,6 +60,18 @@ abstract class AppDatabase : RoomDatabase() {
                 .build()
         }
 
-        val INIT_DATA = Contact("root@root.com", "root")
+        val MIGRATE_CONTACT_TABLE =
+            """
+                INSERT INTO ${Contact.SCHEMA.TABLE} ( 
+                    ${Contact.SCHEMA.EMAIL},
+                    ${Contact.SCHEMA.NAME},
+                    ${Contact.SCHEMA.ID}) 
+                SELECT 
+                    email_,
+                    name_,
+                    id_
+                FROM Contact_
+            """.trimIndent()
+
     }
 }
