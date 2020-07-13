@@ -11,7 +11,7 @@ interface PrimaryKey<X> {
      * @param id: the id of the searched object.
      * @return the object requested.
      */
-    fun get(id: Long): X
+    fun get(id: Long): X?
 
     /**
      * Get a list of object existing in the table by ID's.
